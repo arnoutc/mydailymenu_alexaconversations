@@ -1070,16 +1070,17 @@ module.exports.handler = Alexa.SkillBuilders.standard()
         GetHoursIntentHandler,
         ContinueOrderIntentHandler,
         //HearPizzaReferenceSpecialsIntentHandler,
-        HearSpecialDetailsIntentHandler,
-        AddPizzaReferenceSpecialToOrderIntentHandler,
-        BuildMyOwnPizzaIntentHandler,
+        HearMenuDetailsIntentHandler,
+        //AddPizzaReferenceSpecialToOrderIntentHandler,
+        BuildMyMenuIntentHandler,
         OtherIntentHandler,
-        OrderPizza,
-        OrderTwoToppingPizza,
+        OrderMenu,
+        //OrderTwoToppingPizza,
         MenuQuestion,
-        GetRelativeFeedingSize,
-        GetPizzaReferenceSpecialDetails,
-        OrderCustomizedPizzaReferenceSpecial)
+        //GetRelativeFeedingSize,
+        //GetPizzaReferenceSpecialDetails,
+        //OrderCustomizedPizzaReferenceSpecial
+        )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
