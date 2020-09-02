@@ -1070,7 +1070,7 @@ module.exports.handler = Alexa.SkillBuilders.standard()
         GetHoursIntentHandler,
         ContinueOrderIntentHandler,
         HearPizzaReferenceSpecialsIntentHandler,
-        HearSpecialDetailsIntentHandler,
+        //HearSpecialDetailsIntentHandler,
         AddPizzaReferenceSpecialToOrderIntentHandler,
         BuildMyOwnPizzaIntentHandler,
         OtherIntentHandler,
