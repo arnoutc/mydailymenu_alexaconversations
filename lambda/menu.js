@@ -317,24 +317,24 @@ const generateOrderText = (order) => {
   let cost = 0;
   if (order.special){
     orderText = "a " + order.special.name + " special that comes with ";
-    orderText += order.special.qty + " " + order.special.pizza.size + " ";
-    let speakableToppings = order.special.pizza.toppingsList;
+    orderText += order.special.qty + " " + order.special.menu.size + " ";
+    let speakableToppings = order.special.menu.toppingsList;
     let lastTopping = " and " + speakableToppings.pop();
-    orderText += speakableToppings.join(", ") + lastTopping + " pizza";
-    orderText += " on " + order.special.pizza.crust + " crust";
-    orderText += " with " + order.special.pizza.cheese + " cheese";
+    orderText += speakableToppings.join(", ") + lastTopping + " menu";
+    orderText += " on " + order.special.menu.crust + " crust";
+    orderText += " with " + order.special.menu.cheese + " cheese";
     if (order.special.cost){
       cost += order.special.cost;
     }
   }
-  if (order.pizza){
-      orderText += "a " + order.pizza.size + " ";
-      let speakableToppings = order.pizza.toppingsList;
+  if (order.menu){
+      orderText += "a " + order.menu.size + " ";
+      let speakableToppings = order.menu.toppingsList;
       let lastTopping = " and " + speakableToppings.pop();
-      orderText += speakableToppings.join(", ") + lastTopping + " pizza";
-      orderText += " on " + order.pizza.crust + " crust";
-      orderText += " with " + order.pizza.cheese + " cheese";
-      cost += getPizzaCost(order.pizza.size);
+      orderText += speakableToppings.join(", ") + lastTopping + " menu";
+      orderText += " on " + order.menu.crust + " crust";
+      orderText += " with " + order.menu.cheese + " cheese";
+      cost += getPizzaCost(order.menu.size);
   } 
   if (order.salad){
       if (orderText != null){
@@ -391,8 +391,8 @@ const getSpecialPizzaDetails = (specialPizzaName) => {
       (special.name.toLowerCase() === specialPizzaName) || (special.name.toLowerCase().includes(specialPizzaName)));
     return special;
 }
-const getPizzaCost = (size) => {
-  return pizza_costs[size];
+const getMenuCost = (size) => {
+  return menu_costs[size];
 }
 const getSaladCost = (salad) => {
   let cost;
