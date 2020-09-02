@@ -27,7 +27,7 @@ module.exports = {
             WELCOME_REPROMPT : "Sorry, I didn't catch that. Just tell me to hear our specials or order a pizza",
             GENERIC_REPROMPT: "Sorry, I didn't catch that, would you like to order a pizza or maybe hear our specials?",
             PROMPT_FOR_ACTION : "Ok. What would you like to do? You can ask to hear some of our special pizzas or just order your own custom pizza",
-            HELP_PROMPT: "This skill is an Alexa Conversations reference implementation that simulates pizza ordering dialog flows using Alexa's artificial intelligence technology. You can ask me to order a pizza, order a two topping pizza or hear our specials",
+            HELP_PROMPT: "This skill is an Alexa Conversations implementation that simulates a menu ordering dialog flows using Alexa's artificial intelligence technology. You can ask me to order a menu, or hear our menu",
             REPROMPT_FOR_ACTION : "Sorry, I didnt catch that, what would you like to do?",
             CLOSEST_LOCATION: "The closest Pizza Reference shop to you in {{city}} is open until 9pm tonight. I can tell you their specials or you can just ask me to order a pizza",
             DAILY_LUNCH_SPECIAL: "Our {{day}} lunch special comes with a {{size}} {{toppingsList}} pizza with {{cheese}} cheese on {{crust}} crust, a {{salad}} and {{drinks}} for ${{cost}}. Would you like to order?",
