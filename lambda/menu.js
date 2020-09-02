@@ -15,10 +15,10 @@
 **/
 'use strict';
 
-const daily_specials = {
+const daily_menus = {
   sunday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "small", 
         crust: "thin crust",
         cheese : "extra", 
@@ -29,7 +29,7 @@ const daily_specials = {
       cost : 10.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "extra large", 
         crust: "deep dish",
         cheese : "normal", 
@@ -44,7 +44,7 @@ const daily_specials = {
   },
   monday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "small", 
         crust: "regular",
         cheese : "extra", 
@@ -55,7 +55,7 @@ const daily_specials = {
       cost : 10.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "large", 
         crust: "regular",
         cheese : "extra", 
@@ -70,7 +70,7 @@ const daily_specials = {
   },
   tuesday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "medium", 
         crust: "brooklyn style",
         cheese : "regular", 
@@ -81,7 +81,7 @@ const daily_specials = {
       cost : 11.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "extra large", 
         crust: "brooklyn style",
         cheese : "normal", 
@@ -96,7 +96,7 @@ const daily_specials = {
   },
   wednesday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "small", 
         crust: "thin",
         cheese : "normal", 
@@ -107,7 +107,7 @@ const daily_specials = {
       cost : 10.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "large", 
         crust: "thin",
         cheese : "light", 
@@ -122,7 +122,7 @@ const daily_specials = {
   },
   thursday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "small", 
         crust: "regular",
         cheese : "extra", 
@@ -133,7 +133,7 @@ const daily_specials = {
       cost : 9.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "extra large", 
         crust: "regular",
         cheese : "light", 
@@ -148,7 +148,7 @@ const daily_specials = {
   },
   friday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "medium", 
         crust: "regular",
         cheese : "light", 
@@ -159,7 +159,7 @@ const daily_specials = {
       cost : 10.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "extra large", 
         crust: "deep dish",
         cheese : "normal", 
@@ -174,7 +174,7 @@ const daily_specials = {
   },
   saturday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "small", 
         crust: "brooklyn style",
         cheese : "extra", 
@@ -185,7 +185,7 @@ const daily_specials = {
       cost : 10.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "extra large", 
         crust: "thin",
         cheese : "normal", 
@@ -203,7 +203,7 @@ const specials = [
   { 
     name : "three cheese delight", 
     qty: 1, 
-    pizza: { 
+    menu: { 
       size: "large", 
       crust: "deep dish",
       cheese : "extra", 
@@ -214,7 +214,7 @@ const specials = [
   { 
     name : "pepperoni party", 
     qty: 1, 
-    pizza : {
+    menu : {
       size: "extra large",
       crust: "regular",
       cheese : "extra", 
@@ -225,7 +225,7 @@ const specials = [
   {
     name : "meat lovers", 
     qty: 1, 
-    pizza : {
+    menu : {
       size: "large",
       crust: "regular",
       cheese : "light", 
@@ -236,7 +236,7 @@ const specials = [
   {
     name : "veggie supreme", 
     qty: 1, 
-    pizza: {
+    menu: {
       size: "large",
       crust: "thin",
       cheese : "normal", 
@@ -247,7 +247,7 @@ const specials = [
   {
     name : "kitchen sink", 
     qty: 1, 
-    pizza: {
+    menu: {
       size: "extra large",
       crust: "deep dish",
       cheese : "extra", 
@@ -258,7 +258,7 @@ const specials = [
   {
     name : "two medium, two topping pizzas", 
     qty: 2, 
-    pizza: {
+    menu: {
       size: "medium",
       crust: "regular",
       cheese: "normal", 
@@ -266,7 +266,7 @@ const specials = [
     },
     cost: 10.99
 }];
-const pizza_costs = {
+const menu_costs = {
   "small": 5.99,
   "medium": 7.99,
   "large": 10.99,
@@ -317,24 +317,24 @@ const generateOrderText = (order) => {
   let cost = 0;
   if (order.special){
     orderText = "a " + order.special.name + " special that comes with ";
-    orderText += order.special.qty + " " + order.special.pizza.size + " ";
-    let speakableToppings = order.special.pizza.toppingsList;
+    orderText += order.special.qty + " " + order.special.menu.size + " ";
+    let speakableToppings = order.special.menu.toppingsList;
     let lastTopping = " and " + speakableToppings.pop();
-    orderText += speakableToppings.join(", ") + lastTopping + " pizza";
-    orderText += " on " + order.special.pizza.crust + " crust";
-    orderText += " with " + order.special.pizza.cheese + " cheese";
+    orderText += speakableToppings.join(", ") + lastTopping + " menu";
+    orderText += " on " + order.special.menu.crust + " crust";
+    orderText += " with " + order.special.menu.cheese + " cheese";
     if (order.special.cost){
       cost += order.special.cost;
     }
   }
-  if (order.pizza){
-      orderText += "a " + order.pizza.size + " ";
-      let speakableToppings = order.pizza.toppingsList;
+  if (order.menu){
+      orderText += "a " + order.menu.size + " ";
+      let speakableToppings = order.menu.toppingsList;
       let lastTopping = " and " + speakableToppings.pop();
-      orderText += speakableToppings.join(", ") + lastTopping + " pizza";
-      orderText += " on " + order.pizza.crust + " crust";
-      orderText += " with " + order.pizza.cheese + " cheese";
-      cost += getPizzaCost(order.pizza.size);
+      orderText += speakableToppings.join(", ") + lastTopping + " menu";
+      orderText += " on " + order.menu.crust + " crust";
+      orderText += " with " + order.menu.cheese + " cheese";
+      cost += getMenuCost(order.menu.size);
   } 
   if (order.salad){
       if (orderText != null){
@@ -374,8 +374,8 @@ const generateOrderText = (order) => {
   
   return orderText;
 }
-const getDailySpecialForPeriod = (day, period) => {
-  return daily_specials[day][period];
+const getDailyMenuForPeriod = (day, period) => {
+  return daily_menus[day][period];
 };
 const getPizzaReferenceSpecials = () => {
     return specials.map(function (special) {
@@ -391,8 +391,8 @@ const getSpecialPizzaDetails = (specialPizzaName) => {
       (special.name.toLowerCase() === specialPizzaName) || (special.name.toLowerCase().includes(specialPizzaName)));
     return special;
 }
-const getPizzaCost = (size) => {
-  return pizza_costs[size];
+const getMenuCost = (size) => {
+  return menu_costs[size];
 }
 const getSaladCost = (salad) => {
   let cost;
@@ -441,7 +441,7 @@ const makeSpeakableList =  (list) => {
   
 }
 module.exports = { 
-  getDailySpecialForPeriod,
+  getDailyMenuForPeriod,
   getPizzaReferenceSpecials, 
   getSpecialPizzaDetails, 
   getSpecialCost,

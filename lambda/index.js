@@ -789,15 +789,15 @@ const CancelIntentHandler = {
 // focused dialog manager. These can instead be specified using the private SDK with execute() methods and the skill
 // builder addApiRequestHandler(). To work with the public SDK, these are written as generic request handlers.
 
-const OrderPizza = {
+const OrderMenu = {
     canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'OrderPizza');
+        return requestUtils.isApiRequest(handlerInput, 'OrderMenu');
     },
 
     /**
-     * OrderPizza API
-     * Consumes: size, crust, cheese and a list of toppings
-     * Returns: Valid custom pizza order from Alexa Conversations
+     * OrderMenu API
+     * Consumes: TBD
+     * Returns: Valid custom menu order from Alexa Conversations
      *
      * @param handlerInput {HandlerInput}
      * @return {Promise<Response>}
@@ -805,7 +805,7 @@ const OrderPizza = {
     handle(handlerInput) {
         const apiArguments = requestUtils.getApiArguments(handlerInput);
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.in_progress = {pizza : apiArguments};
+        sessionAttributes.in_progress = {menu : apiArguments};
 
         return {
             directives : [{
@@ -824,18 +824,19 @@ const OrderPizza = {
             }
         }
 };
-const GetPizzaReferenceSpecialDetails = {
+
+const GetMenuDetails = {
     canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'GetPizzaReferenceSpecialDetails');
+        return requestUtils.isApiRequest(handlerInput, 'GetMenuDetails');
     },
     /**
-     * Returns the special pizza detail from the menu
+     * Returns the menu detail
      *
      * @param handlerInput {HandlerInput}
      * @returns {Promise<Response>}
      */
     handle(handlerInput) {
-        console.log("In GetPizzaReferenceSpecialDetails API Handler");
+        console.log("In GetMenuDetails API Handler");
         const apiArguments = requestUtils.getApiArguments(handlerInput);
         let special = menu.getSpecialPizzaDetails(apiArguments.name);
         return {
@@ -845,102 +846,7 @@ const GetPizzaReferenceSpecialDetails = {
          };
     }
 };
-const GetRelativeFeedingSize = {
-    canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'GetRelativeFeedingSize');
-    },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
-    handle(handlerInput) {
-        console.log("In GetRelativeFeedingSize API Handler");
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        let feedingSize = menu.getFeedingSize(apiArguments.size);
-        return {
-            apiResponse: {
-                feedingSize
-            }
-        };
-    }
-};
-const OrderTwoToppingPizza = {
-    canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'OrderTwoToppingPizza');
-    },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
-    handle(handlerInput) {
-        console.log("In OrderTwoToppingPizza API Handler");
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        apiArguments["cheese"] = "normal";
-        apiArguments["toppingsList"] = [apiArguments.toppingone, apiArguments.toppingtwo];
-        sessionAttributes.in_progress = {pizza : apiArguments};
-        return {
-            directives : [{
-                type: 'Dialog.DelegateRequest',
-                target: 'skill',
-                period: {
-                    until: 'EXPLICIT_RETURN'
-                },
-                updatedRequest: {
-                    type: 'IntentRequest',
-                    intent: {
-                        name: 'OrderIntent',
-                    }
-                }}],
-                apiResponse :{}
-            }
-    }
-};
-const OrderCustomizedPizzaReferenceSpecial = {
-    canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'OrderCustomizedPizzaReferenceSpecial');
-    },
-    /**
-     * Returns the special pizza detail from the menu
-     *
-     * @param handlerInput {HandlerInput}
-     * @returns {Promise<Response>}
-     */
-    async handle(handlerInput) {
-        console.log("In OrderCustomizedPizzaReferenceSpecial API Handler");
-        const apiArguments = requestUtils.getApiArguments(handlerInput);
-        const sessionAttributes = await handlerInput.attributesManager.getSessionAttributes();
-        const special = {};
-        special.pizza = {};
-        special.name = apiArguments.name;
-        special.qty = apiArguments.qty;
-        special.pizza.size = apiArguments.size;
-        special.pizza.cheese = apiArguments.cheese;
-        special.pizza.crust = apiArguments.crust;
-        special.pizza.toppingsList = apiArguments.toppings;
-        special.pizza.cost = menu.getSpecialCost(special.name);
-        sessionAttributes.in_progress = special;
-        return {
-            directives : [{
-                type: 'Dialog.DelegateRequest',
-                target: 'skill',
-                period: {
-                    until: 'EXPLICIT_RETURN'
-                },
-                updatedRequest: {
-                    type: 'IntentRequest',
-                    intent: {
-                        name: 'OrderIntent',
-                    }
-                }}],
-                apiResponse :{}
-        }
-    }
-};
+
 const MenuQuestion = {
     canHandle(handlerInput) {
         return requestUtils.isApiRequest(handlerInput, 'MenuQuestion');
@@ -1069,17 +975,15 @@ module.exports.handler = Alexa.SkillBuilders.standard()
         SessionEndedRequestHandler,
         GetHoursIntentHandler,
         ContinueOrderIntentHandler,
-        HearPizzaReferenceSpecialsIntentHandler,
-        HearSpecialDetailsIntentHandler,
-        AddPizzaReferenceSpecialToOrderIntentHandler,
-        BuildMyOwnPizzaIntentHandler,
+        //HearPizzaReferenceSpecialsIntentHandler,
+        HearMenuDetailsIntentHandler,
+        //AddPizzaReferenceSpecialToOrderIntentHandler,
+        BuildMyMenuIntentHandler,
         OtherIntentHandler,
-        OrderPizza,
-        OrderTwoToppingPizza,
+        OrderMenu,
         MenuQuestion,
-        GetRelativeFeedingSize,
-        GetPizzaReferenceSpecialDetails,
-        OrderCustomizedPizzaReferenceSpecial)
+        GetMenuDetails,
+        )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
