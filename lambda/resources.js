@@ -16,9 +16,9 @@
 module.exports = {
     en: {
         translation: {
-            WELCOME: "Welcome to the Pizza Reference. Would you like to hear about our {{day}} {{period}} special?",
+            WELCOME: "Welcome to My Daily Menu. Would you like to hear about our {{day}} {{period}} menu?",
             WELCOME_PERSONALIZED: "Hi <alexa:name type='first' personId='{{personId}}' />! <break /> {{prompt}}",
-            WELCOME_BACK: "Welcome back to the Pizza Reference. Would you like to continue with your existing order or start over",
+            WELCOME_BACK: "Welcome back to My Daily Menu. Would you like to continue with your existing order or start over",
             WELCOME_BACK_REPROMPT : "Sorry, I didn't catch that. Should we continue with your existing order or start a new one",
             REPEAT_ORDER_AND_CUSTOMIZE : "Your order has {{orderText}}. Would you like to customize the pizza or salad? or order as is",
             REPEAT_ORDER_AND_CUSTOMIZE_REPROMPT: "Sorry, I didn't catch that, did you want to customize this order? or order as is",
@@ -76,7 +76,7 @@ module.exports = {
             FALLBACK: "Sorry, I didn't catch that. Say that again please.", 
             FALLBACK_REPROMPT: "Say that again please.",
             ERROR: "Sorry, something went wrong. Please try again later.",
-            EXIT: "Goodbye!",
+            EXIT: "Speak to you later!",
         }
     }
 };
