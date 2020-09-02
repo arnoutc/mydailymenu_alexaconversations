@@ -27,11 +27,11 @@ module.exports = {
             REPEAT_ORDER_AND_ADD_SOMETHING : "Your order has {{orderText}}. Would you like to add something or order as is?",
             REPEAT_ORDER_AND_ADD_SOMETHING_REPROMPT: "Sorry, I didn't catch that, did you want to to add something or order as is?",
             
-            WELCOME_REPROMPT : "Sorry, I didn't catch that. Just tell me to hear our specials or order a pizza",
+            WELCOME_REPROMPT : "Sorry, I didn't catch that. Just tell me to hear our menu or order a menu",
             
-            GENERIC_REPROMPT: "Sorry, I didn't catch that, would you like to order a pizza or maybe hear our specials?",
+            GENERIC_REPROMPT: "Sorry, I didn't catch that, would you like to order a menu or maybe hear our menu options?",
             
-            PROMPT_FOR_ACTION : "Ok. What would you like to do? You can ask to hear some of our special pizzas or just order your own custom pizza",
+            PROMPT_FOR_ACTION : "Ok. What would you like to do? You can ask to hear some of our menu options or just order your menu",
             
             HELP_PROMPT: "This skill is an Alexa Conversations implementation that simulates a menu ordering dialog flows using Alexa's artificial intelligence technology. You can ask me to order a menu, or hear our menu",
             
