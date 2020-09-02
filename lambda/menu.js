@@ -18,7 +18,7 @@
 const daily_specials = {
   sunday : {
     lunch : {
-      pizza : {
+      menu : {
         size: "small", 
         crust: "thin crust",
         cheese : "extra", 
@@ -29,7 +29,7 @@ const daily_specials = {
       cost : 10.99
     },
     dinner : {
-      pizza : {
+      menu : {
         size: "extra large", 
         crust: "deep dish",
         cheese : "normal", 
@@ -334,7 +334,7 @@ const generateOrderText = (order) => {
       orderText += speakableToppings.join(", ") + lastTopping + " menu";
       orderText += " on " + order.menu.crust + " crust";
       orderText += " with " + order.menu.cheese + " cheese";
-      cost += getPizzaCost(order.menu.size);
+      cost += getMenuCost(order.menu.size);
   } 
   if (order.salad){
       if (orderText != null){
