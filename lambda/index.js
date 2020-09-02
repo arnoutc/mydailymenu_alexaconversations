@@ -789,15 +789,15 @@ const CancelIntentHandler = {
 // focused dialog manager. These can instead be specified using the private SDK with execute() methods and the skill
 // builder addApiRequestHandler(). To work with the public SDK, these are written as generic request handlers.
 
-const OrderPizza = {
+const OrderMenu = {
     canHandle(handlerInput) {
-        return requestUtils.isApiRequest(handlerInput, 'OrderPizza');
+        return requestUtils.isApiRequest(handlerInput, 'OrderMenu');
     },
 
     /**
-     * OrderPizza API
-     * Consumes: size, crust, cheese and a list of toppings
-     * Returns: Valid custom pizza order from Alexa Conversations
+     * OrderMenu API
+     * Consumes: TBD
+     * Returns: Valid custom menu order from Alexa Conversations
      *
      * @param handlerInput {HandlerInput}
      * @return {Promise<Response>}
@@ -805,7 +805,7 @@ const OrderPizza = {
     handle(handlerInput) {
         const apiArguments = requestUtils.getApiArguments(handlerInput);
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.in_progress = {pizza : apiArguments};
+        sessionAttributes.in_progress = {menu : apiArguments};
 
         return {
             directives : [{
