@@ -15,7 +15,7 @@
 **/
 'use strict';
 
-const daily_specials = {
+const daily_menus = {
   sunday : {
     lunch : {
       menu : {
@@ -374,8 +374,8 @@ const generateOrderText = (order) => {
   
   return orderText;
 }
-const getDailySpecialForPeriod = (day, period) => {
-  return daily_specials[day][period];
+const getDailyMenuForPeriod = (day, period) => {
+  return daily_menus[day][period];
 };
 const getPizzaReferenceSpecials = () => {
     return specials.map(function (special) {
@@ -441,7 +441,7 @@ const makeSpeakableList =  (list) => {
   
 }
 module.exports = { 
-  getDailySpecialForPeriod,
+  getDailyMenuForPeriod,
   getPizzaReferenceSpecials, 
   getSpecialPizzaDetails, 
   getSpecialCost,
