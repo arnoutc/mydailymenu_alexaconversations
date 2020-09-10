@@ -676,7 +676,7 @@ const BuildMyMenuIntentHandler = {
         //         .getResponse();
         // }
         const breakfastSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'breakfast');
-        console.log('breakfastSlot is ', {breakfastSlot});
+        console.log('breakfastSlot is ' + breakfastSlot);
         if ( breakfastSlot && breakfastSlot.value ){
             return handlerInput.responseBuilder
                 .addDirective({
@@ -702,7 +702,7 @@ const BuildMyMenuIntentHandler = {
         }
 
         const lunchSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'lunch');
-        console.log('lunchSlot is ', {lunchSlot});
+        console.log('lunchSlot is ' + lunchSlot);
         if ( lunchSlot && lunchSlot.value ){
             return handlerInput.responseBuilder
                 .addDirective({
@@ -728,7 +728,7 @@ const BuildMyMenuIntentHandler = {
         }
 
         const dinnerSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'dinner');
-        console.log('dinnerSlot is ', {dinnerSlot});
+        console.log('dinnerSlot is ' + dinnerSlot);
         if ( dinnerSlot && dinnerSlot.value ){
             return handlerInput.responseBuilder
                 .addDirective({
