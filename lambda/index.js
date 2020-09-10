@@ -675,6 +675,84 @@ const BuildMyMenuIntentHandler = {
         //         })
         //         .getResponse();
         // }
+        const breakfastSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'breakfast');
+        console.log('breakfastSlot is ', {breakfastSlot});
+        if ( breakfastSlot && breakfastSlot.value ){
+            return handlerInput.responseBuilder
+                .addDirective({
+                    type: 'Dialog.DelegateRequest',
+                    target: 'AMAZON.Conversations',
+                    period: {
+                        until: 'EXPLICIT_RETURN'
+                    },
+                    updatedRequest: {
+                        type: 'Dialog.InputRequest',
+                        input: {
+                            name: 'orderMenu',
+                            slots: {
+                                name: {
+                                    name: 'breakfast',
+                                    value: breakfastSlot.value
+                                }
+                            }
+                        }
+                    }
+                })
+                .getResponse();
+        }
+
+        const lunchSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'lunch');
+        console.log('lunchSlot is ', {lunchSlot});
+        if ( lunchSlot && lunchSlot.value ){
+            return handlerInput.responseBuilder
+                .addDirective({
+                    type: 'Dialog.DelegateRequest',
+                    target: 'AMAZON.Conversations',
+                    period: {
+                        until: 'EXPLICIT_RETURN'
+                    },
+                    updatedRequest: {
+                        type: 'Dialog.InputRequest',
+                        input: {
+                            name: 'orderMenu',
+                            slots: {
+                                name: {
+                                    name: 'lunch',
+                                    value: lunchSlot.value
+                                }
+                            }
+                        }
+                    }
+                })
+                .getResponse();
+        }
+
+        const dinnerSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'dinner');
+        console.log('dinnerSlot is ', {dinnerSlot});
+        if ( dinnerSlot && dinnerSlot.value ){
+            return handlerInput.responseBuilder
+                .addDirective({
+                    type: 'Dialog.DelegateRequest',
+                    target: 'AMAZON.Conversations',
+                    period: {
+                        until: 'EXPLICIT_RETURN'
+                    },
+                    updatedRequest: {
+                        type: 'Dialog.InputRequest',
+                        input: {
+                            name: 'orderMenu',
+                            slots: {
+                                name: {
+                                    name: 'lunch',
+                                    value: dinnerSlot.value
+                                }
+                            }
+                        }
+                    }
+                })
+                .getResponse();
+        }
+        
         console.log('end BuildMyMenuIntentHandler');
         return handlerInput.responseBuilder
             .addDirective({
