@@ -630,51 +630,52 @@ const BuildMyMenuIntentHandler = {
         console.log("In BuildMyMenuIntentHandler");
 
         // get the name of the special
-        const countSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'count');
-        if ( countSlot && countSlot.value ){
-            if (countSlot.value == 2){
-                return handlerInput.responseBuilder
-                    .addDirective({
-                        type: 'Dialog.DelegateRequest',
-                        target: 'AMAZON.Conversations',
-                        period: {
-                            until: 'EXPLICIT_RETURN' 
-                        },
-                        updatedRequest: {
-                            type: 'Dialog.InputRequest',
-                            input: {
-                                name: 'startTwoToppingPizzaOrder'
-                            }
-                        }
-                    })
-                    .getResponse();
+        // const countSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'count');
+        // if ( countSlot && countSlot.value ){
+        //     if (countSlot.value == 2){
+        //         return handlerInput.responseBuilder
+        //             .addDirective({
+        //                 type: 'Dialog.DelegateRequest',
+        //                 target: 'AMAZON.Conversations',
+        //                 period: {
+        //                     until: 'EXPLICIT_RETURN' 
+        //                 },
+        //                 updatedRequest: {
+        //                     type: 'Dialog.InputRequest',
+        //                     input: {
+        //                         name: 'startTwoToppingPizzaOrder'
+        //                     }
+        //                 }
+        //             })
+        //             .getResponse();
 
-            }
-        }
-        const sizeSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'size');
-        if ( sizeSlot && sizeSlot.value ){
-            return handlerInput.responseBuilder
-                .addDirective({
-                    type: 'Dialog.DelegateRequest',
-                    target: 'AMAZON.Conversations',
-                    period: {
-                        until: 'EXPLICIT_RETURN' 
-                    },
-                    updatedRequest: {
-                        type: 'Dialog.InputRequest',
-                        input: {
-                            name: 'orderSpecificSizePizza',
-                            slots: {
-                                name: {
-                                    name: 'size',
-                                    value: sizeSlot.value
-                                }
-                            }
-                        }
-                    }
-                })
-                .getResponse();
-        }
+        //     }
+        // }
+        // const sizeSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'size');
+        // if ( sizeSlot && sizeSlot.value ){
+        //     return handlerInput.responseBuilder
+        //         .addDirective({
+        //             type: 'Dialog.DelegateRequest',
+        //             target: 'AMAZON.Conversations',
+        //             period: {
+        //                 until: 'EXPLICIT_RETURN' 
+        //             },
+        //             updatedRequest: {
+        //                 type: 'Dialog.InputRequest',
+        //                 input: {
+        //                     name: 'orderSpecificSizePizza',
+        //                     slots: {
+        //                         name: {
+        //                             name: 'size',
+        //                             value: sizeSlot.value
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         })
+        //         .getResponse();
+        // }
+        console.log('end BuildMyMenuIntentHandler');
         return handlerInput.responseBuilder
             .addDirective({
                 type: 'Dialog.DelegateRequest',
