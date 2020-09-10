@@ -17,188 +17,183 @@
 
 const daily_menus = {
   sunday : {
+    breakfast : {
+      menu: {
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
+      }
+    },
     lunch : {
       menu : {
-        size: "small", 
-        crust: "thin crust",
-        cheese : "extra", 
-        toppingsList : ["pineapple", "canadian bacon"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "small caesar salad",
       drinks : "large iced tea",
-      cost : 10.99
     },
     dinner : {
       menu : {
-        size: "extra large", 
-        crust: "deep dish",
-        cheese : "normal", 
-        toppingsList : ["ham", "pepperoni", "sausage", "black olives"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "large house salad",
       drinks : "2 liter coke",
-      side : "cheesy garlic bread",
-      dessert : "two homemade chocolate fudge cookies",
-      cost : 21.99
     }
   },
   monday : {
+    breakfast : {
+      menu: {
+        breakfast: "Selection of cereals",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
+      }
+    },
     lunch : {
       menu : {
-        size: "small", 
-        crust: "regular",
-        cheese : "extra", 
-        toppingsList : ["pepperoni", "olives"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Salmon Fishcakes with boiled potatoes and peas",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "small house salad",
       drinks : "diet coke",
-      cost : 10.99
     },
     dinner : {
       menu : {
-        size: "large", 
-        crust: "regular",
-        cheese : "extra", 
-        toppingsList : ["kalamata olives", "artichoke hearts", "feta cheese"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Chicken Goujons or Jacket Potatoes with a choice of fillings"
       },
-      salad : "large caesar salad",
       drinks: "2 liter sprite",
-      side: "parmesean bread bites",
-      dessert: "a family size fudge brownie",
-      cost : 14.99
     }
   },
   tuesday : {
+    breakfast : {
+      menu: {
+        breakfast: "Toasts and preserves",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
+      }
+    },
     lunch : {
       menu : {
-        size: "medium", 
-        crust: "brooklyn style",
-        cheese : "regular", 
-        toppingsList : ["pepperoni"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Wild Berry Eton Mess",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "small caesar salad",
       drinks : "sprite",
-      cost : 11.99
     },
     dinner : {
       menu : {
-        size: "extra large", 
-        crust: "brooklyn style",
-        cheese : "normal", 
-        toppingsList : ["tomato", "basil", "ricotta cheese"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Apple and Raspberry Crumble with custard"
       },
-      salad : "small house salad",
       drinks: "one liter San Pelligrino",
-      dessert: "chocolate dipped strawberries",
-      side: "basil garlic toast",
-      cost : 14.99
     }
   },
   wednesday : {
+    breakfast : {
+      menu: {
+        breakfast: "Yoghurts",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
+      }
+    },
     lunch : {
       menu : {
-        size: "small", 
-        crust: "thin",
-        cheese : "normal", 
-        toppingsList : ["parmesean flakes", "olive oil"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "small caesar salad",
       drinks : "large iced tea",
-      cost : 10.99
     },
     dinner : {
       menu : {
-        size: "large", 
-        crust: "thin",
-        cheese : "light", 
-        toppingsList : ["chicken", "spinach", "mushroom"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "large caesar salad",
       drinks : "2 liter diet coke",
-      dessert : "a box of pocky sticks",
-      side : "garlic bread sticks",
-      cost : 19.99
     }
   },
   thursday : {
+    breakfast : {
+      menu: {
+        breakfast: "Porridge",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
+      }
+    },
     lunch : {
       menu : {
-        size: "small", 
-        crust: "regular",
-        cheese : "extra", 
-        toppingsList : ["bacon", "canadian bacon", "sausage"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
       salad : "small house salad",
       drinks : "diet coke",
-      cost : 9.99
     },
     dinner : {
       menu : {
-        size: "extra large", 
-        crust: "regular",
-        cheese : "light", 
-        toppingsList : ["tomato", "onion", "garlic"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "small house salad",
-      side: "olive tapenade and fresh sliced bread",
       drinks: "a two liter sprite",
-      dessert : "small apple pie",
-      cost : 18.99
     }
   },
   friday : {
+    breakfast : {
+      menu: {
+        breakfast: "Fresh fruit",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
+      }
+    },
     lunch : {
       menu : {
-        size: "medium", 
-        crust: "regular",
-        cheese : "light", 
-        toppingsList : ["sausage", "onion", "sweet peppers"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "small caesar salad",
       drinks: "iced tea",
-      cost : 10.99
     },
     dinner : {
       menu : {
-        size: "extra large", 
-        crust: "deep dish",
-        cheese : "normal", 
-        toppingsList : ["ham", "pepperoni", "sausage", "black olives"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "large house salad",
       drinks : "2 liter coke",
-      side : "ranch cheesy bites with dipping sauce",
-      dessert : "a truffle brownie",
-      cost : 22.99
     }
   },
   saturday : {
+    breakfast : {
+      menu: {
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
+      }
+    },
     lunch : {
       menu : {
-        size: "small", 
-        crust: "brooklyn style",
-        cheese : "extra", 
-        toppingsList : ["tomato", "basil"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "small house salad",
       drinks : "large iced tea",
-      cost : 10.99
     },
     dinner : {
       menu : {
-        size: "extra large", 
-        crust: "thin",
-        cheese : "normal", 
-        toppingsList : ["pineapple", "canadian bacon"]
+        breakfast: "Cooked Breakfast",
+        lunch: "Beef in Ale Pie with mashed potato and seasonal vegetables",
+        dinner: "Homemade Soup of the Day"
       },
-      salad : "large house salad",
       drinks: "two, two liter cokes",
-      dessert: "homemade raspberry pie",
-      side : "ranch cheesy bites with dipping sauce",
-      cost : 18.99
     }
-  },
+  }
 };
+
 const specials = [
   { 
     name : "three cheese delight", 
@@ -207,9 +202,7 @@ const specials = [
       size: "large", 
       crust: "deep dish",
       cheese : "extra", 
-      toppingsList : ["asiago", "mozzarella blend", "ricotta"]
-    },
-    cost: 12.99
+    }
   },
   { 
     name : "pepperoni party", 
@@ -218,9 +211,7 @@ const specials = [
       size: "extra large",
       crust: "regular",
       cheese : "extra", 
-      toppingsList : ["old world dry aged pepperoni", "molinari pepperoni", "pepper crusted pepperoni", "fresh basil", "roasted ricotta medallions"]
-    },
-    cost: 10.99
+    }
   },
   {
     name : "meat lovers", 
@@ -229,9 +220,7 @@ const specials = [
       size: "large",
       crust: "regular",
       cheese : "light", 
-      toppingsList : ['sausage', 'pepperoni', 'ham', 'bacon']
-    },
-    cost: 9.99
+    }
   },
   {
     name : "veggie supreme", 
@@ -240,9 +229,7 @@ const specials = [
       size: "large",
       crust: "thin",
       cheese : "normal", 
-      toppingsList: ["spinach", "olives", "mushrooms", "onions", "artichoke hearts"]
-    },
-    cost: 8.99
+    }
   },
   {
     name : "kitchen sink", 
@@ -251,9 +238,7 @@ const specials = [
       size: "extra large",
       crust: "deep dish",
       cheese : "extra", 
-      toppingsList: ["ham", "bacon", "pepperoni", "sausage", "onions", "black olives", "green peppers", "jalapenos", "feta cheese"]
-    },
-    cost: 13.99
+    }
   },
   {
     name : "two medium, two topping pizzas", 
@@ -262,59 +247,26 @@ const specials = [
       size: "medium",
       crust: "regular",
       cheese: "normal", 
-      toppingsList: ["your choice of two toppings"]
-    },
-    cost: 10.99
+    }
 }];
-const menu_costs = {
-  "small": 5.99,
-  "medium": 7.99,
-  "large": 10.99,
-  "extra large" : 13.99
-}
-const feeding_size = {
-  "small" : "around one adult",
-  "medium" : "around two adults",
-  "large" : "between two and three adults",
-  "extra large" : "three to four adults"
-}
-const salad_costs = {
-  "small" : 4.99,
-  "large" : 7.99,
-  "custom" : 6.99
-}
-const salads = [
-  "small house salad",
-  "large house salad",
-  "small caesar salad",
-  "large casaer salad"
-];
-const sides = [
-  {name: "garlic bread sticks", cost: 4.99},
-  {name: "ranch cheesy bites with dipping sauce", cost: 5.99},
-  {name: "cheesy garlic bread", cost: 5.99}
-];
-const desserts = [
-  {name: "truffle brownie", cost: 1},
-  {name: "small apple pie", cost: 3.99},
-  {name: "homemade chocolate fudge cookies", cost: 1.50}
-];
+
 const drinks = [
-  {name: "iced tea", cost: 1.99},
-  {name: "lemonade", cost: 1.99},
-  {name: "sprite", cost: 1.99},
-  {name: "water", cost: 1.99},
-  {name: "pepsi", cost: 1.99},
-  {name: "diet coke", cost: 1.99},
-  {name: "coke", cost: 1.99},
-  {name: "two liter coke", cost: 3.99},
-  {name: "two liter diet coke", cost: 3.99},
-  {name: "two liter sprite", cost: 3.99},
-  {name: "two liter pepsi", cost: 3.99}
+  {name: "iced tea"},
+  {name: "lemonade"},
+  {name: "sprite"},
+  {name: "water"},
+  {name: "pepsi"},
+  {name: "diet coke"},
+  {name: "coke"},
+  {name: "two liter coke"},
+  {name: "two liter diet coke"},
+  {name: "two liter sprite"},
+  {name: "two liter pepsi"}
 ]
+
 const generateOrderText = (order) => {
   let orderText = ""
-  let cost = 0;
+
   if (order.special){
     orderText = "a " + order.special.name + " special that comes with ";
     orderText += order.special.qty + " " + order.special.menu.size + " ";
@@ -323,60 +275,28 @@ const generateOrderText = (order) => {
     orderText += speakableToppings.join(", ") + lastTopping + " menu";
     orderText += " on " + order.special.menu.crust + " crust";
     orderText += " with " + order.special.menu.cheese + " cheese";
-    if (order.special.cost){
-      cost += order.special.cost;
-    }
   }
+
   if (order.menu){
-      orderText += "a " + order.menu.size + " ";
-      let speakableToppings = order.menu.toppingsList;
-      let lastTopping = " and " + speakableToppings.pop();
-      orderText += speakableToppings.join(", ") + lastTopping + " menu";
-      orderText += " on " + order.menu.crust + " crust";
-      orderText += " with " + order.menu.cheese + " cheese";
-      cost += getMenuCost(order.menu.size);
+      orderText += "for breakfast " + order.menu.breakfast + " ";
+      orderText += ", for lunch " + order.menu.lunch + " ";
+      orderText += " and for dinner " + order.menu.dinner + " ";
   } 
-  if (order.salad){
-      if (orderText != null){
-          orderText += ", ";
-      }
-      orderText += "a " + order.salad;
-      cost += getSaladCost(order.salad);
-  }
+
   if (order.drinks){
       if (orderText != null){
           orderText += ", ";
       }
-      if (!order.side && !order.dessert){
-        orderText += " and ";
-      }
       orderText += "a " + order.drinks;
-      cost += getDrinkCost(order.drinks);
   }
-  if (order.side){
-      if (orderText != null){
-          orderText += ", ";
-      }
-      if (!order.dessert){
-        orderText += " and ";
-      }
-      orderText += "a side order of " + order.side;
-      cost += getSideCost(order.side);
-  }
-  if (order.dessert){
-      if (orderText != null){
-          orderText += ", and ";
-      }
-      orderText += order.dessert;
-      cost += getDessertCost(order.dessert);
-  }
-  orderText += " for a total of $" + cost;
-  
+
   return orderText;
 }
-const getDailyMenuForPeriod = (day, period) => {
+
+const getDailySpecialForPeriod = (day, period) => {
   return daily_menus[day][period];
 };
+
 const getPizzaReferenceSpecials = () => {
     return specials.map(function (special) {
         return special.name
@@ -391,46 +311,9 @@ const getSpecialPizzaDetails = (specialPizzaName) => {
       (special.name.toLowerCase() === specialPizzaName) || (special.name.toLowerCase().includes(specialPizzaName)));
     return special;
 }
-const getMenuCost = (size) => {
-  return menu_costs[size];
-}
-const getSaladCost = (salad) => {
-  let cost;
-  ['small', 'large', 'custom'].forEach( type => {
-    if (salad.includes(type)){
-      cost = salad_costs[type];
-    }
-  });
-  return cost;
-}
-const getSpecialCost = (name) => {
-  return specials.find(s => s.name == name).cost;
-}
-const getDrinkCost = (drink) => {
-  // silly since all drinks cost $1.99 but this give you the chance to alter the menu 
-  // and not affect the logic
-  return drinks.find(d => d.name == drink).cost;
-}
-const getSideCost = (side) => {
-  return sides.find(s => s.name == side).cost;
-}
-const getDessertCost = (dessert) => {
-  return desserts.find(d => d.name == dessert).cost;
-}
-const getSides = () => {
-  return sides.map(side => side.name);
-}
-const getSalads = () => {
-  return salads.map(salad => salad.name);
-}
-const getDesserts = () => {
-  return desserts.map(dessert => dessert.name);
-}
+
 const getDrinks = () => {
   return drinks.map(drink => drink.name);
-}
-const getFeedingSize = (size) => {
-  return feeding_size[size];
 }
 const makeSpeakableList =  (list) => {
   if (list.length > 1){
@@ -441,16 +324,10 @@ const makeSpeakableList =  (list) => {
   
 }
 module.exports = { 
-  getDailyMenuForPeriod,
+  getDailySpecialForPeriod,
   getPizzaReferenceSpecials, 
   getSpecialPizzaDetails, 
-  getSpecialCost,
-  getSaladCost,
-  getSides, 
-  getSalads, 
-  getDesserts,
   getDrinks,
   generateOrderText,
-  getFeedingSize,
   makeSpeakableList
 };

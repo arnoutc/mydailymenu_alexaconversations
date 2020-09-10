@@ -133,29 +133,29 @@ const YesIntentHandler = {
             // copying to new object to not mess up downstream storage of object in session
             let spoken_special = JSON.parse(JSON.stringify(menu.getDailySpecialForPeriod(day, period)));
             console.log('Daily special: ' + JSON.stringify(spoken_special));
-            if (period === "lunch"){
+            if (period === "breakfast"){
+                speakOutput = handlerInput.t('DAILY_BREAKFAST_SPECIAL', {
+                    day: day,
+                    breakfast: spoken_special.menu.breakfast,
+                    lunch: spoken_special.menu.lunch,
+                    dinner: spoken_special.menu.dinner,
+                    drinks: spoken_special.drinks
+                });
+            } else if (period == "lunch") {
                 speakOutput = handlerInput.t('DAILY_LUNCH_SPECIAL', {
                     day: day,
-                    size: spoken_special.pizza.size,
-                    crust: spoken_special.pizza.crust,
-                    cheese: spoken_special.pizza.cheese,
-                    toppingsList: menu.makeSpeakableList(spoken_special.pizza.toppingsList),
-                    salad: spoken_special.salad,
-                    drinks: spoken_special.drinks,
-                    cost: spoken_special.cost
+                    breakfast: spoken_special.menu.breakfast,
+                    lunch: spoken_special.menu.lunch,
+                    dinner: spoken_special.menu.dinner,
+                    drinks: spoken_special.drinks
                 });
             } else {
                 speakOutput = handlerInput.t('DAILY_DINNER_SPECIAL', {
                     day: day,
-                    size: spoken_special.pizza.size,
-                    crust: spoken_special.pizza.crust,
-                    cheese: spoken_special.pizza.cheese,
-                    toppingsList: menu.makeSpeakableList(spoken_special.pizza.toppingsList),
-                    salad: spoken_special.salad,
-                    side: spoken_special.side,
-                    dessert: spoken_special.dessert,
-                    drinks: spoken_special.drinks,
-                    cost: spoken_special.cost
+                    breakfast: spoken_special.menu.breakfast,
+                    lunch: spoken_special.menu.lunch,
+                    dinner: spoken_special.menu.dinner,
+                    drinks: spoken_special.drinks
                 });
             }
             reprompt = handlerInput.t('DAILY_SPECIAL_REPROMPT',{
@@ -392,6 +392,10 @@ const ContinueOrderIntentHandler = {
             .getResponse();
     }
 };
+
+/**
+ * Adding skill resumption to put the order in background.
+ */
 const OrderIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
@@ -617,13 +621,13 @@ const HearSpecialDetailsIntentHandler = {
             .getResponse();
     },
 };
-const BuildMyOwnPizzaIntentHandler = {
+const BuildMyMenuIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'BuildMyOwnPizzaIntent';
+        return request.type === 'IntentRequest' && request.intent.name === 'BuildMyMenuIntent';
     },
     handle(handlerInput) {
-        console.log("In BuildMyOwnPizzaIntentHandler");
+        console.log("In BuildMyMenuIntentHandler");
 
         // get the name of the special
         const countSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'count');
@@ -681,7 +685,7 @@ const BuildMyOwnPizzaIntentHandler = {
                 updatedRequest: {
                     type: 'Dialog.InputRequest',
                     input: {
-                        name: 'startPizzaOrder'
+                        name: 'startMenuOrder'
                     }
                 }
             })
@@ -976,7 +980,7 @@ module.exports.handler = Alexa.SkillBuilders.standard()
         GetHoursIntentHandler,
         ContinueOrderIntentHandler,
         //HearPizzaReferenceSpecialsIntentHandler,
-        HearMenuDetailsIntentHandler,
+        HearSpecialDetailsIntentHandler,
         //AddPizzaReferenceSpecialToOrderIntentHandler,
         BuildMyMenuIntentHandler,
         OtherIntentHandler,

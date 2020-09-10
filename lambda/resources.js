@@ -38,21 +38,22 @@ module.exports = {
             
             CLOSEST_LOCATION: "The closest Pizza Reference shop to you in {{city}} is open until 9pm tonight. I can tell you their specials or you can just ask me to order a pizza",
             
-            DAILY_LUNCH_SPECIAL: "Our {{day}} lunch special comes with a {{size}} {{toppingsList}} pizza with {{cheese}} cheese on {{crust}} crust, a {{salad}} and {{drinks}} for ${{cost}}. Would you like to order?",
-            DAILY_DINNER_SPECIAL: "Our {{day}} dinner special comes with a {{size}} {{toppingsList}} pizza with {{cheese}} cheese on {{crust}} crust, a {{salad}}, a side order of {{side}}, {{dessert}} and {{drinks}} for ${{cost}}. Would you like to order?",
+            DAILY_BREAKFAST_SPECIAL: "Our {{day}} breakfast special comes with a {{breakfast}} with {{drinks}}. Would you like to order?",
+            DAILY_LUNCH_SPECIAL: "Our {{day}} lunch special comes with a {{lunch}} with {{drinks}}. Would you like to order?",
+            DAILY_DINNER_SPECIAL: "Our {{day}} dinner special comes with a {{dinner}} with {{drinks}}. Would you like to order?",
             DAILY_SPECIAL_REPROMPT: "Sorry, I didn't catch that. Would you like to order the {{day}} {{period}} special?",
             
-            ORDER_DAILY_SPECIAL : "Ok, adding the {{day}} {{period}} special to your order. Would you like to add side orders, drinks or desserts?",
-            ORDER_DAILY_SPECIAL_REPROMPT: "I've got your {{day}} {{period}} added to your order. Would you like to add side orders, drinks or desserts?",
+            ORDER_DAILY_SPECIAL : "Ok, adding the {{day}} {{period}} special to your order. Would you like to add drinks?",
+            ORDER_DAILY_SPECIAL_REPROMPT: "I've got your {{day}} {{period}} added to your order. Would you like to add drinks?",
             
-            ADD_TO_ORDER : "Ok, you can ask for a list of sides, drinks and desserts or just ask to add something by name",
-            ADD_TO_ORDER_REPROMPT : "Sorry, I didn't catch that, you can ask for a list of sides, drinks and desserts or just ask to add something by name",
+            ADD_TO_ORDER : "Ok, you can ask for a list of drinks or just ask to add something by name",
+            ADD_TO_ORDER_REPROMPT : "Sorry, I didn't catch that, you can ask for a list of drinks or just ask to add something by name",
             
             CONFIRM_DAILY_SPECIAL_ORDER : "Great! I've ordered the {{day}} {{period}} special. What would you like to do next?",
             CONFIRM_DAILY_SPECIAL_ORDER_REPROMPT: "Sorry, I didn't catch that. What would you like to do?",
             
-            PLACE_ORDER: "Great! I placed your order for {{orderText}}. What would you like to do next?",
-            PLACE_ORDER_REPROMPT: "Your order has been placed, what would you like to to?",
+            PLACE_ORDER: "Great! I placed your order for {{orderText}}. I'll let you know when it arrives. In the meantime, have you had a glass of water? , It’s important to keep drinking!",
+            PLACE_ORDER_REPROMPT: "Your order has been placed, I'll let you know when it arrives. In the meantime, have you had a glass of water? , It’s important to keep drinking!",
             
             CUSTOMIZE_PIZZA_OR_SALAD: "Sure, would you like to customize the pizza or the salad?",
             CUSTOMIZE_PIZZA_OR_SALAD_REPROMPT: "Sorry, I didn't catch that, dod you want to customize the pizza or salad?",
