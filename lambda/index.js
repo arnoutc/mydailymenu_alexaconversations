@@ -676,6 +676,7 @@ const BuildMyMenuIntentHandler = {
         //         .getResponse();
         // }
         const breakfastSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'breakfast');
+        console.log('envelopes are ' + handlerInput.requestEnvelope);
         console.log('breakfastSlot is ' + breakfastSlot);
         if ( breakfastSlot && breakfastSlot.value ){
             return handlerInput.responseBuilder
