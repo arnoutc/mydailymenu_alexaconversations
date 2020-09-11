@@ -689,7 +689,7 @@ const BuildMyMenuIntentHandler = {
                     updatedRequest: {
                         type: 'Dialog.InputRequest',
                         input: {
-                            name: 'orderMenu',
+                            name: 'orderBreakfast',
                             slots: {
                                 name: {
                                     name: 'breakfast',
@@ -715,7 +715,7 @@ const BuildMyMenuIntentHandler = {
                     updatedRequest: {
                         type: 'Dialog.InputRequest',
                         input: {
-                            name: 'orderMenu',
+                            name: 'orderLunch',
                             slots: {
                                 name: {
                                     name: 'lunch',
@@ -741,10 +741,10 @@ const BuildMyMenuIntentHandler = {
                     updatedRequest: {
                         type: 'Dialog.InputRequest',
                         input: {
-                            name: 'orderMenu',
+                            name: 'orderDinner',
                             slots: {
                                 name: {
-                                    name: 'lunch',
+                                    name: 'dinner',
                                     value: dinnerSlot.value
                                 }
                             }
