@@ -1076,5 +1076,5 @@ module.exports.handler = Alexa.SkillBuilders.standard()
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
     .withAutoCreateTable(true)
-    .withCustomUserAgent('my-daily-menu-skill/v1')
+    // .withCustomUserAgent('my-daily-menu-skill/v1')
     .lambda();
