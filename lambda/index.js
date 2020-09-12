@@ -681,7 +681,7 @@ const BuildMyMenuIntentHandler = {
         console.log('envelopes are ' + JSON.stringify(handlerInput.requestEnvelope));
         console.log('breakfastSlot is ' + breakfastSlot);
         
-        if ( breakfastSlot.value  == null ){
+        if ( breakfastSlot  && breakfastSlot.value ){
             return handlerInput.responseBuilder
                 .addDirective({
                     type: 'Dialog.DelegateRequest',
@@ -756,8 +756,6 @@ const BuildMyMenuIntentHandler = {
                 })
                 .getResponse();
         }
-        
-        console.log('end BuildMyMenuIntentHandler');
         return handlerInput.responseBuilder
             .addDirective({
                 type: 'Dialog.DelegateRequest',
