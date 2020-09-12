@@ -338,6 +338,8 @@ const NoIntentHandler = {
             reprompt = handlerInput.t('REMPROMPT_FOR_ACTION');
         } 
         // if we prompted them to customize and they said no
+        console.log('in NoIntentHandler');
+        console.log('sessionAttributes are ' + JSON.stringify(sessionAttributes));
         if (sessionAttributes.state == states.PROMPTED_TO_ADD_TO_ORDER || 
                 sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA){
             _.defaults(sessionAttributes, {
@@ -1074,5 +1076,5 @@ module.exports.handler = Alexa.SkillBuilders.standard()
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
     .withAutoCreateTable(true)
-    .withCustomUserAgent('reference-skills/pizza-reference/v1')
+    .withCustomUserAgent('my-daily-menu-skill/v1')
     .lambda();
