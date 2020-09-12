@@ -680,7 +680,8 @@ const BuildMyMenuIntentHandler = {
         const breakfastSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'breakfast');
         console.log('envelopes are ' + JSON.stringify(handlerInput.requestEnvelope));
         console.log('breakfastSlot is ' + breakfastSlot);
-        if ( breakfastSlot && breakfastSlot.value ){
+        
+        if ( breakfastSlot.value  == null ){
             return handlerInput.responseBuilder
                 .addDirective({
                     type: 'Dialog.DelegateRequest',
