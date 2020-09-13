@@ -19,7 +19,8 @@
     "aws-sdk": "2.637.0",
     "i18next": "^19.4.4",
     "lodash": "^4.17.15",
-    "sprintf-js": "^1.1.2"
+    "sprintf-js": "^1.1.2",
+    "ask-sdk-s3-persistence-adapter": "^2.3.0"
   },
   "devDependencies": {
     "eslint": "^7.8.1"
