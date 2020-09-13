@@ -259,8 +259,8 @@ const generateOrderText = (order) => {
 
 const getDailySpecialForPeriod = (day, period) => {
   console.log('In getDailySpecialForPeriod')
-  console.log('day is {}', day);
-  console.log('period is {}', period);
+  console.log('day is ' + JSON.stringify(day));
+  console.log('period is ' + JSON.stringify(period));
   return daily_menus[day][period];
 };
 

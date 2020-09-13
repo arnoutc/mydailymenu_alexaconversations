@@ -74,6 +74,7 @@ const LaunchHandler = {
         let speakOutput, reprompt;
         // if they had 'in flight' orders that had not been moved to ordered.
         if(in_progress){
+            console.log('in progress orders');
             if(personId){
                 speakOutput = handlerInput.t('WELCOME_PERSONALIZED', {
                     personId: personId,
@@ -88,7 +89,10 @@ const LaunchHandler = {
             sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE;
         } else {
             // no in progress orders
+            console.log('no in progress orders');
             let {day, period} = await requestUtils.getDayAndPeriod(handlerInput);
+            console.log('day ' + JSON.stringify(day));
+            console.log('period ' + JSON.stringify(period));
             reprompt = handlerInput.t('WELCOME_REPROMPT');
             if (personId) {
                 // Speaker is recognized, so greet by name
