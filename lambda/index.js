@@ -1080,5 +1080,6 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         PersistenceRequestInterceptor)
     .addResponseInterceptors(LogResponseInterceptor, PersistenceResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
+    .withApiClient(new Alexa.DefaultApiClient)
     .withCustomUserAgent('my-daily-menu-skill/v1')
     .lambda();
