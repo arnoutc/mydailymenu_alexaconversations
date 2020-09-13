@@ -25,6 +25,8 @@ const Alexa = require('ask-sdk-core');
  */
 const getUserId = (handlerInput) => {
     try {
+        console.log('In getUserId');
+        console.log('userId: ' + JSON.stringify(handlerInput.requestEnvelope.context.System.user.userId));
         return handlerInput.requestEnvelope.context.System.user.userId;
     } catch (error) {
         console.log('Error occurred while getting user id:', error);
@@ -36,6 +38,9 @@ const getPerson = (handlerInput) => {
 }
 const getPersonId = (handlerInput) => {
     const person = getPerson(handlerInput);
+    console.log('In getPersonId');
+    console.log('personID: ' + JSON.stringify(getPerson(handlerInput)));
+
     if (person) {
         return person.personId;
     }
@@ -44,6 +49,9 @@ const getPersonId = (handlerInput) => {
 const getDayAndPeriod = async (handlerInput) => {
     const serviceClientFactory = handlerInput.serviceClientFactory;
     const deviceId = handlerInput.requestEnvelope.context.System.device.deviceId;
+    console.log('In getDayAndPeriod');
+    console.log('deviceId: ' + JSON.stringify(handlerInput.requestEnvelope.context.System.device.deviceId));
+
       
     let userTimeZone;
     try {
