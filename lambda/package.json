@@ -1,5 +1,5 @@
 {
-  "name": "pizza-reference-skill",
+  "name": "my-daily-menu",
   "version": "1.0.0",
   "description": "Example Alexa skill build in Alexa Conversations showing dialog design and interoperability",
   "main": "index.js",
@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "pizza",
-    "convefsations"
+    "menu",
+    "conversations"
   ],
   "author": "Amazon Alexa",
   "license": "ASL",

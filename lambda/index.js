@@ -126,6 +126,8 @@ const YesIntentHandler = {
     async handle(handlerInput) {
         let speakOutput, reprompt;
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        console.log('In YesIntentHandler');
+        console.log('sessionAtrributes ' + JSON.stringify(sessionAttributes));
         let {day, period} = await requestUtils.getDayAndPeriod(handlerInput);
         // if we just prompted them for specials
         if (sessionAttributes.state == states.PROMPTED_FOR_DAILY_SPECIALS){
@@ -679,7 +681,7 @@ const BuildMyMenuIntentHandler = {
         // }
         const breakfastSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'breakfast');
         console.log('envelopes are ' + JSON.stringify(handlerInput.requestEnvelope));
-        console.log('breakfastSlot is ' + breakfastSlot);
+        console.log('breakfastSlot is ' + JSON.stringify(breakfastSlot));
         
         if ( breakfastSlot  && breakfastSlot.value ){
             return handlerInput.responseBuilder
@@ -706,7 +708,7 @@ const BuildMyMenuIntentHandler = {
         }
 
         const lunchSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'lunch');
-        console.log('lunchSlot is ' + lunchSlot);
+        console.log('lunchSlot is ' + JSON.stringify(lunchSlot));
         if ( lunchSlot && lunchSlot.value ){
             return handlerInput.responseBuilder
                 .addDirective({
@@ -732,7 +734,7 @@ const BuildMyMenuIntentHandler = {
         }
 
         const dinnerSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'dinner');
-        console.log('dinnerSlot is ' + dinnerSlot);
+        console.log('dinnerSlot is ' + JSON.stringify(dinnerSlot));
         if ( dinnerSlot && dinnerSlot.value ){
             return handlerInput.responseBuilder
                 .addDirective({
@@ -821,12 +823,12 @@ const GetHoursIntentHandler = {
 const OtherIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name !== 'GetSpecialtyPizzaListIntent' && request.intent.name !== 'BuildMyOwnPizzaIntent';
+        return request.type === 'IntentRequest' && request.intent.name !== 'GetSpecialtyPizzaListIntent' && request.intent.name !== 'BuildMyMenuIntent';
     },
 
     /**
      * If user says something which is not handled by the specific intent handlers, then the request should be handled by this default
-     * Intent handler. This prompts the user to select one of our defined Intents. For now, GetSpecialtyPizzaListIntent and BuildMyOwnPizzaIntent
+     * Intent handler. This prompts the user to select one of our defined Intents. For now, GetSpecialtyPizzaListIntent and BuildMyMenuIntent
      * 
      * @param handlerInput {HandlerInput}
      * @returns {Response}
@@ -1075,5 +1077,5 @@ module.exports.handler = Alexa.SkillBuilders.standard()
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
     .withAutoCreateTable(true)
-    // .withCustomUserAgent('my-daily-menu-skill/v1')
+    .withCustomUserAgent('my-daily-menu-skill/v1')
     .lambda();
