@@ -56,6 +56,8 @@ const LaunchHandler = {
         const personId = requestUtils.getPersonId(handlerInput);
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         const {in_progress} = sessionAttributes;
+        console.log('In LaunchHandler');
+        console.log('sessionAttributes: ' + JSON.stringify(sessionAttributes));
         
         let speakOutput, reprompt;
         // if they had 'in flight' orders that had not been moved to ordered.
@@ -202,7 +204,7 @@ const YesIntentHandler = {
             // if we dont have a special name, lets ask for it again
             if (!name){
                 speakOutput = handlerInput.t('GET_SPECIAL_PIZZA_NAME');
-                repromt = handlerInput.t('GET_SPECIAL_PIZZA_NAME_REPROMPT');
+                reprompt = handlerInput.t('GET_SPECIAL_PIZZA_NAME_REPROMPT');
             } else {
                 return handlerInput.responseBuilder
                     .addDirective({
