@@ -1098,6 +1098,8 @@ const PersistenceRequestInterceptor = {
   // when the session ends and it stores the skill last used timestamp
   const PersistenceResponseInterceptor = { 
     process(handlerInput, responseOutput) { 
+        console.log('in PersistenceResponseInterceptor');
+        console.log('responseOutput is ' + JSON.stringify(responseOutput));
         const ses = (typeof responseOutput.shouldEndSession === 'undefined' ? true : responseOutput.shouldEndSession); 
         if(ses || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out 
             let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
