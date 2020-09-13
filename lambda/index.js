@@ -1148,8 +1148,8 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, 
-        PersistenceRequestInterceptor, PersistenceResponseInterceptor)
-    .addResponseInterceptors(LogResponseInterceptor)
+        PersistenceRequestInterceptor)
+    .addResponseInterceptors(LogResponseInterceptor, PersistenceResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
     .withCustomUserAgent('my-daily-menu-skill/v1')
     .lambda();
