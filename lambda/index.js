@@ -1120,7 +1120,7 @@ const PersistenceRequestInterceptor = {
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
 // defined are included below. The order matters in lists: they're processed top to bottom.
-module.exports.handler = Alexa.SkillBuilders.standard()
+module.exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(        
         LaunchHandler,
         YesIntentHandler,
