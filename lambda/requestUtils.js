@@ -52,11 +52,11 @@ const getDayAndPeriod = async (handlerInput) => {
     console.log('In getDayAndPeriod');
     console.log('deviceId: ' + JSON.stringify(handlerInput.requestEnvelope.context.System.device.deviceId));
 
-      
     let userTimeZone;
     try {
         const upsServiceClient = serviceClientFactory.getUpsServiceClient();
-        userTimeZone = await upsServiceClient.getSystemTimeZone(deviceId);    
+        userTimeZone = await upsServiceClient.getSystemTimeZone(deviceId); 
+        console.log('userTimeZone: ' + JSON.stringify(userTimeZone));
     } catch (error) {
         if (error.name !== 'ServiceError') {
             return handlerInput.responseBuilder.speak("There was a problem connecting to the service.").getResponse();
@@ -68,8 +68,10 @@ const getDayAndPeriod = async (handlerInput) => {
     let hour = requestDate.toLocaleString('en-US', {hour: '2-digit',   hour12: false, timeZone: userTimeZone});
     console.log("The current hour in the user's timezone: " + hour);
     let period;
-    if(hour <=  14 && hour >= 2){
-        period = "lunch"
+    if(hour <= 11 && hour >= 5){
+        period = "breakfast";
+    } else if(hour <=  14 && hour >= 11){
+        period = "lunch";
     } else {
         period = "dinner";
     }
