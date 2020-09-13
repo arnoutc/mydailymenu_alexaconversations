@@ -45,21 +45,21 @@ let persistenceAdapter;
 const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
 persistenceAdapter = new DynamoDbPersistenceAdapter({ 
     tableName: 'daily-menus',
-    createTable: true,
-    partitionKeyGenerator: keyGenerator
+    createTable: true
+    //partitionKeyGenerator: keyGenerator
 });
 
 // This function establishes the primary key of the database as the skill id (hence you get global persistence, not per user id)
-function keyGenerator(requestEnvelope) {
-    if (requestEnvelope
-        && requestEnvelope.context
-        && requestEnvelope.context.System
-        && requestEnvelope.context.System.application
-        && requestEnvelope.context.System.application.applicationId) {
-      return requestEnvelope.context.System.application.applicationId; 
-    }
-    throw 'Cannot retrieve app id from request envelope!';
-}
+// function keyGenerator(requestEnvelope) {
+//     if (requestEnvelope
+//         && requestEnvelope.context
+//         && requestEnvelope.context.System
+//         && requestEnvelope.context.System.application
+//         && requestEnvelope.context.System.application.applicationId) {
+//       return requestEnvelope.context.System.application.applicationId; 
+//     }
+//     throw 'Cannot retrieve app id from request envelope!';
+// }
 
 // *****************************************************************************
 // Launch request handler.
