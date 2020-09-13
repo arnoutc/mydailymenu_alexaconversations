@@ -37,6 +37,30 @@ const states = {
     PROMPTED_TO_ORDER_SPECIAL : 'PROMPTED_TO_ORDER_SPECIAL',
     PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA : 'PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA'
 };
+
+// Persistence
+let persistenceAdapter;
+
+// IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
+const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
+persistenceAdapter = new DynamoDbPersistenceAdapter({ 
+    tableName: 'daily-menus',
+    createTable: true,
+    partitionKeyGenerator: keyGenerator
+});
+
+// This function establishes the primary key of the database as the skill id (hence you get global persistence, not per user id)
+function keyGenerator(requestEnvelope) {
+    if (requestEnvelope
+        && requestEnvelope.context
+        && requestEnvelope.context.System
+        && requestEnvelope.context.System.application
+        && requestEnvelope.context.System.application.applicationId) {
+      return requestEnvelope.context.System.application.applicationId; 
+    }
+    throw 'Cannot retrieve app id from request envelope!';
+}
+
 // *****************************************************************************
 // Launch request handler.
 // *****************************************************************************
@@ -1074,7 +1098,7 @@ const PersistenceRequestInterceptor = {
   // when the session ends and it stores the skill last used timestamp
   const PersistenceResponseInterceptor = { 
     process(handlerInput, responseOutput) { 
-        const ses = (typeof responseOutput.shouldEndSession === undefined ? true : responseOutput.shouldEndSession); 
+        const ses = (typeof responseOutput.shouldEndSession === 'undefined' ? true : responseOutput.shouldEndSession); 
         if(ses || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out 
             let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
             sessionAttributes['lastUseTimestamp'] = new Date(handlerInput.requestEnvelope.request.timestamp).getTime(); 
@@ -1124,8 +1148,6 @@ module.exports.handler = Alexa.SkillBuilders.standard()
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, 
         PersistenceRequestInterceptor, PersistenceResponseInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
-    .withTableName('dailymenus')
-    .withAutoCreateTable(true)
-    .withDynamoDbClient()
+    .withPersistenceAdapter(persistenceAdapter)
     .withCustomUserAgent('my-daily-menu-skill/v1')
     .lambda();
