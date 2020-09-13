@@ -936,7 +936,8 @@ const SessionEndedRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
     },
     handle(handlerInput) {
-        console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
+        const request = handlerInput.requestEnvelope.request;
+        console.log(`Session ended with reason: ${request.reason} ${request.error.type} ${request.error.message} `);
         return handlerInput.responseBuilder.getResponse();
     },
 };
