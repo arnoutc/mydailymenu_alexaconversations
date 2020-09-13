@@ -54,7 +54,7 @@ const getDayAndPeriod = async (handlerInput) => {
 
     let userTimeZone;
     try {
-        const upsServiceClient = serviceClientFactory.getUpsServiceClient();
+        const upsServiceClient = await serviceClientFactory.getUpsServiceClient();
         userTimeZone = await upsServiceClient.getSystemTimeZone(deviceId); 
         console.log('userTimeZone: ' + JSON.stringify(userTimeZone));
     } catch (error) {
