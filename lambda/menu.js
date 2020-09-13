@@ -199,18 +199,20 @@ const specials = [
     name : "light", 
     qty: 1, 
     menu: {
-      breakfast: "Yoghurts",
-      lunch: "Salmon",
-      dinner : "Soup", 
+      breakfast: "Fresh fruit",
+      lunch: "Dahl Soup",
+      dinner : "Veggie Stir Fry", 
+      drink : "Still water"
     }
   },
   {
     name : "energiser", 
     qty: 1, 
     menu: {
-      breakfast: "Yoghurts",
-      lunch: "Salmon",
-      dinner : "Soup", 
+      breakfast: "Fresh fruits",
+      lunch: "Salmon teriyaki rice",
+      dinner : "Italian Vermicelli Soup", 
+      drink : "Fresh Watermelon juice"
     }
   }];
 
