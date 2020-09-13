@@ -1047,6 +1047,51 @@ const LocalizationInterceptor = {
     }
 };
 
+// This request interceptor with each new session loads all global persistent attributes
+// into the session attributes and increments a launch counter
+const PersistenceRequestInterceptor = { 
+    process(handlerInput) { 
+        if(handlerInput.requestEnvelope.session['new']) { 
+            return new Promise((resolve, reject) => { 
+                handlerInput.attributesManager.getPersistentAttributes() 
+                    .then((persistentAttributes) => { 
+                        persistentAttributes = persistentAttributes || {};
+                        if(!persistentAttributes['launchCount'])
+                          persistentAttributes['launchCount'] = 0;
+                        persistentAttributes['launchCount'] += 1; 
+                        handlerInput.attributesManager.setSessionAttributes(persistentAttributes); 
+                        resolve();
+                    })
+                    .catch((err) => { 
+                      reject(err); 
+                  });
+            }); 
+        } // end session['new'] 
+    } 
+  };
+  
+  // This response interceptor stores all session attributes into global persistent attributes
+  // when the session ends and it stores the skill last used timestamp
+  const PersistenceResponseInterceptor = { 
+    process(handlerInput, responseOutput) { 
+        const ses = (typeof responseOutput.shouldEndSession === "undefined" ? true : responseOutput.shouldEndSession); 
+        if(ses || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out 
+            let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
+            sessionAttributes['lastUseTimestamp'] = new Date(handlerInput.requestEnvelope.request.timestamp).getTime(); 
+            handlerInput.attributesManager.setPersistentAttributes(sessionAttributes); 
+            return new Promise((resolve, reject) => { 
+                handlerInput.attributesManager.savePersistentAttributes() 
+                    .then(() => { 
+                        resolve(); 
+                    }) 
+                    .catch((err) => { 
+                        reject(err); 
+                    }); 
+            }); 
+        } 
+    } 
+  };
+
 // *****************************************************************************
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
 // payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -1076,8 +1121,11 @@ module.exports.handler = Alexa.SkillBuilders.standard()
         GetMenuDetails,
         )
     .addErrorHandlers(ErrorHandler)
-    .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor)
+    .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, 
+        PersistenceRequestInterceptor, PersistenceResponseInterceptor)
     .addResponseInterceptors(LogResponseInterceptor)
+    .withTableName('dailymenus')
     .withAutoCreateTable(true)
+    .withDynamoDbClient()
     .withCustomUserAgent('my-daily-menu-skill/v1')
     .lambda();
