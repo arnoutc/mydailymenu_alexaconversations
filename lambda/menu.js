@@ -195,60 +195,24 @@ const daily_menus = {
 };
 
 const specials = [
-  { 
-    name : "three cheese delight", 
-    qty: 1, 
-    menu: { 
-      size: "large", 
-      crust: "deep dish",
-      cheese : "extra", 
-    }
-  },
-  { 
-    name : "pepperoni party", 
-    qty: 1, 
-    menu : {
-      size: "extra large",
-      crust: "regular",
-      cheese : "extra", 
-    }
-  },
   {
-    name : "meat lovers", 
-    qty: 1, 
-    menu : {
-      size: "large",
-      crust: "regular",
-      cheese : "light", 
-    }
-  },
-  {
-    name : "veggie supreme", 
+    name : "light", 
     qty: 1, 
     menu: {
-      size: "large",
-      crust: "thin",
-      cheese : "normal", 
+      breakfast: "Yoghurts",
+      lunch: "Salmon",
+      dinner : "Soup", 
     }
   },
   {
-    name : "kitchen sink", 
+    name : "energiser", 
     qty: 1, 
     menu: {
-      size: "extra large",
-      crust: "deep dish",
-      cheese : "extra", 
+      breakfast: "Yoghurts",
+      lunch: "Salmon",
+      dinner : "Soup", 
     }
-  },
-  {
-    name : "two medium, two topping pizzas", 
-    qty: 2, 
-    menu: {
-      size: "medium",
-      crust: "regular",
-      cheese: "normal", 
-    }
-}];
+  }];
 
 const drinks = [
   {name: "iced tea"},
@@ -297,18 +261,18 @@ const getDailySpecialForPeriod = (day, period) => {
   return daily_menus[day][period];
 };
 
-const getPizzaReferenceSpecials = () => {
+const getMenuReferenceSpecials = () => {
     return specials.map(function (special) {
         return special.name
       })
 }
-const getSpecialPizzaDetails = (specialPizzaName) => {
-    console.log("In getSpecialPizzaDetails, looking for: " + specialPizzaName);
-    if (!getPizzaReferenceSpecials().includes(specialPizzaName)){
+const getSpecialMenuDetails = (specialMenuName) => {
+    console.log("In getSpecialMenuDetails, looking for: " + specialMenuName);
+    if (!getMenuReferenceSpecials().includes(specialMenuName)){
         return null;
     }
     let special = specials.find(special => 
-      (special.name.toLowerCase() === specialPizzaName) || (special.name.toLowerCase().includes(specialPizzaName)));
+      (special.name.toLowerCase() === specialMenuName) || (special.name.toLowerCase().includes(specialMenuName)));
     return special;
 }
 
@@ -325,8 +289,8 @@ const makeSpeakableList =  (list) => {
 }
 module.exports = { 
   getDailySpecialForPeriod,
-  getPizzaReferenceSpecials, 
-  getSpecialPizzaDetails, 
+  getMenuReferenceSpecials, 
+  getSpecialMenuDetails, 
   getDrinks,
   generateOrderText,
   makeSpeakableList

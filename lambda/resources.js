@@ -21,7 +21,7 @@ module.exports = {
             WELCOME_BACK: "Welcome back to My Daily Menu. Would you like to continue with your existing order or start over",
             WELCOME_BACK_REPROMPT : "Sorry, I didn't catch that. Should we continue with your existing order or start a new one",
             
-            REPEAT_ORDER_AND_CUSTOMIZE : "Your order has {{orderText}}. Would you like to customize the pizza or salad? or order as is",
+            REPEAT_ORDER_AND_CUSTOMIZE : "Your order has {{orderText}}. Would you like to customize the menu? or order as is",
             REPEAT_ORDER_AND_CUSTOMIZE_REPROMPT: "Sorry, I didn't catch that, did you want to customize this order? or order as is",
             REPEAT_ORDER_AND_ADD_SOMETHING : "Your order has {{orderText}}. Would you like to add something or order as is?",
             REPEAT_ORDER_AND_ADD_SOMETHING_REPROMPT: "Sorry, I didn't catch that, did you want to to add something or order as is?",
@@ -35,9 +35,7 @@ module.exports = {
             HELP_PROMPT: "This skill is an Alexa Conversations implementation that simulates a menu ordering dialog flows using Alexa's artificial intelligence technology. You can ask me to order a menu, or hear our menu",
             
             REPROMPT_FOR_ACTION : "Sorry, I didnt catch that, what would you like to do?",
-            
-            CLOSEST_LOCATION: "The closest Pizza Reference shop to you in {{city}} is open until 9pm tonight. I can tell you their specials or you can just ask me to order a pizza",
-            
+                        
             DAILY_BREAKFAST_SPECIAL: "Our {{day}} breakfast special comes with a {{breakfast}} with {{drinks}}. Would you like to order?",
             DAILY_LUNCH_SPECIAL: "Our {{day}} lunch special comes with a {{lunch}} with {{drinks}}. Would you like to order?",
             DAILY_DINNER_SPECIAL: "Our {{day}} dinner special comes with a {{dinner}} with {{drinks}}. Would you like to order?",
@@ -55,32 +53,27 @@ module.exports = {
             PLACE_ORDER: "Great! I placed your order for {{orderText}}. I'll let you know when it arrives. In the meantime, have you had a glass of water? , It’s important to keep drinking!",
             PLACE_ORDER_REPROMPT: "Your order has been placed, I'll let you know when it arrives. In the meantime, have you had a glass of water? , It’s important to keep drinking!",
             
-            CUSTOMIZE_PIZZA_OR_SALAD: "Sure, would you like to customize the pizza or the salad?",
-            CUSTOMIZE_PIZZA_OR_SALAD_REPROMPT: "Sorry, I didn't catch that, dod you want to customize the pizza or salad?",
-            ONLY_CUSTOMIZE_PIZZA_OR_SALAD: "Sorry, I didn't understand, you can ask me to customize the pizza or salad",
-            ONLY_CUSTOMIZE_PIZZA_OR_SALAD_REPROMPT: "You can tell me to customize the pizza or salad",
-            
             CURRENT_ORDER : "Your order has {{orderText}}. Did you want to continue with this order or start over",
             CURRENT_ORDER_REPROMPT: "Sorry, I didn't catch that. Should we continue with your existing order or start a new one",
             NO_CURRENT_ORDER : "You dont have any orders in progress, what would you like to do next?",
             NO_CURRENT_ORDER_REPROMPT: "Sorry, I didn't catch that. What would you like to do next?",
             
-            PIZZA_REFERENCE_SPECIALS: "Our special pizzas are the {{specials}}. " +
+            MENU_REFERENCE_SPECIALS: "Our special menus are the {{specials}}. " +
                 "You can ask me for details about one of the specials or to add one to your order",
-            PIZZA_REFERENCE_SPECIALS_REPROMPT: "Did you want to hear more about a particular special?",
+            MENU_REFERENCE_SPECIALS_REPROMPT: "Did you want to hear more about a particular special?",
             
-            REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME : "{{error}} Our specials are {{specials}}. Which one do you want to know more about?",
-            REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT: "Which special did you want details on?",
-            PIZZA_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER: "The {{name}} comes with {{qty}} {{size}} {{toppings}} pizza on {{crust}} crust with {{cheese}} cheese for ${{cost}}. Would you like to add it to your order?",
-            PIZZA_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER_REPROMPT: "Would you like to order the {{name}} special?",
+            REPEAT_MENU_REFERENCE_SPECIALS_AND_GET_NAME : "{{error}} Our specials are {{specials}}. Which one do you want to know more about?",
+            REPEAT_MENU_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT: "Which special did you want details on?",
+            MENU_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER: "The {{name}} comes with {{qty}} {{breakfast}} {{lunch}} and {{dinner}}. Would you like to add it to your order?",
+            MENU_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER_REPROMPT: "Would you like to order the {{name}} special?",
             
             PROMPT_TO_CUSTOMIZE_SPECIAL: "Did you want to customize the {{name}} special at all?",
             PROMPT_TO_CUSTOMIZE_SPECIAL_REPROMPT: "Did you want to customize it?",
             
-            GET_SPECIAL_PIZZA_NAME : "Which of our specials did you want to customize?",
-            GET_SPECIAL_PIZZA_NAME_REPROMPT: "Which special did you want to customize?",
-            PIZZA_ORDER_OPTIONS : "Ok, did you want to hear our pizza specials or order a custom pizza?",
-            PIZZA_ORDER_OPTIONS_REPROMPT: "Would you like to hear our pizza specials or order a custom pizza?",
+            GET_SPECIAL_MENU_NAME : "Which of our specials did you want to customize?",
+            GET_SPECIAL_MENU_NAME_REPROMPT: "Which special did you want to customize?",
+            MENU_ORDER_OPTIONS : "Ok, did you want to hear our menu specials or order a custom menu?",
+            MENU_ORDER_OPTIONS_REPROMPT: "Would you like to hear our menu specials or order a custom menu?",
             SIDE_ORDER_OPTIONS : "Ok we have {{sides}}, what can I add to your order?",
             SIDE_ORDER_OPTIONS_REPROMPT : "Which side order would you like?",
             
@@ -90,7 +83,7 @@ module.exports = {
             DRINK_ORDER_OPTIONS_REPROMPT: "What drinks would you like?",
             DESSERT_ORDER_OPTIONS : "Ok we have {{desserts}}, what can I add to your order?",
             DESSERT_ORDER_OPTIONS_REPROMPT: "What dessert would you like?",
-            UNRECOGONIZED_ITEM : "Sorry, I don't think we have that on our menu. You can ask me to add sides, drinks, salads, desserts or pizzas to your order",
+            UNRECOGONIZED_ITEM : "Sorry, I don't think we have that on our menu. You can ask me to add menus or drinks to your order",
             PERMISSIONS_ERROR : "Please enable Location permissions in the Amazon Alexa app",
             NO_ADDRESS_SET: "Please enable Location permissions in the Amazon Alexa app.",
             FALLBACK: "Sorry, I didn't catch that. Say that again please.", 

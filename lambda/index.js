@@ -35,7 +35,7 @@ const states = {
     PROMPTED_TO_CUSTOMIZE : 'PROMPTED_TO_CUSTOMIZE',
     PROMPTED_TO_ADD_TO_ORDER: 'PROMPTED_TO_ADD_TO_ORDER',
     PROMPTED_TO_ORDER_SPECIAL : 'PROMPTED_TO_ORDER_SPECIAL',
-    PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA : 'PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA'
+    PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU : 'PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU'
 };
 
 // Persistence
@@ -46,20 +46,8 @@ const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapt
 persistenceAdapter = new DynamoDbPersistenceAdapter({ 
     tableName: 'daily-menus',
     createTable: true
-    //partitionKeyGenerator: keyGenerator
 });
 
-// This function establishes the primary key of the database as the skill id (hence you get global persistence, not per user id)
-// function keyGenerator(requestEnvelope) {
-//     if (requestEnvelope
-//         && requestEnvelope.context
-//         && requestEnvelope.context.System
-//         && requestEnvelope.context.System.application
-//         && requestEnvelope.context.System.application.applicationId) {
-//       return requestEnvelope.context.System.application.applicationId; 
-//     }
-//     throw 'Cannot retrieve app id from request envelope!';
-// }
 
 // *****************************************************************************
 // Launch request handler.
@@ -202,7 +190,7 @@ const YesIntentHandler = {
                 day: day,
                 period: period
             });
-            // let the system know we prompted to customize the pizza or salad
+            // let the system know we prompted to customize the menu or salad
             sessionAttributes.state = states.PROMPTED_TO_ADD_TO_ORDER;
 
             // lets save this order as in-progress
@@ -212,23 +200,23 @@ const YesIntentHandler = {
             speakOutput = handlerInput.t('ADD_TO_ORDER',);
             reprompt = handlerInput.t('ADD_TO_ORDER_REPROMPT');
         } else if (sessionAttributes.state == states.PROMPTED_TO_ORDER_SPECIAL){
-            // the user answered yes to ordering one of the special pizzas
+            // the user answered yes to ordering one of the special menus
             speakOutput = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL',{
                 name: sessionAttributes.specialName
             });
             reprompt = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL_REPROMPT');
-            sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA;
+            sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU;
           
             // lets save this order as in-progress
-            sessionAttributes.in_progress = {special : menu.getSpecialPizzaDetails(sessionAttributes.specialName)};
-        } else if (sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA){
-            // user answered yes to customizing a pizza
-            // send this to Alexa Conversations for customize special pizza
+            sessionAttributes.in_progress = {special : menu.getSpecialMenuDetails(sessionAttributes.specialName)};
+        } else if (sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU){
+            // user answered yes to customizing a menu
+            // send this to Alexa Conversations for customize special menu
             let name = sessionAttributes.in_progress.special.name;
             // if we dont have a special name, lets ask for it again
             if (!name){
-                speakOutput = handlerInput.t('GET_SPECIAL_PIZZA_NAME');
-                reprompt = handlerInput.t('GET_SPECIAL_PIZZA_NAME_REPROMPT');
+                speakOutput = handlerInput.t('GET_SPECIAL_MENU_NAME');
+                reprompt = handlerInput.t('GET_SPECIAL_MENU_NAME_REPROMPT');
             } else {
                 return handlerInput.responseBuilder
                     .addDirective({
@@ -240,7 +228,7 @@ const YesIntentHandler = {
                         updatedRequest: {
                             type: 'Dialog.InputRequest',
                             input: {
-                                name: 'customizePizzaReferenceSpecial',
+                                name: 'customizeMenuReferenceSpecial',
                                 slots: {
                                     name: {
                                         name : 'name',
@@ -259,29 +247,29 @@ const YesIntentHandler = {
             .getResponse();
     }
 };
-const AddPizzaReferenceSpecialToOrderIntentHandler = {
+const AddMenuReferenceSpecialToOrderIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AddPizzaReferenceSpecialToOrderIntent'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AddMenuReferenceSpecialToOrderIntent'
     },
     handle(handlerInput){
         let speakOutput, reprompt;
-        console.log("In AddPizzaReferenceSpecialToOrderIntentHandler");
+        console.log("In AddMenuReferenceSpecialToOrderIntentHandler");
 
         const specialSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'special');
         const firstAuthority = _.first(_.get(specialSlot, 'resolutions.resolutionsPerAuthority'));
         const special = _.first(_.get(firstAuthority, 'values')).value.name;
         
-        // the user answered yes to ordering one of the special pizzas
+        // the user answered yes to ordering one of the special menus
         speakOutput = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL',{
             name: special
         });
         reprompt = handlerInput.t('PROMPT_TO_CUSTOMIZE_SPECIAL_REPROMPT');
         let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA;
+        sessionAttributes.state = states.PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU;
     
         // lets save this order as in-progress
-        sessionAttributes.in_progress = {special : menu.getSpecialPizzaDetails(special)};
+        sessionAttributes.in_progress = {special : menu.getSpecialMenuDetails(special)};
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(reprompt)
@@ -358,7 +346,7 @@ const NoIntentHandler = {
     handle(handlerInput) {
         let speakOutput, reprompt;
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        // if we just prompted them for specials, ordering daily special, or customizing special pizza
+        // if we just prompted them for specials, ordering daily special, or customizing special menu
         if (sessionAttributes.state == states.PROMPTED_FOR_DAILY_SPECIALS || 
                 sessionAttributes.state == states.PROMPTED_TO_ORDER_DAILY_SPECIAL ||
                 sessionAttributes.state == states.PROMPTED_TO_ORDER_SPECIAL){
@@ -369,7 +357,7 @@ const NoIntentHandler = {
         console.log('in NoIntentHandler');
         console.log('sessionAttributes are ' + JSON.stringify(sessionAttributes));
         if (sessionAttributes.state == states.PROMPTED_TO_ADD_TO_ORDER || 
-                sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA){
+                sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU){
             _.defaults(sessionAttributes, {
                 orders: []
             });
@@ -471,29 +459,14 @@ const AddSomethingIntentHandler = {
         const itemSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'item');
         const firstAuthority = _.first(_.get(itemSlot, 'resolutions.resolutionsPerAuthority'));
         const item = _.first(_.get(firstAuthority, 'values')).value.name;
-        if (item === 'pizza'){
-            speakOutput = handlerInput.t('PIZZA_ORDER_OPTIONS');
-            reprompt = handlerInput.t('PIZZA_ORDER_OPTIONS_REPROMPT');
-        } else if (item === 'salad'){
-            speakOutput = handlerInput.t('SALAD_ORDER_OPTIONS',{
-                salads : menu.makeSpeakableList(menu.getSalads())
-            });
-            reprompt = handlerInput.t('SALAD_ORDER_OPTIONS_REPROMPT');
-        } else if (item === 'side'){
-            speakOutput = handlerInput.t('SIDE_ORDER_OPTIONS',{
-                sides : menu.makeSpeakableList(menu.getSides())
-            });
-            reprompt = handlerInput.t('SIDE_ORDER_OPTIONS_REPROMPT');
+        if (item === 'menu'){
+            speakOutput = handlerInput.t('MENU_ORDER_OPTIONS');
+            reprompt = handlerInput.t('MENU_ORDER_OPTIONS_REPROMPT');
         } else if (item === 'drink'){
             speakOutput = handlerInput.t('DRINK_ORDER_OPTIONS',{
                 drinks : menu.makeSpeakableList(menu.getDrinks())
             });
             reprompt = handlerInput.t('DRINK_ORDER_OPTIONS_REPROMPT');
-        } else if (item === 'dessert'){
-            speakOutput = handlerInput.t('DESSERT_ORDER_OPTIONS',{
-                desserts : menu.makeSpeakableList(menu.getDesserts())
-            });
-            reprompt = handlerInput.t('DESSERT_ORDER_OPTIONS_REPROMPT');
         } else {
             speakOutput = handlerInput.t('UNRECOGONIZED_ITEM');
             reprompt = handlerInput.t('UNRECOGONIZED_ITEM_REPROMPT');
@@ -504,10 +477,10 @@ const AddSomethingIntentHandler = {
             .getResponse();
     }
 }
-const HearPizzaReferenceSpecialsIntentHandler = {
+const HearMenuReferenceSpecialsIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'HearPizzaReferenceSpecialsIntent';
+        return request.type === 'IntentRequest' && request.intent.name === 'HearMenuReferenceSpecialsIntent';
     },
     /**
      * User asks to hear the specials, prompt to hear details or add to order
@@ -516,14 +489,14 @@ const HearPizzaReferenceSpecialsIntentHandler = {
      * @returns {Response}
      */
     handle(handlerInput) {
-        console.log("In HearPizzaReferenceSpecialsIntentHandler");
+        console.log("In HearMenuReferenceSpecialsIntentHandler");
         let speakOutput, reprompt;
         // make a deep copy of the object and return a 'speakable' list
-        let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getPizzaReferenceSpecials())));
-        speakOutput = handlerInput.t('PIZZA_REFERENCE_SPECIALS', {
+        let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getMenuReferenceSpecials())));
+        speakOutput = handlerInput.t('MENU_REFERENCE_SPECIALS', {
             specials: specials
         });
-        reprompt = handlerInput.t('PIZZA_REFERENCE_SPECIALS_REPROMPT');
+        reprompt = handlerInput.t('MENU_REFERENCE_SPECIALS_REPROMPT');
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         sessionAttributes.state = states.PROMPTED_TO_HEAR_BLUE_SHIFT_SPECIAL_DETAILS;
         return handlerInput.responseBuilder
@@ -580,24 +553,24 @@ const HearSpecialDetailsIntentHandler = {
         console.log("heard [" + specialName + "] as the special name")
         // if they didnt pass us a name and just asked for details 'on a special', lets prompt again for name
         if (!specialName){
-            let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getPizzaReferenceSpecials())));
-            speakOutput = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME', {
+            let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getMenuReferenceSpecials())));
+            speakOutput = handlerInput.t('REPEAT_MENU_REFERENCE_SPECIALS_AND_GET_NAME', {
                 specials: specials
             });
-            reprompt = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT');
+            reprompt = handlerInput.t('REPEAT_MENU_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT');
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(reprompt)
                 .getResponse()
         }
         // if they passed in a name, but its not a special
-        if (!menu.getPizzaReferenceSpecials().includes(specialName)){
-            let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getPizzaReferenceSpecials())));
-            speakOutput = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME', {
+        if (!menu.getMenuReferenceSpecials().includes(specialName)){
+            let specials = menu.makeSpeakableList(JSON.parse(JSON.stringify(menu.getMenuReferenceSpecials())));
+            speakOutput = handlerInput.t('REPEAT_MENU_REFERENCE_SPECIALS_AND_GET_NAME', {
                 specials: specials,
                 error: "Sorry, I dont recognize " + specialName + " as one of our specials."
             });
-            reprompt = handlerInput.t('REPEAT_PIZZA_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT');
+            reprompt = handlerInput.t('REPEAT_MENU_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT');
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 .reprompt(reprompt)
@@ -607,7 +580,7 @@ const HearSpecialDetailsIntentHandler = {
         // if we get here, we have a valid special name
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         // if we are re-prompting them for the special name and they indicated they wanted to customize
-        if (sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_PIZZA){
+        if (sessionAttributes.state == states.PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU){
             return handlerInput.responseBuilder
                 .addDirective({
                     type: 'Dialog.DelegateRequest',
@@ -618,7 +591,7 @@ const HearSpecialDetailsIntentHandler = {
                     updatedRequest: {
                         type: 'Dialog.InputRequest',
                         input: {
-                            name: 'customizePizzaReferenceSpecial',
+                            name: 'customizeMenuReferenceSpecial',
                             slots: {
                                 name: {
                                     name: 'name',
@@ -630,17 +603,16 @@ const HearSpecialDetailsIntentHandler = {
                 })
                 .getResponse();
         }
-        const special = menu.getSpecialPizzaDetails(specialName);
-        speakOutput = handlerInput.t('PIZZA_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER', {
+        const special = menu.getSpecialMenuDetails(specialName);
+        speakOutput = handlerInput.t('MENU_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER', {
             name : special.name,
             qty : special.qty,
-            size : special.pizza.size,
-            crust : special.pizza.crust,
-            cheese : special.pizza.cheese,
-            toppings : menu.makeSpeakableList(special.pizza.toppingsList),
-            cost: special.cost
+            breakfast : special.menu.breakfast,
+            lunch : special.menu.lunch,
+            dinner : special.menu.dinner,
+            //cost: special.cost
         });
-        reprompt = handlerInput.t('PIZZA_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER_REPROMPT', {
+        reprompt = handlerInput.t('MENU_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER_REPROMPT', {
             name: special.name
         });
         sessionAttributes.state = states.PROMPTED_TO_ORDER_SPECIAL;
@@ -658,53 +630,6 @@ const BuildMyMenuIntentHandler = {
     },
     handle(handlerInput) {
         console.log("In BuildMyMenuIntentHandler");
-
-        // get the name of the special
-        // const countSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'count');
-        // if ( countSlot && countSlot.value ){
-        //     if (countSlot.value == 2){
-        //         return handlerInput.responseBuilder
-        //             .addDirective({
-        //                 type: 'Dialog.DelegateRequest',
-        //                 target: 'AMAZON.Conversations',
-        //                 period: {
-        //                     until: 'EXPLICIT_RETURN' 
-        //                 },
-        //                 updatedRequest: {
-        //                     type: 'Dialog.InputRequest',
-        //                     input: {
-        //                         name: 'startTwoToppingPizzaOrder'
-        //                     }
-        //                 }
-        //             })
-        //             .getResponse();
-
-        //     }
-        // }
-        // const sizeSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'size');
-        // if ( sizeSlot && sizeSlot.value ){
-        //     return handlerInput.responseBuilder
-        //         .addDirective({
-        //             type: 'Dialog.DelegateRequest',
-        //             target: 'AMAZON.Conversations',
-        //             period: {
-        //                 until: 'EXPLICIT_RETURN' 
-        //             },
-        //             updatedRequest: {
-        //                 type: 'Dialog.InputRequest',
-        //                 input: {
-        //                     name: 'orderSpecificSizePizza',
-        //                     slots: {
-        //                         name: {
-        //                             name: 'size',
-        //                             value: sizeSlot.value
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         })
-        //         .getResponse();
-        // }
         const breakfastSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'breakfast');
         console.log('envelopes are ' + JSON.stringify(handlerInput.requestEnvelope));
         console.log('breakfastSlot is ' + JSON.stringify(breakfastSlot));
@@ -849,12 +774,12 @@ const GetHoursIntentHandler = {
 const OtherIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name !== 'GetSpecialtyPizzaListIntent' && request.intent.name !== 'BuildMyMenuIntent';
+        return request.type === 'IntentRequest' && request.intent.name !== 'GetSpecialtyMenuListIntent' && request.intent.name !== 'BuildMyMenuIntent';
     },
 
     /**
      * If user says something which is not handled by the specific intent handlers, then the request should be handled by this default
-     * Intent handler. This prompts the user to select one of our defined Intents. For now, GetSpecialtyPizzaListIntent and BuildMyMenuIntent
+     * Intent handler. This prompts the user to select one of our defined Intents. For now, GetSpecialtyMenuListIntent and BuildMyMenuIntent
      * 
      * @param handlerInput {HandlerInput}
      * @returns {Response}
@@ -953,7 +878,7 @@ const GetMenuDetails = {
     handle(handlerInput) {
         console.log("In GetMenuDetails API Handler");
         const apiArguments = requestUtils.getApiArguments(handlerInput);
-        let special = menu.getSpecialPizzaDetails(apiArguments.name);
+        let special = menu.getSpecialMenuDetails(apiArguments.name);
         return {
             apiResponse: {
                 special
@@ -967,7 +892,7 @@ const MenuQuestion = {
         return requestUtils.isApiRequest(handlerInput, 'MenuQuestion');
     },
     /**
-     * Returns the special pizza detail from the menu
+     * Returns the special menu detail from the menu
      *
      * @param handlerInput {HandlerInput}
      * @returns {Promise<Response>}
@@ -1137,9 +1062,9 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         SessionEndedRequestHandler,
         GetHoursIntentHandler,
         ContinueOrderIntentHandler,
-        HearPizzaReferenceSpecialsIntentHandler,
+        HearMenuReferenceSpecialsIntentHandler,
         HearSpecialDetailsIntentHandler,
-        AddPizzaReferenceSpecialToOrderIntentHandler,
+        AddMenuReferenceSpecialToOrderIntentHandler,
         BuildMyMenuIntentHandler,
         OtherIntentHandler,
         OrderMenu,
