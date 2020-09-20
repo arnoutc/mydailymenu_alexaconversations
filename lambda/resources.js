@@ -90,6 +90,7 @@ module.exports = {
             FALLBACK_REPROMPT: "Say that again please.",
             ERROR: "Sorry, something went wrong. Please try again later.",
             EXIT: "Speak to you later!",
+            PAUSE: "Allright, pausing your order, let me know when you're ready"
         }
     }
 };
