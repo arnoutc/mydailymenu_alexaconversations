@@ -374,7 +374,8 @@ const NoIntentHandler = {
             speakOutput = handlerInput.t('PLACE_ORDER', {
                 orderText: menu.generateOrderText(in_progress)
             });
-            reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
+            reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');  
+ 
         } 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -425,6 +426,10 @@ const OrderIntentHandler = {
     },
     handle(handlerInput) {
         console.log("In OrderIntentHandler");
+       
+        // This intent requires an access token so that we can get the user's
+        // My Daily Menu user profile from persistent storage.
+
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         _.defaults(sessionAttributes, {
             orders: []
@@ -439,6 +444,7 @@ const OrderIntentHandler = {
             orderText : orderText
         });
         let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
+    
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(reprompt)
@@ -812,6 +818,43 @@ const StopIntentHandler = {
             .getResponse();
     }
 }
+
+/**
+ * For Skill Resumption, when user actively pauses the interaction
+ */
+const PauseIntentHandler = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return request.type === 'IntentRequest' && request.intent.name === 'AMAZON.PauseIntent';
+    },
+    handle(handlerInput){
+        const sessionAtrributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAtrributes.state = 'BACKGROUNDED'
+        let speechOutput = handlerInput.t('PAUSE');
+        return handlerInput.responseBuilder
+            .speak(speechOutput)
+            .getResponse();
+    }
+}
+
+/**
+ * For Skill Resumption, when user actively pauses the interaction
+ */
+// const WhereIsMyOrderIntentHandler = {
+//     canHandle(handlerInput) {
+//         const request = handlerInput.requestEnvelope.request;
+//         return request.type === 'IntentRequest' && request.intent.name === 'WhereIsMyOrderIntent';
+//     },
+//     handle(handlerInput){
+//         const sessionAtrributes = handlerInput.attributesManager.getSessionAttributes();
+//         sessionAtrributes.state = 'BACKGROUNDED'
+//         let speechOutput = handlerInput.t('PAUSE');
+//         return handlerInput.responseBuilder
+//             .speak(speechOutput)
+//             .getResponse();
+//     }
+// }
+
 const CancelIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
@@ -1029,11 +1072,15 @@ const PersistenceRequestInterceptor = {
   const PersistenceResponseInterceptor = { 
     process(handlerInput, responseOutput) { 
         console.log('in PersistenceResponseInterceptor');
-        console.log('responseOutput is ' + JSON.stringify(responseOutput));
+        console.log(`responseOutput is ${JSON.stringify(responseOutput)}`);
         const ses = (typeof responseOutput.shouldEndSession === 'undefined' ? true : responseOutput.shouldEndSession); 
         if(ses || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out 
             let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
             sessionAttributes['lastUseTimestamp'] = new Date(handlerInput.requestEnvelope.request.timestamp).getTime(); 
+            const sessionBehavior = { "type":"SetSessionState", "state":"BACKGROUNDED"};
+            console.log(`sessionBehavior set ${JSON.stringify(sessionBehavior)}`);
+            responseOutput.response = Object.assign({}, sessionBehavior);
+            console.log(`responseOutput.response is ${JSON.stringify(responseOutput.response)}`);
             handlerInput.attributesManager.setPersistentAttributes(sessionAttributes); 
             return new Promise((resolve, reject) => { 
                 handlerInput.attributesManager.savePersistentAttributes() 
@@ -1061,6 +1108,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         StartOverIntentHandler,
         AddSomethingIntentHandler,
         StopIntentHandler,
+        PauseIntentHandler,
         CancelIntentHandler,
         HelpIntentHandler,
         WhatsInMyOrderIntentHandler,
@@ -1075,6 +1123,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         OrderMenu,
         MenuQuestion,
         GetMenuDetails,
+        //WhereIsMyOrderIntentHandler,
         )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, 
