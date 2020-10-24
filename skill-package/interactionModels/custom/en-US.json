@@ -1,0 +1,816 @@
+{
+  "interactionModel": {
+      "languageModel": {
+          "invocationName": "my daily menu",
+          "modelConfiguration": {
+              "fallbackIntentSensitivity": {
+                  "level": "LOW"
+              }
+          },
+          "intents": [
+              {
+                  "name": "AMAZON.FallbackIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": [
+                      "what else can I say",
+                      "what can I ask",
+                      "more help",
+                      "help me",
+                      "help"
+                  ]
+              },
+              {
+                  "name": "AMAZON.StopIntent",
+                  "samples": [
+                      "I am done",
+                      "I am good for now",
+                      "I have other things to do",
+                      "I will do something better",
+                      "I will do something else",
+                      "I will use my time in a better way",
+                      "I will use my time in something else",
+                      "I will utilize my time in some other way",
+                      "I don't need you anymore",
+                      "I don't need you",
+                      "I don't want anything",
+                      "I don't want it",
+                      "I don't want to continue thanks",
+                      "I don't want you",
+                      "done with you",
+                      "it's enough",
+                      "it's over",
+                      "leave me",
+                      "leave now",
+                      "no I don't need anything now",
+                      "no more information needed",
+                      "no more information required",
+                      "no need for anything",
+                      "please excuse me",
+                      "please pardon me",
+                      "please don't irritate me",
+                      "that's enough",
+                      "what's happening here",
+                      "stop",
+                      "I am finished",
+                      "I'm done",
+                      "I'm finished",
+                      "be quiet",
+                      "bye alexa",
+                      "bye alexis",
+                      "bye bye",
+                      "close app",
+                      "close skill",
+                      "cool thank you that's enough for now",
+                      "done",
+                      "end conversation",
+                      "enough",
+                      "enough stop",
+                      "exit skill",
+                      "get out",
+                      "go to sleep",
+                      "good bye",
+                      "good bye alexa",
+                      "goodbye alexa",
+                      "goodnight",
+                      "no thank you goodbye",
+                      "off",
+                      "off okay",
+                      "oh goodbye",
+                      "oh stop",
+                      "oh stop already",
+                      "ok stop",
+                      "ok that is enough",
+                      "okay alexa stop",
+                      "okay bye",
+                      "okay stop",
+                      "okay thank you",
+                      "okay that is enough",
+                      "okay that's enough",
+                      "okay that's it",
+                      "quiet",
+                      "quit it",
+                      "sh quiet",
+                      "stop goodbye",
+                      "stop listening",
+                      "stop skill",
+                      "stop stop",
+                      "stop stop stop",
+                      "thank you alexa off",
+                      "thank you alexa stop",
+                      "thanks alexa off",
+                      "thanks bye",
+                      "thanks off",
+                      "that is all",
+                      "that is all for now",
+                      "that is enough",
+                      "that will be all",
+                      "that'll be all",
+                      "that's all for now",
+                      "that's enough alexa",
+                      "that's enough alexa thanks",
+                      "that's it alexa",
+                      "that's it alexa stop",
+                      "uh be quite",
+                      "we are finished",
+                      "we're finished",
+                      "yes stop"
+                  ]
+              },
+              {
+                  "name": "AMAZON.NavigateHomeIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.MoreIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.NavigateSettingsIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.NextIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.PageUpIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.PageDownIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.PreviousIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.ScrollRightIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.ScrollDownIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.ScrollLeftIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.ScrollUpIntent",
+                  "samples": []
+              },
+              {
+                  "name": "AMAZON.PauseIntent",
+                  "samples": [
+                      "come back later",
+                      "break",
+                      "continue later",
+                      "pause"
+                  ]
+              },
+              {
+                  "name": "AMAZON.ResumeIntent",
+                  "samples": []
+              },
+              {
+                  "name": "BuildMyMenuIntent",
+                  "slots": [
+                      {
+                          "name": "breakfast",
+                          "type": "breakfast"
+                      },
+                      {
+                          "name": "lunch",
+                          "type": "lunch"
+                      },
+                      {
+                          "name": "dinner",
+                          "type": "dinner"
+                      }
+                  ],
+                  "samples": [
+                      "let's do an order from the custom menu",
+                      "I wanna order from the custom menu",
+                      "order from my custom menu",
+                      "order a menu please",
+                      "order menu",
+                      "order off the custom menu",
+                      "order from the custom menu",
+                      "customize my menu",
+                      "I want a customized order",
+                      "I want to begin a custom order",
+                      "how about a custom order",
+                      "I want to make up a custom order",
+                      "I want to do a customer order",
+                      "custom order",
+                      "let's start a custom menu",
+                      "menu please",
+                      "I'd like a customized menu",
+                      "I'd like a custom menu",
+                      "can I have a menu",
+                      "send me a menu",
+                      "I want a menu",
+                      "I want to order {breakfast} for breakfast",
+                      "I'd like to order {breakfast} for breakfast",
+                      "I'd like to order {lunch} for lunch",
+                      "I'd like {lunch} for lunch",
+                      "order {dinner} for dinner",
+                      "I want {dinner} for dinner",
+                      "can I order {dinner}",
+                      "I wan to order {dinner}",
+                      "I'd like to order {dinner}",
+                      "I'd like {dinner}",
+                      "order {dinner}",
+                      "i want {dinner}",
+                      "can I order {breakfast}",
+                      "I want to order {breakfast}",
+                      "I'd like to order {breakfast}",
+                      "I'd like {breakfast}",
+                      "order {breakfast}",
+                      "i want {breakfast}",
+                      "can I order {lunch}",
+                      "i want to order {lunch}",
+                      "I'd like to order {lunch}",
+                      "I'd like {lunch}",
+                      "order {lunch}",
+                      "i want {lunch}",
+                      "can I order {lunch} and {dinner}",
+                      "I want to order {lunch} and {dinner}",
+                      "I'd like {lunch} and {dinner}",
+                      "order {lunch} and {dinner}",
+                      "i want {lunch} and {dinner}",
+                      "can I order {breakfast} and {dinner}",
+                      "I want to order {breakfast} and {dinner}",
+                      "I'd like {breakfast} and {dinner}",
+                      "order {breakfast} and {dinner}",
+                      "i want {breakfast} and {dinner}",
+                      "can I order {breakfast} and {lunch}",
+                      "I want to order {breakfast} and {lunch}",
+                      "I'd like to order {breakfast} and {lunch}",
+                      "I'd like {breakfast} and {lunch}",
+                      "order {breakfast} and {lunch}",
+                      "i want {breakfast} and {lunch}",
+                      "can I order {breakfast} {lunch} and {dinner}",
+                      "I want to order {breakfast} {lunch} and {dinner}",
+                      "I'd like to order {breakfast} {lunch} and {dinner}",
+                      "I'd like {breakfast} {lunch} and {dinner}",
+                      "order a {dinner}",
+                      "order a {lunch}",
+                      "order a {breakfast}",
+                      "I want {breakfast} {lunch} and {dinner}",
+                      "order  {breakfast} {lunch} and {dinner}",
+                      "order a menu",
+                      "get a menu",
+                      "start a custom order",
+                      "order me {dinner} for a custom menu",
+                      "I want my customized menu"
+                  ]
+              },
+              {
+                  "name": "GetHoursIntent",
+                  "slots": [],
+                  "samples": [
+                      "you are still receiving orders",
+                      "can I  still order",
+                      "until how late can I order",
+                      "what are your hours",
+                      "what time are you open until"
+                  ]
+              },
+              {
+                  "name": "ContinueOrderIntent",
+                  "slots": [],
+                  "samples": [
+                      "continue",
+                      "continue with existing order",
+                      "keep going with this order",
+                      "I would like to continue my order",
+                      "let's continue",
+                      "continue my order"
+                  ]
+              },
+              {
+                  "name": "StartOverIntent",
+                  "slots": [],
+                  "samples": [
+                      "let's start over",
+                      "start over",
+                      "start a new order",
+                      "start my order over"
+                  ]
+              },
+              {
+                  "name": "AMAZON.YesIntent",
+                  "samples": [
+                      "Why not",
+                      "Yep",
+                      "Yes",
+                      "Ok",
+                      "Sure"
+                  ]
+              },
+              {
+                  "name": "AMAZON.NoIntent",
+                  "samples": [
+                      "Nah",
+                      "No thanks",
+                      "No I will order my own",
+                      "Nope",
+                      "No"
+                  ]
+              },
+              {
+                  "name": "OrderIntent",
+                  "slots": [],
+                  "samples": [
+                      "order it",
+                      "order what's in progress",
+                      "order as is"
+                  ]
+              },
+              {
+                  "name": "WhatsInMyOrderIntent",
+                  "slots": [],
+                  "samples": [
+                      "tell me my current order",
+                      "remind me what's in my order",
+                      "what do I have in my current order",
+                      "what's my current order",
+                      "what's in my order"
+                  ]
+              },
+              {
+                  "name": "HearMenuReferenceSpecialsIntent",
+                  "slots": [],
+                  "samples": [
+                      "hear your special",
+                      "tell me the special",
+                      "hear the special",
+                      "listen to your special",
+                      "hear your special special"
+                  ]
+              },
+              {
+                  "name": "AddMenuReferenceSpecialToOrderIntent",
+                  "slots": [
+                      {
+                          "name": "special",
+                          "type": "specialMenuName"
+                      }
+                  ],
+                  "samples": [
+                      "add a {special}",
+                      "go ahead and order a {special}",
+                      "I'll have the {special}",
+                      "we'll take the {special}",
+                      "give me a {special}",
+                      "add the {special} to my order"
+                  ]
+              },
+              {
+                  "name": "HearSpecialDetailsIntent",
+                  "slots": [
+                      {
+                          "name": "special",
+                          "type": "specialMenuName"
+                      }
+                  ],
+                  "samples": [
+                      "give me details about the {special}",
+                      "I want details about the {special}",
+                      "The {special}",
+                      "tell me about the {special}",
+                      "what about the {special}"
+                  ]
+              },
+              {
+                  "name": "GetSpecialtyMenuListIntent",
+                  "slots": [],
+                  "samples": [
+                      "List of specials",
+                      "Get me a list of specials"
+                  ]
+              },
+              {
+                  "name": "WhereIsMyOrderIntent",
+                  "slots": [],
+                  "samples": [
+                      "when's the arrival time for my order",
+                      "when is my order going to get here",
+                      "what's the e. t. a. on my order",
+                      "what time is my order my order coming",
+                      "tell me the e. t. a. for my my order",
+                      "give me the e. t. a. for my order",
+                      "give me the e. t. a.",
+                      "can you tell me when my order will be delivered",
+                      "can you tell me the e. t. a. for my order",
+                      "can you tell me the e. t. a.",
+                      "when should I expect my order",
+                      "what time should my order be arriving ",
+                      "what time should I expect my order",
+                      "how long until my order gets here",
+                      "what's the status of the order",
+                      "can you tell me my order status",
+                      "can you give me my order status",
+                      "what's the status of my order",
+                      "where's my order",
+                      "when is my order gonna come",
+                      "when will my order get here",
+                      "what's my order's arrival time",
+                      "what's the estimated time of arrival for my order",
+                      "what's the e.t.a. on my order",
+                      "what time will my order be here",
+                      "what time is my order going to arrive",
+                      "what time will my order show up",
+                      "what time will my order come",
+                      "what time is my order coming",
+                      "can you tell me what time my order will arrive",
+                      "can you tell me what time my order is coming",
+                      "can you tell me what the delivery time is",
+                      "can you tell me the delivery time for my order",
+                      "can you telle me when my order will be delivered",
+                      "can you tell me my order's delivery time",
+                      "can you tell me my order's arrival time",
+                      "can you tell me the e.t.a.",
+                      "can you tell me the e.t.a. for my order",
+                      "can you tell me the arrival time for my order",
+                      "can you tell me my order arrival time",
+                      "can you tell me when my order is arriving",
+                      "can you tell me when my order is coming",
+                      "give me the delivery time for my order",
+                      "tell me when my order will be delivered",
+                      "tell my order's arrival time",
+                      "tell me my order's delivery time",
+                      "tell me the delivery time for my order",
+                      "give me the e.t.a.",
+                      "give me the e.t.a for my order",
+                      "give me the arrival time for my order",
+                      "tell me the e.t.a for my order",
+                      "tell me the arrival time for my order",
+                      "tell me what time my ordering is coming",
+                      "tell me when my order is arriving",
+                      "tell me when my order is coming",
+                      "when is my order coming",
+                      "is my order coming soon",
+                      "when is my order due",
+                      "when will my order arrive",
+                      "where is my order"
+                  ]
+              }
+          ],
+          "types": [
+              {
+                  "name": "drink",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "iced tea",
+                              "synonyms": [
+                                  "tea",
+                                  "teas",
+                                  "iced teas"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "lemonade",
+                              "synonyms": [
+                                  "lemonades"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "sprite",
+                              "synonyms": [
+                                  "sprites"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "water",
+                              "synonyms": [
+                                  "waters"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "pepsi",
+                              "synonyms": [
+                                  "pepsis"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "diet coke",
+                              "synonyms": [
+                                  "diet cokes"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "coke",
+                              "synonyms": [
+                                  "cokes"
+                              ]
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "item",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "yoghurts"
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "salmon fishcakes",
+                              "synonyms": [
+                                  "fishcakes",
+                                  "salmon"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "homemade soup of the day",
+                              "synonyms": [
+                                  "soup"
+                              ]
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "dessert",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "homemade chocolate fudge cookies",
+                              "synonyms": [
+                                  "chocolate cookies",
+                                  "chocolate cookie",
+                                  "cookies"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "small apple pie",
+                              "synonyms": [
+                                  "apple pies",
+                                  "apple pie"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "truffle brownies",
+                              "synonyms": [
+                                  "brownies",
+                                  "truffle brownie",
+                                  "brownie"
+                              ]
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "option",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "breakfast",
+                              "synonyms": [
+                                  "breakfasts"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "lunch",
+                              "synonyms": [
+                                  "lunches"
+                              ]
+                          }
+                      },
+                      {
+                          "name": {
+                              "value": "dinner",
+                              "synonyms": [
+                                  "suppers",
+                                  "supper",
+                                  "dinners"
+                              ]
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "optionResponse",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "dummy value for response string literal"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "StringLiteral",
+                  "values": [
+                      {
+                          "name": {
+                              "value": "dummy value for api response literal property"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "specialMenuName",
+                  "values": [
+                      {
+                          "id": "ENERGISER",
+                          "name": {
+                              "value": "Energiser"
+                          }
+                      },
+                      {
+                          "id": "LITE",
+                          "name": {
+                              "value": "Lite"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "breakfast",
+                  "values": [
+                      {
+                          "id": "FRUIT",
+                          "name": {
+                              "value": "Fresh fruit",
+                              "synonyms": [
+                                  "fruit"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "TOAST",
+                          "name": {
+                              "value": "Toasts and preserves",
+                              "synonyms": [
+                                  "preserves",
+                                  "toasts",
+                                  "toast"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "CEREAL",
+                          "name": {
+                              "value": "Selection of cereals",
+                              "synonyms": [
+                                  "cereals",
+                                  "cereal"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "COOKED",
+                          "name": {
+                              "value": "Cooked Breakfast",
+                              "synonyms": [
+                                  "cooked"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "YOGH",
+                          "name": {
+                              "value": "Yoghurts",
+                              "synonyms": [
+                                  "yoghurt"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "PORR",
+                          "name": {
+                              "value": "Porridge",
+                              "synonyms": [
+                                  "porridges"
+                              ]
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "lunch",
+                  "values": [
+                      {
+                          "id": "STRUD",
+                          "name": {
+                              "value": "Apple Strudel with ice cream",
+                              "synonyms": [
+                                  "apple strudel"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "ETON",
+                          "name": {
+                              "value": "Wild Berry Eton Mess",
+                              "synonyms": [
+                                  "mess",
+                                  "eton mess",
+                                  "berry",
+                                  "wild berry"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "SALM",
+                          "name": {
+                              "value": "Salmon fishcakes with boiled potatoes and peas",
+                              "synonyms": [
+                                  "fish",
+                                  "fishcakes",
+                                  "salmon"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "BEEF",
+                          "name": {
+                              "value": "Beef in Ale Pie with mashed potato and seasonal vegetables",
+                              "synonyms": [
+                                  "ale pie",
+                                  "pie",
+                                  "ale",
+                                  "beef"
+                              ]
+                          }
+                      }
+                  ]
+              },
+              {
+                  "name": "dinner",
+                  "values": [
+                      {
+                          "id": "GOUJ",
+                          "name": {
+                              "value": "Homemade Chicken Goujons or Jacket Potatoes with a choice of fillings",
+                              "synonyms": [
+                                  "homemade chicken goujons",
+                                  "homemade chicken",
+                                  "goujons",
+                                  "chicken goujons"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "SOUP",
+                          "name": {
+                              "value": "Homemade Soup of the Day",
+                              "synonyms": [
+                                  "soup of the day",
+                                  "homemade soup",
+                                  "soup"
+                              ]
+                          }
+                      },
+                      {
+                          "id": "CRUMB",
+                          "name": {
+                              "value": "Apple and Raspberry Crumble with custard",
+                              "synonyms": [
+                                  "custard",
+                                  "crumble with custard",
+                                  "crumble",
+                                  "apple and raspberry crumble"
+                              ]
+                          }
+                      }
+                  ]
+              }
+          ]
+      }
+  }
+}
