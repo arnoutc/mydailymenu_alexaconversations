@@ -445,12 +445,12 @@ const OrderIntentHandler = {
         });
         let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
 
-        const type = 'setSessionState';
-        const state = 'BACKGROUNDED';
+        // const type = 'setSessionState';
+        // const state = 'BACKGROUNDED';
     
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            .withSessionBehavior(type, state)
+ //           .withSessionBehavior({ "type" : type, "state" : state})
             .reprompt(reprompt)
             .getResponse();
     }
