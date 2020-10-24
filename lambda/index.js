@@ -122,6 +122,9 @@ const LaunchHandler = {
         }
         return handlerInput.responseBuilder
                 .speak(speakOutput)
+                .withSimpleCard(
+                    "Welcome", 
+                    "Welcome to My Daily Menu?")
                 .reprompt(reprompt)
                 .getResponse();
     }
@@ -427,9 +430,6 @@ const OrderIntentHandler = {
     handle(handlerInput) {
         console.log("In OrderIntentHandler");
        
-        // This intent requires an access token so that we can get the user's
-        // My Daily Menu user profile from persistent storage.
-
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         _.defaults(sessionAttributes, {
             orders: []
@@ -444,9 +444,13 @@ const OrderIntentHandler = {
             orderText : orderText
         });
         let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
+
+        const type = 'setSessionState';
+        const state = 'BACKGROUNDED';
     
         return handlerInput.responseBuilder
             .speak(speakOutput)
+            .withSessionBehavior(type, state)
             .reprompt(reprompt)
             .getResponse();
     }
@@ -534,6 +538,9 @@ const HelpIntentHandler = {
         reprompt = handlerInput.t('GENERIC_REPROMPT');
         return handlerInput.responseBuilder
             .speak(speakOutput)
+            .withSimpleCard(
+                "Help", 
+                "What can I help you with today?")
             .reprompt(reprompt)
             .getResponse();
     },
@@ -828,8 +835,6 @@ const PauseIntentHandler = {
         return request.type === 'IntentRequest' && request.intent.name === 'AMAZON.PauseIntent';
     },
     handle(handlerInput){
-        const sessionAtrributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAtrributes.state = 'BACKGROUNDED'
         let speechOutput = handlerInput.t('PAUSE');
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -1077,10 +1082,6 @@ const PersistenceRequestInterceptor = {
         if(ses || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out 
             let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
             sessionAttributes['lastUseTimestamp'] = new Date(handlerInput.requestEnvelope.request.timestamp).getTime(); 
-            const sessionBehavior = { "type":"SetSessionState", "state":"BACKGROUNDED"};
-            console.log(`sessionBehavior set ${JSON.stringify(sessionBehavior)}`);
-            responseOutput.response = Object.assign({}, sessionBehavior);
-            console.log(`responseOutput.response is ${JSON.stringify(responseOutput.response)}`);
             handlerInput.attributesManager.setPersistentAttributes(sessionAttributes); 
             return new Promise((resolve, reject) => { 
                 handlerInput.attributesManager.savePersistentAttributes() 
