@@ -823,9 +823,6 @@ const StopIntentHandler = {
     }
 }
 
-/**
- * For Skill Resumption, when user actively pauses the interaction
- */
 const PauseIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
@@ -976,16 +973,16 @@ const MenuQuestion = {
 // *****************************************************************************
 // Generic session-ended handling logging the reason received, to help debug in error cases.
 
-// const SessionEndedRequestHandler = {
-//     canHandle(handlerInput) {
-//         return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
-//     },
-//     handle(handlerInput) {
-//         const request = handlerInput.requestEnvelope.request;
-//         console.log(`Session ended with reason: ${request.reason} ${request.error.type} ${request.error.message} `);
-//         return handlerInput.responseBuilder.getResponse();
-//     },
-// };
+const SessionEndedRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+    },
+    handle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        console.log(`Session ended with reason: ${request.reason} ${request.error.type} ${request.error.message} `);
+        return handlerInput.responseBuilder.getResponse();
+    },
+};
 
 // *****************************************************************************
 // Generic error handling to capture any syntax or routing errors. If you receive an error
@@ -1129,7 +1126,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         CancelIntentHandler,
         HelpIntentHandler,
         WhatsInMyOrderIntentHandler,
-        //SessionEndedRequestHandler,
+        SessionEndedRequestHandler,
         GetHoursIntentHandler,
         ContinueOrderIntentHandler,
         HearMenuReferenceSpecialsIntentHandler,
