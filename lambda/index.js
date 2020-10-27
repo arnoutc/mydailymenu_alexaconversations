@@ -444,13 +444,10 @@ const OrderIntentHandler = {
             orderText : orderText
         });
         let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
-
-        // const type = 'setSessionState';
-        // const state = 'BACKGROUNDED';
     
         return handlerInput.responseBuilder
             .speak(speakOutput)
- //           .withSessionBehavior({ "type" : type, "state" : state})
+            .withSessionBehavior("BACKGROUNDED")
             .reprompt(reprompt)
             .getResponse();
     }
@@ -1049,6 +1046,25 @@ const LocalizationInterceptor = {
     }
 };
 
+/**
+ * Background Request Interceptor
+ */
+ const BackgroundingRequestInterceptor = {
+     async process(handlerInput) {
+        const responseBuilder = handlerInput.responseBuilder;
+        const response = responseBuilder.getResponse();
+        responseBuilder.withSessionBehavior = function (state) {
+            response.sessionBehavior = {
+                "type": "SetSessionState",
+                "state": state
+            };
+            return responseBuilder;
+        }
+        console.log(`REQUEST ENVELOPE = ${JSON.stringify(handlerInput.requestEnvelope)}`);
+    },
+}
+ 
+
 // This request interceptor with each new session loads all global persistent attributes
 // into the session attributes and increments a launch counter
 const PersistenceRequestInterceptor = { 
@@ -1077,7 +1093,7 @@ const PersistenceRequestInterceptor = {
   const PersistenceResponseInterceptor = { 
     process(handlerInput, responseOutput) { 
         console.log('in PersistenceResponseInterceptor');
-        console.log(`responseOutput is ${JSON.stringify(responseOutput)}`);
+        console.log(`responseOutput JSON is ${JSON.stringify(responseOutput)}`);
         const ses = (typeof responseOutput.shouldEndSession === 'undefined' ? true : responseOutput.shouldEndSession); 
         if(ses || handlerInput.requestEnvelope.request.type === 'SessionEndedRequest') { // skill was stopped or timed out 
             let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
@@ -1127,7 +1143,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         //WhereIsMyOrderIntentHandler,
         )
     .addErrorHandlers(ErrorHandler)
-    .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, 
+    .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, BackgroundingRequestInterceptor, 
         PersistenceRequestInterceptor)
     .addResponseInterceptors(LogResponseInterceptor, PersistenceResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
