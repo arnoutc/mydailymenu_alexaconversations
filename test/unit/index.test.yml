@@ -1,0 +1,43 @@
+#=====================================================================================================================
+#     ______    _ ____  ______        __  _
+#    / __/ /__ (_) / / /_  __/__ ___ / /_(_)__  ___ _
+#   _\ \/  '_// / / /   / / / -_|_-</ __/ / _ \/ _ `/
+#  /___/_/\_\/_/_/_/   /_/  \__/___/\__/_/_//_/\_, /
+#                                             /___/
+#
+# Created by Bespoken
+# Learn more at https://read.bespoken.io/unit-testing/getting-started/
+#
+# Skill name: "My Daily Menu" by PA Consulting
+# Test scope: LaunchRequest, AMAZON.HelpIntent, AMAZON.StopIntent, AMAZON.CancelIntent,
+#             AMAZON.FallbackIntent, BuildMyMenuIntent, OrderIntent
+# Description: General test suite for all My Daily Menu intents
+#=====================================================================================================================
+
+---
+configuration:
+  description: My Daily Menu unit test suite
+  locales: en-US
+  dynamo: mock
+---
+
+- test : Launch intent
+- LaunchRequest: # LaunchRequest sends a LaunchRequest
+  - response.outputSpeech.ssml: Welcome to My Daily Menu. Would you like to hear about our   menu?
+  - response.card.type: Simple
+  - response.card.title: Welcome
+  - response.card.content: /.*/ # Regular expression indicating any text will match for card content
+
+- AMAZON.HelpIntent :
+  - prompt : "This skill is an Alexa Conversations implementation that simulates a menu ordering dialog flows using Alexa's artificial intelligence technology. You can ask me to order a menu, or hear our menu"
+  - cardContent : "What can I help you with today?"
+  - cardTitle : "Help"
+
+- AMAZON.StopIntent: Speak to you later!
+
+- OrderIntent :
+  - response.sessionBehavior.type : 'SetSessionState'
+  - response.sessionBehavior.state : 'BACKGROUNDED'
+
+  # - cardContent : "Order a menu"
+  # - cardTitle : "Build My Menu"
