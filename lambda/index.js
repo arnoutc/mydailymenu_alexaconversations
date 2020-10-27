@@ -448,6 +448,7 @@ const OrderIntentHandler = {
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .withSessionBehavior("BACKGROUNDED")
+            .shouldEndSession(false)
             .reprompt(reprompt)
             .getResponse();
     }
