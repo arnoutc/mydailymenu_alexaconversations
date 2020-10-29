@@ -20,7 +20,7 @@ const sprintf       = require('sprintf-js').sprintf;
 const _             = require('lodash');
 
 // IntentHandlers
-const OrderIntentHandler = require('./handlers/OrderIntentHandler');
+const OrderIntentHandler = require('./handlers/OrderIntentHandler.js');
 
 // Localization strings
 const resources     = require('./resources')
