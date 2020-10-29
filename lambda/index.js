@@ -19,6 +19,9 @@ const i18next       = require('i18next');
 const sprintf       = require('sprintf-js').sprintf;
 const _             = require('lodash');
 
+// IntentHandlers
+const OrderIntentHandler = require('./handlers/OrderIntentHandler');
+
 // Localization strings
 const resources     = require('./resources')
 // Utility for parsing intent requests and API requests
@@ -419,45 +422,6 @@ const ContinueOrderIntentHandler = {
     }
 };
 
-/**
- * Adding skill resumption to put the order in background.
- */
-const OrderIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'OrderIntent';
-    },
-    handle(handlerInput) {
-        console.log("In OrderIntentHandler");
-
-        /**
-         * Token exchange 
-         */
-        const userId = handlerInput.requestEnvelope.context.System.user.userId;
-        console.log(`user id is ${userId}`);
-       
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        _.defaults(sessionAttributes, {
-            orders: []
-        });
-        const {in_progress} = sessionAttributes;
-        let orderText = menu.generateOrderText(in_progress);
-        sessionAttributes.orders.push({ 
-            date : new Date().toISOString(),
-            order: in_progress
-        });  
-        let speakOutput = handlerInput.t('PLACE_ORDER', {
-            orderText : orderText
-        });
-        // let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
-    
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .withSessionBehavior("BACKGROUNDED")
-            // .reprompt(reprompt)
-            .getResponse();
-    }
-}
 const AddSomethingIntentHandler = {
     canHandle(handlerInput) {
         const request = handlerInput.requestEnvelope.request;
