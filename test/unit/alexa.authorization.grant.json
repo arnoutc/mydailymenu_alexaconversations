@@ -1,0 +1,11 @@
+{
+    "type": "Alexa.Authorization.Grant",
+    "requestId": "c499fe29-252d-4c4b-81f9-42d1fd321559",
+    "timestamp": "2020-08-12T17:57:27Z",
+    "body": {
+        "grant": {
+        "type": "OAuth2.AuthorizationCode",
+        "code": "ANRXjCOASFeybxAUnqOB"
+        }
+    }
+}
