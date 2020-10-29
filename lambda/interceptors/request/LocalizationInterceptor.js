@@ -3,7 +3,7 @@ const sprintf       = require('sprintf-js').sprintf;
 const _             = require('lodash');
 
 // Localization strings
-const resources     = require('../resources.js');
+const resources     = require('../../resources.js');
 
 const LocalizationInterceptor = {
     process(handlerInput) {
