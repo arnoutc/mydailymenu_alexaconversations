@@ -22,7 +22,7 @@ const _             = require('lodash');
 // IntentHandlers
 const LaunchHandler = require('./handlers/LaunchHandler.js');
 const YesIntentHandler = require('./handlers/YesIntentHandler.js');
-const NoIntentHandler = require('./NoIntentHandler.js');
+const NoIntentHandler = require('./handlers/NoIntentHandler.js');
 const OrderIntentHandler = require('./handlers/OrderIntentHandler.js');
 
 // Localization strings
