@@ -429,6 +429,12 @@ const OrderIntentHandler = {
     },
     handle(handlerInput) {
         console.log("In OrderIntentHandler");
+
+        /**
+         * Token exchange 
+         */
+        const userId = handlerInput.requestEnvelope.context.System.user.userId;
+        console.log(`user id is ${userId}`);
        
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         _.defaults(sessionAttributes, {
