@@ -3,7 +3,7 @@ const requestUtils = require('../requestUtils.js');
 const states = require('../states.js');
 
 // APL docs
-const welcome_apl   = require('./launch_request.json');
+const welcome_apl   = require('../launch_request.json');
 
 // *****************************************************************************
 // Launch request handler.
