@@ -1,12 +1,14 @@
-import { getRequestType, getIntentName } from 'ask-sdk-core';
+const Alexa = require('ask-sdk-core');
+const _             = require('lodash');
+const menu          = require('../menu.js');
 
 /**
  * Adding skill resumption to put the order in background.
  */
 const OrderIntentHandler = {
     canHandle(handlerInput) {
-        return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
-                && getIntentName(handlerInput.requestEnvelope) === 'OrderIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'OrderIntent';
     },
     handle(handlerInput) {
         console.log("In OrderIntentHandler");
@@ -40,4 +42,4 @@ const OrderIntentHandler = {
     }
 }
 
-export default OrderIntentHandler;
+module.exports = OrderIntentHandler;
