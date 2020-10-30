@@ -4,7 +4,7 @@
   "description": "Example Alexa skill build in Alexa Conversations showing dialog design and interoperability",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/jest --coverage"
   },
   "keywords": [
     "menu",
@@ -23,6 +23,7 @@
     "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
-    "eslint": "^7.8.1"
+    "eslint": "^7.8.1",
+    "jest": "^26.6.1"
   }
 }

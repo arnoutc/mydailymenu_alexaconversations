@@ -37,6 +37,7 @@ const HearSpecialDetailsIntentHandler               = require('./handlers/HearSp
 const AddMenuReferenceSpecialToOrderIntentHandler   = require('./handlers/AddMenuReferenceSpecialToOrderIntentHandler.js');
 const ErrorHandler                                  = require('./handlers/ErrorHandler.js');
 const OtherIntentHandler                            = require('./handlers/OtherIntentHandler.js');
+const AuthorizationTokenHandler                     = require('./handlers/AuthorizationTokenHandler.js');
 
 // interceptors
 const BackgroundingRequestInterceptor               = require('./interceptors/request/BackgroundingRequestInterceptor.js');
@@ -195,6 +196,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         MenuQuestion,
         GetMenuDetails,
         //WhereIsMyOrderIntentHandler,
+        AuthorizationTokenHandler,
         )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, BackgroundingRequestInterceptor, 
