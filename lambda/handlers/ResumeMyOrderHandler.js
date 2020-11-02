@@ -1,5 +1,6 @@
+
 const Alexa = require('ask-sdk-core');
-const AuthTokenHandler = require('./AuthTokenHandler.js');
+const AuthTokenHandler = await import('./AuthTokenHandler.js');
 
 const ResumeMyOrderHandler = {
     
