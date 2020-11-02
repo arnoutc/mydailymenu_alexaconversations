@@ -58,7 +58,6 @@ let persistenceAdapter;
 
 // IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
 const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
-const ResumeMyOrderHandler = require('./handlers/ResumeMyOrderHandler.js');
 
 persistenceAdapter = new DynamoDbPersistenceAdapter({ 
     tableName: 'daily-menus',
