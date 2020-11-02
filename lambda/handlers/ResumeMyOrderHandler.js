@@ -1,6 +1,6 @@
 
 const Alexa = require('ask-sdk-core');
-const AuthTokenHandler = await import('./AuthTokenHandler.js');
+let AuthTokenHandler = await import('./AuthTokenHandler.js');
 
 const ResumeMyOrderHandler = {
     
@@ -11,7 +11,7 @@ const ResumeMyOrderHandler = {
       handle(handlerInput) {
         console.log(JSON.stringify(handlerInput.requestEnvelope, 0, null));
     
-        const apiAccessToken = await AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope));
+        const apiAccessToken =  AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope));
 
         if (apiAccessToken) {
         console.log(`Found apiAccessToken ${apiAccessToken}, scheduling a resumption`);
