@@ -1,5 +1,5 @@
 const Alexa = require('ask-sdk-core');
-const AuthTokenHandler = require('./handlers/AuthTokenHandler.js');
+const AuthTokenHandler = require('./AuthTokenHandler.js');
 
 const AuthorizationGrantHandler = {
     canHandle(handlerInput) {
