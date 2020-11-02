@@ -38,6 +38,7 @@ const AddMenuReferenceSpecialToOrderIntentHandler   = require('./handlers/AddMen
 const ErrorHandler                                  = require('./handlers/ErrorHandler.js');
 const OtherIntentHandler                            = require('./handlers/OtherIntentHandler.js');
 const AuthorizationGrantHandler                     = require('./handlers/AuthorizationGrantHandler.js');
+const ResumeMyOrderHandler                          = require('./handlers/ResumeMyOrderHandler.js');
 
 // interceptors
 const BackgroundingRequestInterceptor               = require('./interceptors/request/BackgroundingRequestInterceptor.js');
@@ -57,6 +58,7 @@ let persistenceAdapter;
 
 // IMPORTANT: don't forget to give DynamoDB access to the role you're to run this lambda (IAM)
 const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
+const ResumeMyOrderHandler = require('./handlers/ResumeMyOrderHandler.js');
 
 persistenceAdapter = new DynamoDbPersistenceAdapter({ 
     tableName: 'daily-menus',
@@ -197,6 +199,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         GetMenuDetails,
         //WhereIsMyOrderIntentHandler,
         AuthorizationGrantHandler,
+        ResumeMyOrderHandler,
         )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, BackgroundingRequestInterceptor, 
