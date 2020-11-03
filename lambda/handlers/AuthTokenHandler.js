@@ -116,6 +116,7 @@ const getToken = async (userId) => {
   let token;
 
   try {
+    console.log(`getToken --- params are ${params}`);
     const item = await docClient.get(params).promise();
     console.log('Retrieved item:', JSON.stringify(item.Item, null, 2));
     token = item.Item.AccessToken;
