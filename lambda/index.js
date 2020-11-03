@@ -86,7 +86,9 @@ const OrderMenu = {
     handle(handlerInput) {
         console.log('in OrderMenu');
         const apiArguments = requestUtils.getApiArguments(handlerInput);
-        console.log('apiArguments ' + apiArguments);
+
+        console.log(`apiArguments ${JSON.stringify(apiArguments)}`);
+        
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         sessionAttributes.in_progress = {menu : apiArguments};
 
