@@ -53,7 +53,7 @@ const OrderIntentHandler = {
         } else {
             //redirect the user to the Alexa app to grant permission
             console.log(`initiate AuthorizationGrantHandler`);
-            return AuthorizationGrantHandler.handle(handlerInput);
+            return await AuthorizationGrantHandler.handle(handlerInput);
 
         }
     }
