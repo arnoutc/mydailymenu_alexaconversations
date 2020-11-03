@@ -52,7 +52,10 @@ const OrderIntentHandler = {
         } else {
             //redirect the user to the Alexa app to grant permission
             console.log(`initiate token exchange and persist token in Dynamodb table of request envelope: ${handlerInput.requestEnvelope} from user ${Alexa.getUserId(handlerInput.requestEnvelope)}`);
-            await AuthTokenHandler.handle(handlerInput.requestEnvelope);
+
+            const token =  await AuthTokenHandler.handle(handlerInput.requestEnvelope);
+            console.log(`handle --- token to return is ${JSON.stringify(token)}`);
+            return token;
         }
     }
 }
