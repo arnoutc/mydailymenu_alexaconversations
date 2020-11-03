@@ -53,16 +53,15 @@ const OrderIntentHandler = {
             //redirect the user to the Alexa app to grant permission
             console.log(`initiate token exchange and persist token in Dynamodb table of request envelope: ${JSON.stringify(handlerInput.requestEnvelope)} from user ${Alexa.getUserId(handlerInput.requestEnvelope)}`);
 
-            // const token =  await AuthTokenHandler.handle(handlerInput.requestEnvelope);
-            // console.log(`handle --- token to return is ${JSON.stringify(token)}`);
-            // return token;
+            const token =  await AuthTokenHandler.handle(handlerInput.requestEnvelope);
+            console.log(`handle --- token to return is ${JSON.stringify(token)}`);
+        
             var speechText = "You must have a My Daily Menu account to order a menu. " +
             "Please use the Alexa app to link your Amazon account " +
             "with your My Daily Menu Account.";
 
             return handlerInput.responseBuilder
                 .speak(speechText)
-                .withLinkAccountCard()
                 .getResponse();
         }
     }
