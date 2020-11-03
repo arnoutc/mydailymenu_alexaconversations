@@ -110,7 +110,7 @@ const handle = async (requestEnvelope) => {
 const getToken = async (userId) => {
   const params = {
     TableName: TABLE_NAME,
-    Key: { UserId: userId },
+    Key: { id: userId },
   };
 
   let token;
