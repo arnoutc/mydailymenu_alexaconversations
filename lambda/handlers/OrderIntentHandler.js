@@ -2,6 +2,9 @@ const Alexa = require('ask-sdk-core');
 const _             = require('lodash');
 const menu          = require('../menu.js');
 
+const AuthTokenHandler =  require('./AuthTokenHandler.js');
+//const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
+
 /**
  * Adding skill resumption to put the order in background.
  */
@@ -10,15 +13,9 @@ const OrderIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'OrderIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         console.log("In OrderIntentHandler");
 
-        /**
-         * Token exchange 
-         */
-        const userId = handlerInput.requestEnvelope.context.System.user.userId;
-        console.log(`user id is ${userId}`);
-       
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         _.defaults(sessionAttributes, {
             orders: []
@@ -32,13 +29,30 @@ const OrderIntentHandler = {
         let speakOutput = handlerInput.t('PLACE_ORDER', {
             orderText : orderText
         });
-        // let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
-    
-        return handlerInput.responseBuilder
+
+        //let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
+
+
+        /**
+         * Token exchange 
+         */
+        const apiAccessToken = await AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope))
+
+        if (apiAccessToken) {
+        console.log(`Found apiAccessToken ${apiAccessToken}, scheduling a resumption`);
+        
+        // scheduleResumption(stage.value.toLowerCase(), region.value.toLowerCase(), sessionId, apiAccessToken, delay.value)
+        //     .then((data) => console.log(`MessageID is ${data.MessageId}`))
+        //     .catch((err) => console.error(err, err.stack));
+
+            return handlerInput.responseBuilder
             .speak(speakOutput)
             .withSessionBehavior("BACKGROUNDED")
-            // .reprompt(reprompt)
             .getResponse();
+        } else {
+            //redirect the user to the Alexa app to grant permission
+            await AuthTokenHandler.handle(Alexa.getUserId(handlerInput.requestEnvelope));
+        }
     }
 }
 
