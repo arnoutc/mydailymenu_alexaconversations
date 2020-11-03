@@ -1,5 +1,5 @@
 const Alexa = require('ask-sdk-core');
-const AuthTokenHandler = require('./AuthTokenHandler');
+//const AuthTokenHandler = require('./AuthTokenHandler');
 let scheduleResumption;
 
 const ResumeMyOrderHandler = {
