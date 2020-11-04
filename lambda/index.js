@@ -204,7 +204,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, BackgroundingRequestInterceptor, 
-        )
+        PersistenceRequestInterceptor)
     .addResponseInterceptors(LogResponseInterceptor, PersistenceResponseInterceptor)
     .withPersistenceAdapter(persistenceAdapter)
     .withApiClient(new Alexa.DefaultApiClient)
