@@ -29,6 +29,9 @@ const postRequest = (requestBody) =>
     },
   });
 
+  console.log(`postrequest is ${JSON.stringify(postRequest)}`);
+
+
 // Calls DDB to store tokens
 const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) => {
   const expiresAt = getExpiresAt(expiresIn);
