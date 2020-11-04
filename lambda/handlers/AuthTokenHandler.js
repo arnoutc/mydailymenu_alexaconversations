@@ -89,8 +89,8 @@ const handle = async (requestEnvelope) => {
   //     grant: { type: 'OAuth2.AuthorizationCode', code: 'RHjSfTTjGYHNkWaxSiez' }
   //   }
   // }
-  console.log(`AuthTokenHandler --- handle() -- requestEnvelope is ${requestEnvelope.request}`);
-  console.log(`AuthTokenHandler --- handle() -- requestBody is ${requestEnvelope.requestBody}`);
+  console.log(`AuthTokenHandler --- handle() -- requestEnvelope is ${JSON.stringify(requestEnvelope.request)}`);
+
   const { code } = requestEnvelope.request.body.grant;
   const userId = Alexa.getUserId(requestEnvelope);
   const requestBody = {
