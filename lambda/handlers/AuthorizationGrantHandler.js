@@ -3,6 +3,9 @@ const AuthTokenHandler = require('./AuthTokenHandler.js');
 
 const AuthorizationGrantHandler = {
     canHandle(handlerInput) {
+      console.log(`AuthorizationGrantHandler --- canHandle -- requestEnvelope is ${JSON.stringify(handlerInput.requestEnvelope)}`);
+      console.log(`AuthorizationGrantHandler --- canHandle -- requestTypes are ${JSON.stringify(Alexa.RequestTypes)}`);
+
       return Alexa.getRequestType(handlerInput.requestEnvelope) === Alexa.RequestTypes.ALEXA_AUTHORIZATION_GRANT_REQUEST;
     },
   
