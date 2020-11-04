@@ -1,3 +1,4 @@
+const Alexa = require('ask-sdk-core');
 
 /** 
  * This request interceptor with each new session loads all global persistent attributes
@@ -5,8 +6,8 @@
 */
 const PersistenceRequestInterceptor = { 
     process(handlerInput) { 
-        if(handlerInput.requestEnvelope.session['new']) { 
-            try {
+        if(Alexa.isNewSession(handlerInput.requestEnvelope)) { 
+            try{
                 return new Promise((resolve, reject) => { 
                     handlerInput.attributesManager.getPersistentAttributes() 
                         .then((persistentAttributes) => { 
@@ -24,6 +25,7 @@ const PersistenceRequestInterceptor = {
             } catch(error){
                 console.log(`Error calling Alexa ${error}`);
             }
+
         } // end session['new'] 
     } 
   }
