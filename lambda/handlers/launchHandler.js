@@ -26,6 +26,8 @@ const LaunchHandler = {
         const {in_progress} = sessionAttributes;
         console.log('In LaunchHandler');
         console.log('sessionAttributes: ' + JSON.stringify(sessionAttributes));
+
+        console.log(`LaunchHandler --- requestEnvelope is ${JSON.stringify(handlerInput.requestEnvelope)}`);
         
         let speakOutput, reprompt;
         // if they had 'in flight' orders that had not been moved to ordered.
