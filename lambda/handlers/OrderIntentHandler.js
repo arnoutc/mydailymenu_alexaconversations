@@ -51,10 +51,10 @@ const OrderIntentHandler = {
             .withSessionBehavior("BACKGROUNDED")
             .getResponse();
         } else {
-            //redirect the user to the Alexa app to grant permission
-            console.log(`initiate AuthorizationGrantHandler`);
-            return await AuthorizationGrantHandler.handle(handlerInput);
-
+            // continue as usual if there is no token for now
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .getResponse();
         }
     }
 }
