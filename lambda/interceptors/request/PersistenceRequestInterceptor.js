@@ -6,7 +6,7 @@ const Alexa = require('ask-sdk-core');
 */
 const PersistenceRequestInterceptor = { 
     process(handlerInput) { 
-        if(Alexa.isNewSession(handlerInput.requestEnvelope)) { 
+        if(Alexa.isNewSession(handlerInput.requestEnvelope )) { 
             try{
                 return new Promise((resolve, reject) => { 
                     handlerInput.attributesManager.getPersistentAttributes() 
