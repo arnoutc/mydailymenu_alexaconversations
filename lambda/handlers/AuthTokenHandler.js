@@ -92,7 +92,11 @@ const handle = async (requestEnvelope) => {
   console.log(`AuthTokenHandler --- handle() -- requestEnvelope is ${JSON.stringify(requestEnvelope.request)}`);
 
   const { code } = requestEnvelope.request.body.grant;
+  console.log(`AuthTokenHandler --- handle() -- code is ${JSON.stringify(code)}`);
+
   const userId = Alexa.getUserId(requestEnvelope);
+  console.log(`AuthTokenHandler --- handle() -- userId is ${JSON.stringify(userId)}`);
+
   const requestBody = {
     grant_type: 'authorization_code',
     code,
@@ -100,6 +104,9 @@ const handle = async (requestEnvelope) => {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
   };
+
+  console.log(`AuthTokenHandler --- handle() -- requestBody is ${JSON.stringify(requestBody)}`);
+
 
   return fetchAndStoreAccessTokens(requestBody, userId);
 };
