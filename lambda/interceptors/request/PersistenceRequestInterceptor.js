@@ -4,22 +4,24 @@
 */
 const PersistenceRequestInterceptor = { 
     process(handlerInput) { 
-        if(handlerInput.requestEnvelope.session['new']) { 
-            return new Promise((resolve, reject) => { 
-                handlerInput.attributesManager.getPersistentAttributes() 
-                    .then((persistentAttributes) => { 
-                        persistentAttributes = persistentAttributes || {};
-                        if(!persistentAttributes['launchCount'])
-                          persistentAttributes['launchCount'] = 0;
-                        persistentAttributes['launchCount'] += 1; 
-                        handlerInput.attributesManager.setSessionAttributes(persistentAttributes); 
-                        resolve();
-                    })
-                    .catch((err) => { 
-                      reject(err); 
-                  });
-            }); 
-        } // end session['new'] 
+        if(handlerInput.requestEnvelope.session !== undefined){ //check that a session object exists
+            if(handlerInput.requestEnvelope.session['new']) {  //check that a session object is new
+                return new Promise((resolve, reject) => { 
+                    handlerInput.attributesManager.getPersistentAttributes() 
+                        .then((persistentAttributes) => { 
+                            persistentAttributes = persistentAttributes || {};
+                            if(!persistentAttributes['launchCount'])
+                              persistentAttributes['launchCount'] = 0;
+                            persistentAttributes['launchCount'] += 1; 
+                            handlerInput.attributesManager.setSessionAttributes(persistentAttributes); 
+                            resolve();
+                        })
+                        .catch((err) => { 
+                          reject(err); 
+                      });
+                }); 
+            } // end session['new'] 
+        }
     } 
   }
 
