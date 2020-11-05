@@ -1,5 +1,4 @@
 const Alexa = require('ask-sdk-core');
-const { reject } = require('lodash');
 
 /** 
  * This request interceptor with each new session loads all global persistent attributes
@@ -7,7 +6,9 @@ const { reject } = require('lodash');
 */
 const PersistenceRequestInterceptor = { 
     process(handlerInput) { 
+        console.log(`PersistenceRequestInterceptor  -- start `);
         if(Alexa.isNewSession(handlerInput.requestEnvelope )) { 
+            console.log(`PersistenceRequestInterceptor  -- new session`);
                 return new Promise((resolve, reject) => { 
                     handlerInput.attributesManager.getPersistentAttributes() 
                         .then((persistentAttributes) => { 
@@ -15,7 +16,9 @@ const PersistenceRequestInterceptor = {
                             if(!persistentAttributes['launchCount'])
                               persistentAttributes['launchCount'] = 0;
                             persistentAttributes['launchCount'] += 1; 
+                            console.log(`PersistenceRequestInterceptor  -- launchCount incremented`);
                             handlerInput.attributesManager.setSessionAttributes(persistentAttributes); 
+                            console.log(`PersistenceRequestInterceptor  -- persistentAttributes ${JSON.stringify(persistentAttributes)}`);
                             resolve();
                         })
                         .catch((err) => { 
@@ -23,12 +26,8 @@ const PersistenceRequestInterceptor = {
                       });
                 }); 
             
-
+        
         } // end session['new'] 
-        else {
-            //proceed with no session and return empty Promise
-            return new Promise();
-        }
     } 
   }
 
