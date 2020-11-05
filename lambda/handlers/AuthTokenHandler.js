@@ -26,7 +26,7 @@ function getExpiresAt(expiresIn) {
 const postRequest = (requestBody) =>
   axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      'Content-Type': 'application/json',
     },
   });
 
