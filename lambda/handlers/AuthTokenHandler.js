@@ -3,6 +3,7 @@ const Alexa = require('ask-sdk-core');
 
 const axios = require('axios');
 const querystring = require('querystring');
+const qs = require('qs');
 const AWS = require('aws-sdk');
 
 AWS.config.update({
@@ -23,7 +24,7 @@ function getExpiresAt(expiresIn) {
 }
 
 const postRequest = (requestBody) =>
-  axios.post('https://api.amazon.com/auth/o2/token', querystring.stringify(requestBody), {
+  axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },

@@ -21,6 +21,7 @@
     "axios": "^0.21.0",
     "i18next": "^19.4.4",
     "lodash": "^4.17.15",
+    "qs": "^6.5.2",
     "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
