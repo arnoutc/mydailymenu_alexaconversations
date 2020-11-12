@@ -24,7 +24,7 @@ function getExpiresAt(expiresIn) {
 }
 
 const postRequest = async (requestBody) =>
-  await axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody.body), {
+  await axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     },
@@ -107,7 +107,7 @@ const handle = async (requestEnvelope) => {
     client_secret : CLIENT_SECRET
   };
 
-  console.log(`AuthTokenHandler --- handle() -- requestBody is ${JSON.stringify(requestBody)}`);
+  console.log(`AuthTokenHandler --- handle() -- requestBody is ${qs.stringify(requestBody)}`);
 
 
   return await fetchAndStoreAccessTokens(requestBody, userId);
