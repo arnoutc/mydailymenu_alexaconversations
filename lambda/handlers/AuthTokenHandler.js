@@ -102,10 +102,9 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code,
+    code: code,
     client_id: CLIENT_ID,
-    client_secret : CLIENT_SECRET,
-    redirect_uri : 'http://localhost'
+    client_secret : CLIENT_SECRET
   };
 
   console.log(`AuthTokenHandler --- handle() -- requestBody is ${JSON.stringify(requestBody)}`);
