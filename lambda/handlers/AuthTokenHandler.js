@@ -109,7 +109,7 @@ const handle = async (requestEnvelope) => {
   console.log(`AuthTokenHandler --- handle() -- requestBody is ${JSON.stringify(requestBody)}`);
 
 
-  return fetchAndStoreAccessTokens(requestBody, userId);
+  return await fetchAndStoreAccessTokens(requestBody, userId);
 };
 
 // Returns a token value that is a string or null
