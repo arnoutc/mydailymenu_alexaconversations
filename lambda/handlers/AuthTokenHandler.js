@@ -67,7 +67,7 @@ const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   // eslint-disable-next-line camelcase
   const { access_token, refresh_token, expires_in } = response.data;
   console.log(`fetchAndStoreAccessTokens --- response data is ${JSON.stringify(response.data)}`);
-  
+
   await storeCredentials(userId, access_token, refresh_token, expires_in);
   return response.data;
 };
@@ -102,7 +102,7 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code,
+    code: code,
     // This is the Alexa Client ID you can obtain from the ADC portal
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
