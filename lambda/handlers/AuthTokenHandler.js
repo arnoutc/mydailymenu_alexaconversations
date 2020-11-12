@@ -58,7 +58,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
 const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   let response;
   try {
-    response = postRequest(requestBody);
+    response = await postRequest(requestBody);
     console.log(`fetchAndStoreAccessTokens --- response is ${response}`);
   } catch (e) {
     console.log(`fetchAndStoreAccessTokens --- error caught is ${e}`);
