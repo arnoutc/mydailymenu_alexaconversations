@@ -101,11 +101,10 @@ const handle = async (requestEnvelope) => {
   console.log(`AuthTokenHandler --- handle() -- userId is ${JSON.stringify(userId)}`);
 
   const requestBody = JSON.stringify({
-    'grant_type': 'authorization_code',
-    'code': code,
-    // This is the Alexa Client ID you can obtain from the ADC portal
-    'client_id': CLIENT_ID,
-    'client_secret' : CLIENT_SECRET,
+    grant_type: 'authorization_code',
+    code,
+    client_id: CLIENT_ID,
+    client_secret : CLIENT_SECRET
   });
 
   console.log(`AuthTokenHandler --- handle() -- requestBody is ${JSON.stringify(requestBody)}`);
