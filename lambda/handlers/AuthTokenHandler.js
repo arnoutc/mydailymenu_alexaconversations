@@ -107,7 +107,7 @@ const handle = async (requestEnvelope) => {
     client_secret : CLIENT_SECRET
   };
 
-  console.log(`AuthTokenHandler --- handle() -- requestBody is ${qs.stringify(requestBody)}`);
+  console.log(`AuthTokenHandler --- handle() -- qs.stringify requestBody is ${qs.stringify(requestBody)}`);
 
 
   return await fetchAndStoreAccessTokens(requestBody, userId);
