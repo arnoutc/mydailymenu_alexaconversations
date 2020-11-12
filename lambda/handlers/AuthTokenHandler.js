@@ -24,7 +24,7 @@ function getExpiresAt(expiresIn) {
 }
 
 const postRequest = (requestBody) =>
-  axios.post('https://api.amazon.com/auth/o2/token', querystring.stringify(requestBody), {
+  axios.post('https://api.amazon.com/auth/o2/token', requestBody, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
     },
@@ -100,12 +100,12 @@ const handle = async (requestEnvelope) => {
   const userId = Alexa.getUserId(requestEnvelope);
   console.log(`AuthTokenHandler --- handle() -- userId is ${JSON.stringify(userId)}`);
 
-  const requestBody = JSON.stringify({
+  const requestBody = {
     grant_type: 'authorization_code',
     code,
     client_id: CLIENT_ID,
     client_secret : CLIENT_SECRET
-  });
+  };
 
   console.log(`AuthTokenHandler --- handle() -- requestBody is ${JSON.stringify(requestBody)}`);
 
