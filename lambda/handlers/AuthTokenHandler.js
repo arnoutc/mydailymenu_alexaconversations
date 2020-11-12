@@ -102,7 +102,7 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code: code,
+    code,
     // This is the Alexa Client ID you can obtain from the ADC portal
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
