@@ -24,11 +24,13 @@ function getExpiresAt(expiresIn) {
 }
 
 const postRequest = (requestBody) =>
-  axios.post('https://api.amazon.com/auth/o2/token', JSON.stringify(requestBody), {
+  axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
   });
+
+console.log(`postRequest is ${qs.stringify(postRequest)}`);
 
 // Calls DDB to store tokens
 const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) => {
