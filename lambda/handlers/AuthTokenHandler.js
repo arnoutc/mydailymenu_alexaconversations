@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const Alexa = require('ask-sdk-core');
 
-const axios = require('axios');
+const axios = require('axios').default;
 const querystring = require('querystring');
 const qs = require('qs');
 const AWS = require('aws-sdk');
@@ -23,10 +23,10 @@ function getExpiresAt(expiresIn) {
   return expiresAt.toISOString();
 }
 
-let postRequest = (requestBody) =>
-  axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
+const postRequest = async (requestBody) =>
+  await axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     },
   });
 
@@ -59,7 +59,8 @@ const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   let response;
   try {
     response = await postRequest(requestBody);
-  } catch (e) {
+  }
+  catch (e) {
     console.log(`fetchAndStoreAccessTokens --- error caught is ${e}`);
     return null;
   }
