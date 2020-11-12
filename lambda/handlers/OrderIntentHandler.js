@@ -1,9 +1,7 @@
 const Alexa = require('ask-sdk-core');
 const _             = require('lodash');
 const menu          = require('../menu.js');
-const AuthorizationGrantHandler = require('./AuthorizationGrantHandler.js');
 
-const AuthTokenHandler =  require('./AuthTokenHandler.js');
 //const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
 
 /**
@@ -33,29 +31,15 @@ const OrderIntentHandler = {
 
         //let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
 
-
-        /**
-         * Token exchange 
-         */
-        const apiAccessToken = await AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope))
-
-        if (apiAccessToken) {
-        console.log(`Found apiAccessToken ${apiAccessToken}, scheduling a resumption`);
-        
         // scheduleResumption(stage.value.toLowerCase(), region.value.toLowerCase(), sessionId, apiAccessToken, delay.value)
         //     .then((data) => console.log(`MessageID is ${data.MessageId}`))
         //     .catch((err) => console.error(err, err.stack));
 
-            return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .withSessionBehavior("BACKGROUNDED")
-            .getResponse();
-        } else {
-            // continue as usual if there is no token for now
-            return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .getResponse();
-        }
+        return handlerInput.responseBuilder
+        .speak(speakOutput)
+        .withSessionBehavior("BACKGROUNDED")
+        .getResponse();
+        
     }
 }
 
