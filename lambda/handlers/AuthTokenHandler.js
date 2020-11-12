@@ -26,7 +26,6 @@ function getExpiresAt(expiresIn) {
 const postRequest = (requestBody) =>
   axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
@@ -105,7 +104,8 @@ const handle = async (requestEnvelope) => {
     grant_type: 'authorization_code',
     code,
     client_id: CLIENT_ID,
-    client_secret : CLIENT_SECRET
+    client_secret : CLIENT_SECRET,
+    redirect_uri : 'http://localhost'
   };
 
   console.log(`AuthTokenHandler --- handle() -- requestBody is ${JSON.stringify(requestBody)}`);
