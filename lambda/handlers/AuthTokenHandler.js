@@ -59,7 +59,6 @@ const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   let response;
   try {
     response = await postRequest(requestBody);
-    console.log(`fetchAndStoreAccessTokens --- response is ${response}`);
   } catch (e) {
     console.log(`fetchAndStoreAccessTokens --- error caught is ${e}`);
     return null;
