@@ -69,9 +69,9 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
 const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   let response;
   try {
-    //time before response
+   
     response = await postRequest(requestBody);
-    //time after response
+    console.log(`fetchAndStoreAccessTokens --- response data is ${JSON.stringify(response)}`);
   }
   catch (e) {
     console.log(`fetchAndStoreAccessTokens --- error caught is ${e}`);
@@ -79,7 +79,6 @@ const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   }
   // eslint-disable-next-line camelcase
   const { access_token, refresh_token, expires_in } = response.data;
-  console.log(`fetchAndStoreAccessTokens --- response data is ${JSON.stringify(response.data)}`);
 
   await storeCredentials(userId, access_token, refresh_token, expires_in);
   return response.data;
