@@ -112,7 +112,7 @@ const handle = async (requestEnvelope) => {
     code,
     client_id: CLIENT_ID,
     client_secret : CLIENT_SECRET,
-    scope: 'profile',
+    redirect_uri : 'https://pitangui.amazon.com/api/skill/link/M2QT277BHEGF7V',
   };
 
   console.log(`AuthTokenHandler --- handle() -- qs.stringify requestBody is ${qs.stringify(requestBody)}`);
