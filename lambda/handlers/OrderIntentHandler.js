@@ -47,22 +47,18 @@ const OrderIntentHandler = {
     //        .catch((err) => console.error(err, err.stack));
     //    }
 
-        // if(apiAccessToken){
-        //     return handlerInput.responseBuilder
-        //     .speak(speakOutput)
-        //     .withSessionBehavior("BACKGROUNDED")
-        //     .getResponse();
-        // } else {
-        //     return handlerInput.responseBuilder
-        //         .speak("Please go to the Alexa mobile app to grant Skill Resumption permissions.")
-        //         .withAskForPermissionsConsentCard(['alexa::skill:resumption'])
-        //         .getResponse()
-        // }
+        if(apiAccessToken){
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .withSessionBehavior("BACKGROUNDED")
+            .getResponse();
+        } else {
+            return handlerInput.responseBuilder
+                .speak("Please go to the Alexa mobile app to grant Skill Resumption permissions.")
+                .withAskForPermissionsConsentCard(['alexa::skill:resumption'])
+                .getResponse()
+        }
 
-        return handlerInput.responseBuilder
-        .speak(speakOutput)
-        .withSessionBehavior("BACKGROUNDED")
-        .getResponse();
     }
 }
 
