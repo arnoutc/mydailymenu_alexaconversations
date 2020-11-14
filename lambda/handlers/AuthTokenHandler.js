@@ -85,7 +85,6 @@ const refreshAccessToken = async (userId, refreshToken) => {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
     refresh_token: refreshToken,
-    scope: 'profile',
   };
   return fetchAndStoreAccessTokens(requestBody, userId);
 };
@@ -110,9 +109,10 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code: code,
+    code,
     client_id: CLIENT_ID,
-    client_secret : CLIENT_SECRET
+    client_secret : CLIENT_SECRET,
+    scope: 'profile',
   };
 
   console.log(`AuthTokenHandler --- handle() -- qs.stringify requestBody is ${qs.stringify(requestBody)}`);
