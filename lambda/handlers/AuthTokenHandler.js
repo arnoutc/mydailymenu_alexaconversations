@@ -101,7 +101,7 @@ const handle = async (requestEnvelope) => {
   // }
   console.log(`AuthTokenHandler --- handle() -- requestEnvelope is ${JSON.stringify(requestEnvelope.request)}`);
 
-  const { code } = requestEnvelope.request.body.grant;
+  const { code } = requestEnvelope.request.body.grant.code;
   console.log(`AuthTokenHandler --- handle() -- code is ${JSON.stringify(code)}`);
 
   const userId = Alexa.getUserId(requestEnvelope);
@@ -109,7 +109,7 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code: requestEnvelope.request.body.grant,
+    code: code,
     client_id: CLIENT_ID,
     client_secret : CLIENT_SECRET,
     redirect_uri : 'https://pitangui.amazon.com/api/skill/link/M2QT277BHEGF7V',
