@@ -101,7 +101,7 @@ const handle = async (requestEnvelope) => {
   // }
   console.log(`AuthTokenHandler --- handle() -- requestEnvelope is ${JSON.stringify(requestEnvelope.request)}`);
 
-  const { code } = requestEnvelope.request.body.grant.code;
+  const { code } = requestEnvelope.request.body.grant;
   console.log(`AuthTokenHandler --- handle() -- code is ${JSON.stringify(code)}`);
 
   const userId = Alexa.getUserId(requestEnvelope);
