@@ -233,6 +233,8 @@ const drinks = [
 const generateOrderText = (order) => {
   let orderText = ""
 
+  if (order === undefined) return null
+
   if (order.special){
     orderText = "a " + order.special.name + " special that comes with ";
     orderText += order.special.qty + " " + order.special.menu.size + " ";
