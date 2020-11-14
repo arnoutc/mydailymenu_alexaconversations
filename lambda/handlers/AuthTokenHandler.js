@@ -34,11 +34,6 @@ const postRequest = async (requestBody) =>
     },
     data : qs.stringify(requestBody),
     timeout : 1000,
-  })
-  .then((response) => {
-    console.log(response);
-  }, (error) => {
-    console.log(error);
   });
 
 // Calls DDB to store tokens
