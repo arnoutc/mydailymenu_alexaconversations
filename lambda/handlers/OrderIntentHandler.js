@@ -5,9 +5,6 @@ const AuthTokenHandler = require('./AuthTokenHandler.js');
 
 //const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
 
-/**
- * Adding skill resumption to put the order in background.
- */
 const OrderIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
@@ -37,8 +34,8 @@ const OrderIntentHandler = {
             If the permissions has not been granted, send an AskForPermissionsConsent card to the Alexa Companion mobile app.
             Reference: https://developer.amazon.com/docs/custom-skills/request-customer-contact-information-for-use-in-your-skill.html#permissions-card-for-requesting-customer-consent
         */
-       //const apiAccessToken = await AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope));
-       //console.log(`OrderIntentHandler --- apiAccessToken is ${JSON.stringify(apiAccessToken)}`);
+       const apiAccessToken = await AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope));
+       console.log(`OrderIntentHandler --- apiAccessToken is ${JSON.stringify(apiAccessToken)}`);
 
     //    if (apiAccessToken) {
     //      console.log(`Found apiAccessToken ${apiAccessToken}, scheduling a resumption`);
@@ -47,23 +44,21 @@ const OrderIntentHandler = {
     //        .catch((err) => console.error(err, err.stack));
     //    }
 
-        // if(apiAccessToken){
-        //     return handlerInput.responseBuilder
-        //     .speak(speakOutput)
-        //     .withSessionBehavior("BACKGROUNDED")
-        //     .getResponse();
-        // } else {
-        //     return handlerInput.responseBuilder
-        //         .speak("Please go to the Alexa mobile app to grant Skill Resumption permissions.")
-        //         .withAskForPermissionsConsentCard(['alexa::skill:resumption'])
-        //         .getResponse()
-        // }
-
-        return handlerInput.responseBuilder
-        .speak(speakOutput)
-        .withSessionBehavior("BACKGROUNDED")
-        .getResponse();
-
+        if(apiAccessToken){
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .withSessionBehavior("BACKGROUNDED")
+            .getResponse();
+        } else if(!apiAccessToken) {
+            return handlerInput.responseBuilder
+                .speak("Please go to the Alexa mobile app to grant Skill Resumption permissions.")
+                .withAskForPermissionsConsentCard(['alexa::skill:resumption'])
+                .getResponse()
+        } else {
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .getResponse(); 
+        }
     }
 }
 
