@@ -24,7 +24,7 @@ function getExpiresAt(expiresIn) {
   return expiresAt.toISOString();
 }
 
-const postRequest = async (requestBody, url) =>
+const postRequest = async (requestBody) =>
   await axios({
     url,
     method : 'post',
