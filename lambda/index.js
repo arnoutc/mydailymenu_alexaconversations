@@ -199,7 +199,6 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         OrderMenu,
         MenuQuestion,
         GetMenuDetails,
-        WhereIsMyOrderIntentHandler,
         AuthorizationGrantHandler,
         ResumeMyOrderHandler,
         WhereIsMyOrderIntentHandler,
