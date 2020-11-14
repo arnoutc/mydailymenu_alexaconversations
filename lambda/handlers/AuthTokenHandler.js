@@ -14,6 +14,7 @@ const TABLE_NAME = 'daily-menus'; // Be sure to update with your DynamoDB Table 
 const CLIENT_ID = 'amzn1.application-oa2-client.852d0f938fbe4bce91b4e3d665f08358'; // Be sure to update with your CLIENT_ID from ADC portal
 const CLIENT_SECRET = 'a49a7a2c533b52f3a7206f9078f193305ebd397ba293d1ea9eb8c4726e63dadf'; // Be sure to update with your CLIENT_SECRET from ADC portal
 const docClient = new AWS.DynamoDB.DocumentClient();
+const url = `'https://api.amazon.com/auth/o2/token`;
 
 function getExpiresAt(expiresIn) {
   const now = new Date().getTime();
@@ -23,14 +24,14 @@ function getExpiresAt(expiresIn) {
   return expiresAt.toISOString();
 }
 
-const postRequest = async (requestBody) =>
+const postRequest = async (requestBody, url) =>
   await axios.post({
-    url : 'https://api.amazon.com/auth/o2/token',
+    url,
     method : 'post',
     headers : {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    data : requestBody,
+    data : qs.stringify(requestBody),
     timeout : 1000,
   })
   .then((response) => {
