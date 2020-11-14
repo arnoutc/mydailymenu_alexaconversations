@@ -2,7 +2,6 @@
 const Alexa = require('ask-sdk-core');
 
 const axios = require('axios').default;
-const querystring = require('querystring');
 const qs = require('qs');
 const AWS = require('aws-sdk');
 
@@ -45,7 +44,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
   const expiresAt = getExpiresAt(expiresIn);
 
   const item = {
-    UserId: userId,
+    Id: userId,
     AccessToken: accessToken,
     RefreshToken: refreshToken,
     ExpiresAt: expiresAt,
