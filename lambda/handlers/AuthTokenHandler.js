@@ -23,11 +23,16 @@ function getExpiresAt(expiresIn) {
   return expiresAt.toISOString();
 }
 
+const url = 'https://api.amazon.com/auth/o2/token'
 const postRequest = async (requestBody) =>
-  await axios.post('https://api.amazon.com/auth/o2/token', qs.stringify(requestBody), {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+  await axios.post({
+    url,
+    method : 'post',
+    headers : {
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
+    data : requestBody,
+    timeout : 1000,
   })
   .then((response) => {
     console.log(response);
@@ -109,10 +114,9 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code: `${code}`,
+    code,
     client_id: CLIENT_ID,
     client_secret : CLIENT_SECRET,
-    redirect_uri : 'https://pitangui.amazon.com/api/skill/link/M2QT277BHEGF7V',
   };
 
   console.log(`AuthTokenHandler --- handle() -- qs.stringify requestBody is ${qs.stringify(requestBody)}`);
