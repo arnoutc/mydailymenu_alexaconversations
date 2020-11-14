@@ -14,6 +14,7 @@ const CLIENT_ID = 'amzn1.application-oa2-client.8997938a33a3410c921a3cb638c55fc8
 const CLIENT_SECRET = '5352c993e908f7b9fe431e61c12534d18dbe9dd59374886645311181bce74c8b'; // Be sure to update with your CLIENT_SECRET from Alexa Skill Account Linking
 const docClient = new AWS.DynamoDB.DocumentClient();
 const url = `https://api.amazon.com/auth/o2/token`;
+let lastUseTimestamp;
 
 function getExpiresAt(expiresIn) {
   const now = new Date().getTime();
@@ -40,7 +41,7 @@ const postRequest = async (requestBody) =>
   });
 
 // Calls DDB to store tokens
-const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) => {
+const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, lastUseTimestamp) => {
   const expiresAt = getExpiresAt(expiresIn);
 
   const item = {
@@ -48,6 +49,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
     AccessToken: accessToken,
     RefreshToken: refreshToken,
     ExpiresAt: expiresAt,
+    lastUseTimestamp
   };
 
   const params = {
@@ -79,7 +81,7 @@ const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   const { access_token, refresh_token, expires_in } = response.data;
   console.log(`fetchAndStoreAccessTokens --- response data is ${JSON.stringify(response.data)}`);
 
-  await storeCredentials(userId, access_token, refresh_token, expires_in);
+  await storeCredentials(userId, access_token, refresh_token, expires_in, lastUseTimestamp);
   return response.data;
 };
 
@@ -104,6 +106,9 @@ const handle = async (requestEnvelope) => {
   //   }
   // }
   console.log(`AuthTokenHandler --- handle() -- requestEnvelope is ${JSON.stringify(requestEnvelope.request)}`);
+
+  //update global variable to use for DynamoDB
+  lastUseTimestamp = new Date(requestEnvelope.request.timestamp).getTime();
 
   const { code } = requestEnvelope.request.body.grant;
   console.log(`AuthTokenHandler --- handle() -- code is ${JSON.stringify(code)}`);
