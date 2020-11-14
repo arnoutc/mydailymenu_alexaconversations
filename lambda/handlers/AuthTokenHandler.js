@@ -85,6 +85,7 @@ const refreshAccessToken = async (userId, refreshToken) => {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
     refresh_token: refreshToken,
+    scope: 'profile',
   };
   return fetchAndStoreAccessTokens(requestBody, userId);
 };
