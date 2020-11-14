@@ -202,6 +202,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         WhereIsMyOrderIntentHandler,
         AuthorizationGrantHandler,
         ResumeMyOrderHandler,
+        WhereIsMyOrderIntentHandler,
         )
     .addErrorHandlers(ErrorHandler)
     .addRequestInterceptors(LogRequestInterceptor, LocalizationInterceptor, BackgroundingRequestInterceptor, 
