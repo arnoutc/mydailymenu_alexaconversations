@@ -109,7 +109,7 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code: requestEnvelope.request.body.grant.code,
+    code: requestEnvelope.request.body.grant,
     client_id: CLIENT_ID,
     client_secret : CLIENT_SECRET,
     redirect_uri : 'https://pitangui.amazon.com/api/skill/link/M2QT277BHEGF7V',
