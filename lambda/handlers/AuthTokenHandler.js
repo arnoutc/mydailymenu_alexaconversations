@@ -66,11 +66,11 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
 };
 
 // Calls LWA to fetch tokens
-const fetchAndStoreAccessTokens = async (requestBody, userId) => {
+const fetchAndStoreAccessTokens = (requestBody, userId) => {
   let response;
   try {
    
-    response = await postRequest(requestBody);
+    response = postRequest(requestBody);
     console.log(`fetchAndStoreAccessTokens --- response data is ${JSON.stringify(response)}`);
   }
   catch (e) {
@@ -80,7 +80,7 @@ const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   // eslint-disable-next-line camelcase
   const { access_token, refresh_token, expires_in } = response.data;
 
-  await storeCredentials(userId, access_token, refresh_token, expires_in);
+  storeCredentials(userId, access_token, refresh_token, expires_in);
   return response.data;
 };
 
