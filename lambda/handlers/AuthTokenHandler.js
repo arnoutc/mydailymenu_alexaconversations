@@ -25,8 +25,8 @@ function getExpiresAt(expiresIn) {
 }
 
 const postRequest = async (requestBody, url) =>
-  await axios.post({
-    url: url,
+  await axios({
+    url,
     method : 'post',
     headers : {
       'Content-Type': 'application/x-www-form-urlencoded',
