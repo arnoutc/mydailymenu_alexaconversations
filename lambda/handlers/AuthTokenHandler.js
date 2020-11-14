@@ -11,11 +11,10 @@ AWS.config.update({
 });
 
 const TABLE_NAME = 'daily-menus'; // Be sure to update with your DynamoDB Table name
-const CLIENT_ID = 'amzn1.application-oa2-client.8997938a33a3410c921a3cb638c55fc8'; // Be sure to update with your CLIENT_ID from ADC portal
-const CLIENT_SECRET = '5352c993e908f7b9fe431e61c12534d18dbe9dd59374886645311181bce74c8b'; // Be sure to update with your CLIENT_SECRET from ADC portal
+const CLIENT_ID = 'amzn1.application-oa2-client.8997938a33a3410c921a3cb638c55fc8'; // Be sure to update with your CLIENT_ID from Alexa Skill Account Linking
+const CLIENT_SECRET = '5352c993e908f7b9fe431e61c12534d18dbe9dd59374886645311181bce74c8b'; // Be sure to update with your CLIENT_SECRET from Alexa Skill Account Linking
 const docClient = new AWS.DynamoDB.DocumentClient();
 const url = `https://api.amazon.com/auth/o2/token`;
-console.log(`url is ${url}`);
 
 function getExpiresAt(expiresIn) {
   const now = new Date().getTime();
@@ -25,8 +24,8 @@ function getExpiresAt(expiresIn) {
   return expiresAt.toISOString();
 }
 
-const postRequest = async (requestBody) =>
-  await axios({
+const postRequest = async (requestBody, url) =>
+  await axios.post({
     url: url,
     method : 'post',
     headers : {
@@ -34,6 +33,11 @@ const postRequest = async (requestBody) =>
     },
     data : qs.stringify(requestBody),
     timeout : 1000,
+  })
+  .then((response) => {
+    return response;
+  }, (error) => {
+    console.log(error);
   });
 
 // Calls DDB to store tokens
@@ -64,15 +68,17 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
 const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   let response;
   try {
+    //time before response
     response = await postRequest(requestBody);
+    //time after response
   }
   catch (e) {
     console.log(`fetchAndStoreAccessTokens --- error caught is ${e}`);
     return null;
   }
   // eslint-disable-next-line camelcase
-  console.log(`fetchAndStoreAccessTokens --- response is ${JSON.stringify(response)}`);
   const { access_token, refresh_token, expires_in } = response.data;
+  console.log(`fetchAndStoreAccessTokens --- response data is ${JSON.stringify(response.data)}`);
 
   await storeCredentials(userId, access_token, refresh_token, expires_in);
   return response.data;
@@ -108,7 +114,7 @@ const handle = async (requestEnvelope) => {
 
   const requestBody = {
     grant_type: 'authorization_code',
-    code: code,
+    code,
     client_id: CLIENT_ID,
     client_secret : CLIENT_SECRET,
   };
