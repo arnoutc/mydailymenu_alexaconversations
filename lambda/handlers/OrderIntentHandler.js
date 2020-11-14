@@ -1,6 +1,7 @@
 const Alexa = require('ask-sdk-core');
 const _             = require('lodash');
 const menu          = require('../menu.js');
+const AuthTokenHandler = require('./AuthTokenHandler.js');
 
 //const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
 
@@ -31,15 +32,31 @@ const OrderIntentHandler = {
 
         //let reprompt = handlerInput.t('PLACE_ORDER_REPROMPT');
 
-        // scheduleResumption(stage.value.toLowerCase(), region.value.toLowerCase(), sessionId, apiAccessToken, delay.value)
-        //     .then((data) => console.log(`MessageID is ${data.MessageId}`))
-        //     .catch((err) => console.error(err, err.stack));
+        /* 
+            Check if the user has granted permissions for the skill to read and write reminders.
+            If the permissions has not been granted, send an AskForPermissionsConsent card to the Alexa Companion mobile app.
+            Reference: https://developer.amazon.com/docs/custom-skills/request-customer-contact-information-for-use-in-your-skill.html#permissions-card-for-requesting-customer-consent
+        */
+       const apiAccessToken = await AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope));
 
-        return handlerInput.responseBuilder
-        .speak(speakOutput)
-        .withSessionBehavior("BACKGROUNDED")
-        .getResponse();
-        
+    //    if (apiAccessToken) {
+    //      console.log(`Found apiAccessToken ${apiAccessToken}, scheduling a resumption`);
+    //      scheduleResumption(stage.value.toLowerCase(), region.value.toLowerCase(), sessionId, apiAccessToken, delay.value)
+    //        .then((data) => console.log(`MessageID is ${data.MessageId}`))
+    //        .catch((err) => console.error(err, err.stack));
+    //    }
+
+        if(apiAccessToken){
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .withSessionBehavior("BACKGROUNDED")
+            .getResponse();
+        } else {
+            return handlerInput.responseBuilder
+                .speak("Please go to the Alexa mobile app to grant Skill Resumption permissions.")
+                .withAskForPermissionsConsentCard(['alexa::skill:resumption'])
+                .getResponse()
+        }
     }
 }
 
