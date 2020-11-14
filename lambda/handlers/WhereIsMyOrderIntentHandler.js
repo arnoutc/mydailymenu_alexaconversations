@@ -9,7 +9,7 @@ const WhereIsMyOrderIntentHandler = {
         return request.type === 'IntentRequest' && request.intent.name === 'WhereIsMyOrderIntent';
     },
     handle(handlerInput){
-        let speechOutput = handlerInput.t('PAUSE');
+        let speechOutput = handlerInput.t('WHERE_IS');
         return handlerInput.responseBuilder
             .speak(speechOutput)
             .getResponse();
