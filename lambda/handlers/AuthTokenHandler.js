@@ -28,6 +28,11 @@ const postRequest = async (requestBody) =>
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
     },
+  })
+  .then((response) => {
+    console.log(response);
+  }, (error) => {
+    console.log(error);
   });
 
 // Calls DDB to store tokens
@@ -58,7 +63,9 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
 const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   let response;
   try {
+    //time before response
     response = await postRequest(requestBody);
+    //time after response
   }
   catch (e) {
     console.log(`fetchAndStoreAccessTokens --- error caught is ${e}`);
