@@ -66,6 +66,8 @@ module.exports = {
             REPEAT_MENU_REFERENCE_SPECIALS_AND_GET_NAME_REPROMPT: "Which special did you want details on?",
             MENU_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER: "The {{name}} comes with {{qty}} {{breakfast}} {{lunch}} and {{dinner}}. Would you like to add it to your order?",
             MENU_REFERENCE_SPECIAL_DETAILS_PROMPT_TO_ORDER_REPROMPT: "Would you like to order the {{name}} special?",
+
+            NOTIFY_MISSING_PERMISSIONS: "Please enable Skill Resumption permissions in the Amazon Alexa app.",
             
             PROMPT_TO_CUSTOMIZE_SPECIAL: "Did you want to customize the {{name}} special at all?",
             PROMPT_TO_CUSTOMIZE_SPECIAL_REPROMPT: "Did you want to customize it?",

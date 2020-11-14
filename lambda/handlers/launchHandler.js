@@ -5,6 +5,9 @@ const states = require('../states.js');
 // APL docs
 const welcome_apl   = require('../launch_request.json');
 
+// Skill Resumption
+const PERMISSIONS = ['alexa::skill:resumption'];
+
 // *****************************************************************************
 // Launch request handler.
 // *****************************************************************************
@@ -21,6 +24,17 @@ const LaunchHandler = {
      * @returns {Response}
      */
     async handle(handlerInput) {
+
+        //check Skill Resumption permission
+
+        const consentToken = handlerInput.requestEnvelope.context.System.apiAccessToken;
+        if (!consentToken) {
+          return handlerInput.responseBuilder
+            .speak(handlerInput.t('NOTIFY_MISSING_PERMISSIONS')
+            .withAskForPermissionsConsentCard(PERMISSIONS)
+            .getResponse());
+        }
+
         const personId = requestUtils.getPersonId(handlerInput);
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         const {in_progress} = sessionAttributes;
