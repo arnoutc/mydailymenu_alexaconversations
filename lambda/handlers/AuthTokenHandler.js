@@ -11,8 +11,8 @@ AWS.config.update({
 });
 
 const TABLE_NAME = 'daily-menus'; // Be sure to update with your DynamoDB Table name
-const CLIENT_ID = 'amzn1.application-oa2-client.852d0f938fbe4bce91b4e3d665f08358'; // Be sure to update with your CLIENT_ID from ADC portal
-const CLIENT_SECRET = 'a49a7a2c533b52f3a7206f9078f193305ebd397ba293d1ea9eb8c4726e63dadf'; // Be sure to update with your CLIENT_SECRET from ADC portal
+const CLIENT_ID = 'amzn1.application-oa2-client.8997938a33a3410c921a3cb638c55fc8'; // Be sure to update with your CLIENT_ID from ADC portal
+const CLIENT_SECRET = '5352c993e908f7b9fe431e61c12534d18dbe9dd59374886645311181bce74c8b'; // Be sure to update with your CLIENT_SECRET from ADC portal
 const docClient = new AWS.DynamoDB.DocumentClient();
 const url = `https://api.amazon.com/auth/o2/token`;
 console.log(`url is ${url}`);
