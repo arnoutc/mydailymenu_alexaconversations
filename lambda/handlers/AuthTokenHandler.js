@@ -23,10 +23,11 @@ function getExpiresAt(expiresIn) {
   return expiresAt.toISOString();
 }
 
-const url = 'https://api.amazon.com/auth/o2/token'
+const url = 'https://api.amazon.com/auth/o2/token';
+
 const postRequest = async (requestBody) =>
   await axios.post({
-    url,
+    url : url,
     method : 'post',
     headers : {
       'Content-Type': 'application/x-www-form-urlencoded',
