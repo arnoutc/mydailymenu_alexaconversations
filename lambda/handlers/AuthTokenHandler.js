@@ -44,7 +44,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn) =>
   const expiresAt = getExpiresAt(expiresIn);
 
   const item = {
-    Id: userId,
+    id: userId,
     AccessToken: accessToken,
     RefreshToken: refreshToken,
     ExpiresAt: expiresAt,
