@@ -133,6 +133,7 @@ module.exports = {
     isApiRequest,
     getApiArguments,
     getApiSlots,
+    getPerson,
     getPersonId,
     getDayAndPeriod 
 

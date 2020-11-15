@@ -9,7 +9,6 @@ const PauseIntentHandler = {
         let speechOutput = handlerInput.t('PAUSE');
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .withSessionBehavior("BACKGROUNDED")
             .getResponse();
     }
 }
