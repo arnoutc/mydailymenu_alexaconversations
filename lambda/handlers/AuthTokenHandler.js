@@ -55,6 +55,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
   const params = {
     TableName: TABLE_NAME,
     Key: { id: userId },
+    Item: item,
   };
 
   //add also to an initial session, if there is no existing session for the user
