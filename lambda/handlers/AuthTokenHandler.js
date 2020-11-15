@@ -54,7 +54,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
 
   const params = {
     TableName: TABLE_NAME,
-    Key:{ "id": userId },
+    Key: { id: userId },
     Item: item,
   };
 
