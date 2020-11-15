@@ -68,6 +68,12 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
     .catch((err) => console.error('Unable to update item. Error JSON:', JSON.stringify(err, null, 2)));
   } else {
     console.log('Adding a new entry', JSON.stringify(item, null, 2));
+
+    const params = {
+      TableName: TABLE_NAME,
+      Item: item,
+    };
+
     return docClient
     .put(params)
     .promise()
