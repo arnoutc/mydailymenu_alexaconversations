@@ -24,4 +24,4 @@
     }
   };
 
-  module.exports = {PersistenceResponseInterceptor};
+  module.exports = PersistenceResponseInterceptor;
