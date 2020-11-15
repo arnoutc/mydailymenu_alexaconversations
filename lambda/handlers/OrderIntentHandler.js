@@ -44,21 +44,17 @@ const OrderIntentHandler = {
     //        .catch((err) => console.error(err, err.stack));
     //    }
 
-        if(apiAccessToken){
+        if(apiAccessToken){ //if Skill Resumption is enabled, use backgrounding
             return handlerInput.responseBuilder
             .speak(speakOutput)
             .withSessionBehavior("BACKGROUNDED")
             .getResponse();
         } else if(!apiAccessToken) {
             return handlerInput.responseBuilder
-                .speak("Please go to the Alexa mobile app to grant Skill Resumption permissions.")
-                .withAskForPermissionsConsentCard(['alexa::skill:resumption'])
+                .speak(speakOutput)
+                //.withAskForPermissionsConsentCard(['alexa::skill:resumption'])
                 .getResponse()
-        } else {
-            return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .getResponse(); 
-        }
+        } 
     }
 }
 
