@@ -79,13 +79,9 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
 // Get user id from Dynamodb
 const getUserId = async (userId) => {
   try{
-    const item = {
-      id: userId
-    };
-
     const params = {
-      Key:{ "id": userId, },
-      TableName:  TABLE_NAME
+      TableName:  TABLE_NAME,
+      Key:{ "id": userId },
     };
 
     const result =  docClient.get(params).promise();
