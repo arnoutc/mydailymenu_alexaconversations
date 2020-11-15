@@ -49,7 +49,7 @@ const OrderIntentHandler = {
             .speak(speakOutput)
             .withSessionBehavior("BACKGROUNDED")
             .getResponse();
-        } else if(!apiAccessToken) {
+        } else {
             return handlerInput.responseBuilder
                 .speak(speakOutput)
                 //.withAskForPermissionsConsentCard(['alexa::skill:resumption'])
