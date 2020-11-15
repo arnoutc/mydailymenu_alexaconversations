@@ -61,7 +61,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
   //add also to an initial session, if there is no existing session for the user
   if(getUserId() === userId ){
     console.log('Updating an existing entry', JSON.stringify(item, null, 2));
-    return docClient
+    return await docClient
     .update(params)
     .promise()
     .then((data) => console.log('Updated item:', JSON.stringify(data, null, 2)))
@@ -69,7 +69,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
   } else {
     console.log('Adding a new entry', JSON.stringify(item, null, 2));
 
-    return docClient
+    return await docClient
     .put(params)
     .promise()
     .then((data) => console.log('Added item:', JSON.stringify(data, null, 2)))
@@ -87,8 +87,9 @@ const getUserId = async (userId) => {
       Key:{ id: userId },
     };
 
-    const result =  docClient.get(params).promise();
+    const result =  await docClient.get(params).promise();
     console.log(`getUserId -- result is ${JSON.stringify(result)}`);
+    return result;
   } catch(err) {
       console.log(`The user ID does not exit ${err}`);
   }
