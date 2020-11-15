@@ -1,9 +1,8 @@
-
   // This response interceptor stores all session attributes into global persistent attributes
   // when the session ends and it stores the skill last used timestamp
   const PersistenceResponseInterceptor = { 
     process(handlerInput, responseOutput) { 
-        if(handlerInput.requestEnvelope.session !== undefined){ //check that a session object exists, as we are checking Alexa App out of Session for Skill Resumption permissions
+        if(handlerInput.requestEnvelope.session !== undefined){ 
             console.log('in PersistenceResponseInterceptor');
             console.log(`responseOutput JSON is ${JSON.stringify(responseOutput)}`);
             const ses = (typeof responseOutput.shouldEndSession === 'undefined' ? true : responseOutput.shouldEndSession); 
@@ -21,8 +20,8 @@
                         }); 
                 }); 
             } 
-        }
-    } 
+        } 
+    }
   };
 
-  module.exports = PersistenceResponseInterceptor;
+  module.exports = {PersistenceResponseInterceptor};

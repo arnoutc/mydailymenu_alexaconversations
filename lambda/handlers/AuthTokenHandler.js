@@ -57,6 +57,8 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
     Item: item,
   };
 
+  //add also to an initial session, if there is no existing session for the user
+  
   console.log('Adding a new entry', JSON.stringify(item, null, 2));
   return docClient
     .put(params)
@@ -64,6 +66,25 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
     .then((data) => console.log('Added item:', JSON.stringify(data, null, 2)))
     .catch((err) => console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2)));
 };
+
+// Get user id from Dynamodb
+const getUserId = async (userId) => {
+  try{
+    const item = {
+      id: userId
+    };
+
+    const params = {
+      Item: item,
+      TableName:  TABLE_NAME
+    };
+
+    const result =  docClient.get(params).promise();
+    console.log(`getUserId -- result is ${JSON.stringify(result)}`);
+  } catch(err) {
+      console.log(`The user ID does not exit ${err}`);
+  }
+}
 
 // Calls LWA to fetch tokens
 const fetchAndStoreAccessTokens = async (requestBody, userId) => {
@@ -80,6 +101,9 @@ const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   // eslint-disable-next-line camelcase
   const { access_token, refresh_token, expires_in } = response.data;
   console.log(`fetchAndStoreAccessTokens --- response data is ${JSON.stringify(response.data)}`);
+  
+  //check for existing Item in session
+  getUserId(userId);
 
   await storeCredentials(userId, access_token, refresh_token, expires_in, lastUseTimestamp);
   return response.data;
