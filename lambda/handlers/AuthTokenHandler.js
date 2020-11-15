@@ -61,7 +61,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
   //add also to an initial session, if there is no existing session for the user
   if(getUserId() === userId ){
     console.log('Updating an existing entry', JSON.stringify(item, null, 2));
-    return docClient
+    return await docClient
     .update(params)
     .promise()
     .then((data) => console.log('Updated item:', JSON.stringify(data, null, 2)))
@@ -74,7 +74,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
       Item: item,
     };
 
-    return docClient
+    return await docClient
     .put(params)
     .promise()
     .then((data) => console.log('Added item:', JSON.stringify(data, null, 2)))
@@ -85,6 +85,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
 
 // Get user id from Dynamodb
 const getUserId = async (userId) => {
+  console.log(`getUserId -- userId is ${userId}`);
   try{
     const params = {
       TableName:  TABLE_NAME,
