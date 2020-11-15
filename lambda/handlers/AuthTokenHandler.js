@@ -68,7 +68,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
   } else {
     console.log('Adding a new entry', JSON.stringify(item, null, 2));
     return docClient
-    .update(params)
+    .put(params)
     .promise()
     .then((data) => console.log('Added item:', JSON.stringify(data, null, 2)))
     .catch((err) => console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2)));
