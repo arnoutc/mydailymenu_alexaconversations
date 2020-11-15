@@ -75,7 +75,7 @@ const getUserId = async (userId) => {
     };
 
     const params = {
-      Item: item,
+      Key: item,
       TableName:  TABLE_NAME
     };
 
