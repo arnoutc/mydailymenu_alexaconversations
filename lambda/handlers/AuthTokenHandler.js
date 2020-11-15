@@ -58,13 +58,22 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
   };
 
   //add also to an initial session, if there is no existing session for the user
-  
-  console.log('Adding a new entry', JSON.stringify(item, null, 2));
-  return docClient
-    .put(params)
+  if(getUserId() === userId ){
+    console.log('Updating an existing entry', JSON.stringify(item, null, 2));
+    return docClient
+    .update(params)
     .promise()
     .then((data) => console.log('Added item:', JSON.stringify(data, null, 2)))
     .catch((err) => console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2)));
+  } else {
+    console.log('Adding a new entry', JSON.stringify(item, null, 2));
+    return docClient
+    .update(params)
+    .promise()
+    .then((data) => console.log('Added item:', JSON.stringify(data, null, 2)))
+    .catch((err) => console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2)));
+  }
+ 
 };
 
 // Get user id from Dynamodb
@@ -90,9 +99,7 @@ const getUserId = async (userId) => {
 const fetchAndStoreAccessTokens = async (requestBody, userId) => {
   let response;
   try {
-    //time before response
     response = await postRequest(requestBody);
-    //time after response
   }
   catch (e) {
     console.log(`fetchAndStoreAccessTokens --- error caught is ${e}`);
