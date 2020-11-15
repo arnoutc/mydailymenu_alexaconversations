@@ -54,14 +54,14 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
 
   const params = {
     TableName: TABLE_NAME,
-    Key: { id: userId },
-    Item: item,
+    Key: { id: `${userId}` },
+    Item: `${item}`,
   };
 
   //add also to an initial session, if there is no existing session for the user
   if(getUserId() === userId ){
     console.log('Updating an existing entry', JSON.stringify(item, null, 2));
-    return await docClient
+    return docClient
     .update(params)
     .promise()
     .then((data) => console.log('Updated item:', JSON.stringify(data, null, 2)))
@@ -69,12 +69,7 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
   } else {
     console.log('Adding a new entry', JSON.stringify(item, null, 2));
 
-    const params = {
-      TableName: TABLE_NAME,
-      Item: item,
-    };
-
-    return await docClient
+    return docClient
     .put(params)
     .promise()
     .then((data) => console.log('Added item:', JSON.stringify(data, null, 2)))
