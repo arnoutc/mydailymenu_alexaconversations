@@ -54,7 +54,8 @@ const storeCredentials = async (userId, accessToken, refreshToken, expiresIn, la
 
   const params = {
     TableName: TABLE_NAME,
-    Item: item
+    Item: item,
+    Key:{ id: userId },
   };
 
   //add also to an initial session, if there is no existing session for the user
@@ -81,7 +82,7 @@ const getUserId = async (userId) => {
   try{
     const params = {
       TableName:  TABLE_NAME,
-      Key:{ "id": userId },
+      Key:{ id: userId },
     };
 
     const result =  docClient.get(params).promise();
