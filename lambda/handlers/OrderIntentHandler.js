@@ -1,7 +1,7 @@
-const Alexa = require('ask-sdk-core');
-const _             = require('lodash');
-const menu          = require('../menu.js');
-const AuthTokenHandler = require('./AuthTokenHandler.js');
+const Alexa             = require('ask-sdk-core');
+const _                 = require('lodash');
+const menu              = require('../menu.js');
+const AuthTokenHandler  = require('./AuthTokenHandler.js');
 
 //const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
 
