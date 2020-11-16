@@ -38,7 +38,7 @@ const AddMenuReferenceSpecialToOrderIntentHandler   = require('./handlers/AddMen
 const ErrorHandler                                  = require('./handlers/ErrorHandler.js');
 const OtherIntentHandler                            = require('./handlers/OtherIntentHandler.js');
 const AuthorizationGrantHandler                     = require('./handlers/AuthorizationGrantHandler.js');
-const ResumeMyOrderHandler                          = require('./handlers/ResumeMyOrderHandler.js');
+//const ResumeMyOrderHandler                          = require('./handlers/ResumeMyOrderHandler.js');
 //const WhereIsMyOrderIntentHandler                   = require('./handlers/WhereIsMyOrderIntentHandler.js');
 
 // interceptors
@@ -200,7 +200,7 @@ module.exports.handler = Alexa.SkillBuilders.custom()
         MenuQuestion,
         GetMenuDetails,
         AuthorizationGrantHandler,
-        ResumeMyOrderHandler,
+        //ResumeMyOrderHandler,
         //WhereIsMyOrderIntentHandler,
         )
     .addErrorHandlers(ErrorHandler)
