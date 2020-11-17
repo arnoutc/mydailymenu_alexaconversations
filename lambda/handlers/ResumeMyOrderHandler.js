@@ -1,26 +1,19 @@
 const Alexa = require('ask-sdk-core');
-
-const scheduleResumption = {
-  stage : 1, 
-  region : 'us-east1', 
-  sessionId: '', 
-  apiAccessToken: '', 
-  delay: 600000
-};
+const resources = require('../resources.js');
 
 const ResumeMyOrderHandler = {
     
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ResumeMyOrderHandler';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'SessionResumedRequest';    
       },
       async handle(handlerInput) {
         console.log(JSON.stringify(handlerInput.requestEnvelope, 0, null));
-
-        return handlerInput.responseBuilder.getResponse();
+        return handlerInput.responseBuilder
+          .speak(resources.WHERE_IS)
+          .getResponse();
       },
 }
 
 
 
-module.exports = {ResumeMyOrderHandler, scheduleResumption};
+module.exports = ResumeMyOrderHandler;
