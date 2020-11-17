@@ -2,8 +2,9 @@ const Alexa             = require('ask-sdk-core');
 const _                 = require('lodash');
 const menu              = require('../menu.js');
 const AuthTokenHandler  = require('./AuthTokenHandler.js');
+const AWS               = require('aws-sdk');
 
-//const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
+const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
 
 const OrderIntentHandler = {
     canHandle(handlerInput) {
@@ -37,14 +38,22 @@ const OrderIntentHandler = {
        const apiAccessToken = await AuthTokenHandler.getToken(Alexa.getUserId(handlerInput.requestEnvelope));
        console.log(`OrderIntentHandler --- apiAccessToken is ${JSON.stringify(apiAccessToken)}`);
 
-    //    if (apiAccessToken) {
-    //      console.log(`Found apiAccessToken ${apiAccessToken}, scheduling a resumption`);
-    //      scheduleResumption(stage.value.toLowerCase(), region.value.toLowerCase(), sessionId, apiAccessToken, delay.value)
-    //        .then((data) => console.log(`MessageID is ${data.MessageId}`))
-    //        .catch((err) => console.error(err, err.stack));
-    //    }
+        const {sessionId} = handlerInput.requestEnvelope.sessionId;
 
         if(apiAccessToken){ //if Skill Resumption is enabled, use backgrounding
+            console.log(`Found apiAccessToken ${apiAccessToken}, scheduling a resumption`);
+            const sns = new AWS.SNS();
+            const params = {
+                Message: JSON.stringify({
+                    endpoint: `https://api.eu.amazonalexa.com/v1/_customSkillSessions/${sessionId}/resume/`,
+                    apiAccessToken,
+                }),
+                TopicArn: 'arn:aws:sns:us-east-1:054117929198:mydailymenu',
+            }
+
+            console.log(`Publishing ${params.Message} to SNS`);
+            await sns.publish(params);
+
             return handlerInput.responseBuilder
             .speak(speakOutput)
             .withSessionBehavior("BACKGROUNDED")
@@ -52,7 +61,6 @@ const OrderIntentHandler = {
         } else {
             return handlerInput.responseBuilder
                 .speak(speakOutput)
-                //.withAskForPermissionsConsentCard(['alexa::skill:resumption'])
                 .getResponse()
         } 
     }

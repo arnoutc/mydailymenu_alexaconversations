@@ -1,5 +1,12 @@
 const Alexa = require('ask-sdk-core');
-let scheduleResumption;
+
+const scheduleResumption = {
+  stage : 1, 
+  region : 'us-east1', 
+  sessionId: '', 
+  apiAccessToken: '', 
+  delay: 600000
+};
 
 const ResumeMyOrderHandler = {
     
