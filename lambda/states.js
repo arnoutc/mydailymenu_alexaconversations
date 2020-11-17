@@ -7,6 +7,4 @@ const states = {
     PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU : 'PROMPTED_TO_CUSTOMIZE_SPECIAL_MENU'
 };
 
-module.exports = {
-    states,
-};
+module.exports = states;

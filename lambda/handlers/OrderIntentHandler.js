@@ -4,8 +4,6 @@ const menu              = require('../menu.js');
 const AuthTokenHandler  = require('./AuthTokenHandler.js');
 const AWS               = require('aws-sdk');
 
-const {scheduleResumption } = require('./ResumeMyOrderHandler.js');
-
 const OrderIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 

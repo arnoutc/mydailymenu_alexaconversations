@@ -2,8 +2,8 @@ const Alexa = require('ask-sdk-core');
 
 const BuildMyMenuIntentHandler = {
     canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest' && request.intent.name === 'BuildMyMenuIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BuildMyMenuIntent';
     },
     handle(handlerInput) {
         console.log("In BuildMyMenuIntentHandler");

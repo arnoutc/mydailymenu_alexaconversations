@@ -4,7 +4,7 @@
 */
 const PersistenceRequestInterceptor = { 
     process(handlerInput) { 
-       // if(handlerInput.requestEnvelope.session !== undefined){ //check that a session object exists
+        if(handlerInput.requestEnvelope.session !== undefined){ //check that a session object exists
             if(handlerInput.requestEnvelope.session['new']) {  //check that a session object is new
                 return new Promise((resolve, reject) => { 
                     handlerInput.attributesManager.getPersistentAttributes() 
@@ -21,7 +21,7 @@ const PersistenceRequestInterceptor = {
                       });
                 }); 
             } // end session['new'] 
-        //}
+        }
     } 
   }
 
