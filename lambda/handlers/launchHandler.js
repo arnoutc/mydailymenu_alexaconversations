@@ -83,9 +83,6 @@ const LaunchHandler = {
         }
         return handlerInput.responseBuilder
                 .speak(speakOutput)
-                .withSimpleCard(
-                    "Welcome", 
-                    "Welcome to My Daily Menu?")
                 .reprompt(reprompt)
                 .getResponse();
     }

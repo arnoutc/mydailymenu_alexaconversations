@@ -20,7 +20,7 @@ const Alexa         = require('ask-sdk');
 const LaunchHandler                                 = require('./handlers/LaunchHandler.js');
 const YesIntentHandler                              = require('./handlers/YesIntentHandler.js');
 const NoIntentHandler                               = require('./handlers/NoIntentHandler.js');
-const BuildMyMenuIntentHandler                      = require('./handlers/BuildMyMenuIntentHandler.js');
+//const BuildMyMenuIntentHandler                      = require('./handlers/BuildMyMenuIntentHandler.js');
 const StartOverIntentHandler                        = require('./handlers/StartOverIntentHandler.js');
 const OrderIntentHandler                            = require('./handlers/OrderIntentHandler.js');
 const AddSomethingIntentHandler                     = require('./handlers/AddSomethingIntentHandler.js');
@@ -170,6 +170,110 @@ const MenuQuestion = {
         };
     }
 }
+
+const BuildMyMenuIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' 
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BuildMyMenuIntent';
+    },
+    handle(handlerInput) {
+        console.log("In BuildMyMenuIntentHandler");
+        const breakfastSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'breakfast');
+        console.log('envelopes are ' + JSON.stringify(handlerInput.requestEnvelope));
+        console.log('breakfastSlot is ' + JSON.stringify(breakfastSlot));
+        
+        if ( breakfastSlot  && breakfastSlot.value ){
+            return handlerInput.responseBuilder
+                .addDirective({
+                    type: 'Dialog.DelegateRequest',
+                    target: 'AMAZON.Conversations',
+                    period: {
+                        until: 'EXPLICIT_RETURN'
+                    },
+                    updatedRequest: {
+                        type: 'Dialog.InputRequest',
+                        input: {
+                            name: 'orderBreakfast',
+                            slots: {
+                                name: {
+                                    name: 'breakfast',
+                                    value: breakfastSlot.value
+                                }
+                            }
+                        }
+                    }
+                })
+                .getResponse();
+        }
+
+        const lunchSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'lunch');
+        console.log('lunchSlot is ' + JSON.stringify(lunchSlot));
+        if ( lunchSlot && lunchSlot.value ){
+            return handlerInput.responseBuilder
+                .addDirective({
+                    type: 'Dialog.DelegateRequest',
+                    target: 'AMAZON.Conversations',
+                    period: {
+                        until: 'EXPLICIT_RETURN'
+                    },
+                    updatedRequest: {
+                        type: 'Dialog.InputRequest',
+                        input: {
+                            name: 'orderLunch',
+                            slots: {
+                                name: {
+                                    name: 'lunch',
+                                    value: lunchSlot.value
+                                }
+                            }
+                        }
+                    }
+                })
+                .getResponse();
+        }
+
+        const dinnerSlot = Alexa.getSlot(handlerInput.requestEnvelope, 'dinner');
+        console.log('dinnerSlot is ' + JSON.stringify(dinnerSlot));
+        if ( dinnerSlot && dinnerSlot.value ){
+            return handlerInput.responseBuilder
+                .addDirective({
+                    type: 'Dialog.DelegateRequest',
+                    target: 'AMAZON.Conversations',
+                    period: {
+                        until: 'EXPLICIT_RETURN'
+                    },
+                    updatedRequest: {
+                        type: 'Dialog.InputRequest',
+                        input: {
+                            name: 'orderDinner',
+                            slots: {
+                                name: {
+                                    name: 'dinner',
+                                    value: dinnerSlot.value
+                                }
+                            }
+                        }
+                    }
+                })
+                .getResponse();
+        }
+        return handlerInput.responseBuilder
+            .addDirective({
+                type: 'Dialog.DelegateRequest',
+                target: 'AMAZON.Conversations',
+                period: {
+                    until: 'EXPLICIT_RETURN' 
+                },
+                updatedRequest: {
+                    type: 'Dialog.InputRequest',
+                    input: {
+                        name: 'startMenuOrder'
+                    }
+                }
+            })
+            .getResponse();
+    }
+};
 
 // *****************************************************************************
 // The SkillBuilder acts as the entry point for your skill, routing all request and response
